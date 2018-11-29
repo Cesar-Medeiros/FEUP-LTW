@@ -19,11 +19,11 @@
 
     </header>
 
-    <form action="action_login.php" method="get">
+    <form method="post">
         <label>Username: <input type="text" name="username"> </label>
         <label>Password: <input type="password" name="password"></label>
-        <button formaction="action_login.php" formmethod="post">Login</button>
-        <button formaction="action_signup.php" formmethod="post">Signup</button>
+        <input type="submit" formaction="actions/action_login.php" value="Login">
+        <input type="submit" formaction="actions/action_signup.php" value="Signup">
     </form>
 
 </body>

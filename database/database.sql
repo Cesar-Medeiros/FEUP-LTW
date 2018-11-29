@@ -19,11 +19,11 @@ CREATE TABLE Comment (
 CREATE TABLE Message (
     message_id  INTEGER PRIMARY KEY,
     text        TEXT NOT NULL,
-    date        TEXT NOT NULL,
+    date        INTEGER NOT NULL,
     score       INTEGER,
     comments    INTEGER,
     publisher   INTEGER NOT NULL REFERENCES User(user_id),
-    parent_message_id  INTEGER NOT NULL REFERENCES Message(message_id)
+    parent_message_id  INTEGER REFERENCES Message(message_id)
 );
 
 
@@ -44,4 +44,11 @@ CREATE TABLE ChannelSubscribers (
     channel_id  INTEGER NOT NULL,
     user_id     INTEGER NOT NULL,
     PRIMARY KEY (channel_id, user_id)
+);
+
+
+CREATE TABLE ChannelMessages (
+    channel_id  INTEGER NOT NULL,
+    story_id    INTEGER NOT NULL REFERENCES Story(story_id),
+    PRIMARY KEY (channel_id, story_id)
 );
