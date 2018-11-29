@@ -1,15 +1,15 @@
 <?php
   //include_once('../includes/session.php');
-  //include_once('../database/db_user.php');
+  include_once('../database/db_user.php');
   $username = $_POST['username'];
   $password = $_POST['password'];
-  header('Location: ../index.html');
-  /*
+  
+  
   if (checkUserPassword($username, $password)) {
-    $_SESSION['username'] = $username;
-    header('Location: ../pages/list.php');
+    //$_SESSION['username'] = $username;
+    header('Location: ../pages/index.html');
   } else {
     header('Location: ../pages/login.php');
   }
-  */
+  
 ?>
