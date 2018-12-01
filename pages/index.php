@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
         crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans+Condensed:300" rel="stylesheet">
@@ -15,7 +15,7 @@
     <header class="sticky">
         <span id="user_info">
             <i class="fas fa-user-circle fa-2x" value="user"></i>
-            <label for="user">User</label>
+            <!--<label for="user"><?php echo $_SESSION['username']?></label>-->
 
             <a class="header-icons" href="#settings"><i class="fas fa-cog"></i></a>
             <a class="header-icons" href="../actions/action_logout.php"><i class="fas fa-power-off"></i></a>

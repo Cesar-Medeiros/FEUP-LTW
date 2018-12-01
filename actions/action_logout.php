@@ -3,5 +3,5 @@
   include_once('../includes/session.php');
   
   session_destroy();
-  header('Location: ../login.php');
+  header('Location: ../pages/login.php');
 ?>

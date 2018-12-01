@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans+Condensed:300" rel="stylesheet">
 </head>
@@ -61,11 +61,11 @@
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Repeat Password</label>
-                                <input name="password" type="password" class="input">
+                                <input name="password-conf" type="password" class="input">
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Email Address</label>
-                                <input name="password" type="text" class="input">
+                                <input name="email" type="text" class="input">
                             </div>
                             <div class="group">
                                 <input type="submit" class="button" formaction="../actions/action_signup.php" value="Signup">

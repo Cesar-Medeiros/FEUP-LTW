@@ -10,8 +10,8 @@
 
     function addUser($username, $password){
         $db = Database::db();
-        $stmt = $db->prepare('INSERT INTO User VALUES(NULL, ?, ?)');
-        $stmt->execute(array($username, $password));
+        $stmt = $db->prepare('INSERT INTO User VALUES(?, ?, ?)');
+        $stmt->execute(array(-1, $username, $password));
     }
 
     function userExist($username){
@@ -19,6 +19,13 @@
         $stmt = $db->prepare('SELECT * from User WHERE username = ?');
         $stmt->execute(array($username));
         return $stmt->fetch() ? true : false; 
+    }
+
+    function getUser($username){
+        $db = Database::db();
+        $stmt = $db->prepare('SELECT * from User WHERE username = ?');
+        $stmt->execute(array($username));
+        return $stmt->fetch();
     }
 
     function checkUserPassword($username, $password){
