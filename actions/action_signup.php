@@ -9,7 +9,7 @@
     $_SESSION['username'] = $username;
     header('Location: ../pages/index.php');
   } catch (PDOException $e) {
-    echo "User already exists";
+    $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Failed to signup!');
     header('Location: ../pages/login.php');
   }
 ?>

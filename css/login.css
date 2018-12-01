@@ -5,9 +5,18 @@
   --form-color: rgba(1, 2, 3, 0.8);
   --font-color: #fff;
   --theme-color: rgb(12, 83, 141);
-  --background-image: url(https://images.pexels.com/photos/2255/black-and-white-city-houses-skyline.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+  --background-image: url(https://images.pexels.com/photos/722218/pexels-photo-722218.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+  
+  --error-font-color: rgb(250, 73, 73);
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+   -webkit-transition-delay: 9999s;
+   transition-delay: 9999s;
+}
 
 /* Options */
 
@@ -63,7 +72,7 @@ body{
   position: fixed;
   width: 100vw;
   height: 100vh;
-  filter: blur(30px); 
+  filter: blur(10px); 
   transform: scale(1.1);
 } 
 
@@ -73,6 +82,18 @@ body{
 .identity{
   display: none;
 }
+
+/* Messages */
+#messages div {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  padding: 1em;
+}
+#messages .error {
+  color: var(--error-font-color);
+}
+
 
 /* Login */
 

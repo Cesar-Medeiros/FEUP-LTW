@@ -8,7 +8,7 @@
     $_SESSION['username'] = $username;
     header('Location: ../pages/index.php');
   } else {
-    echo "wrong";
+    $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Login failed!');
     header('Location: ../pages/login.php');
   }
 ?>

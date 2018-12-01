@@ -1,3 +1,4 @@
+<?php  include_once('../includes/session.php'); ?>
 <!DOCTYPE html>
 <html>
 
@@ -15,11 +16,11 @@
     </div>
 
     <header class="identity">
-
         <a class="logo"><i class="fab fa-reddit fa-4x"></i></a>
         <h1> WebsiteName </h1>
-
     </header>
+
+   
 
     <div class="login-container">
         <div class="login-wrap">
@@ -33,16 +34,16 @@
                         <form accept-charset="utf-8" form method="post" class="sign-in-form">
                             <div class="group">
                                 <label for="user" class="label">Username</label>
-                                <input name="username" maxlength="255" type="text" class="input">
+                                <input name="username" maxlength="255" type="text" class="input" require>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Password</label>
-                                <input name="password" maxlength="255" type="password" class="input">
+                                <input name="password" maxlength="255" type="password" class="input" require>
                             </div>
+                            <?php include_once('../templates/messages.php');?>
                             <div class="group">
                                <input type="submit" class="button" formaction="../actions/action_login.php" value="Login">
                             </div>
-                            <div class="hr"></div>
                             <div class="foot-lnk">
                                 <a href="#forgot">Forgot Password?</a>
                             </div>
@@ -53,20 +54,23 @@
                         <form accept-charset="utf-8" form method="post" class="sign-in-form">
                             <div class="group">
                                 <label for="user" class="label">Username</label>
-                                <input name="username" type="text" class="input">
+                                <input name="username" type="text" class="input" require>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Password</label>
-                                <input name="password" type="password" class="input">
+                                <input name="password" type="password" class="input" require>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Repeat Password</label>
-                                <input name="password-conf" type="password" class="input">
+                                <input name="password-conf" type="password" class="input" require>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Email Address</label>
-                                <input name="email" type="text" class="input">
+                                <input name="email" type="text" class="input" require>
                             </div>
+
+                            <?php include_once('../templates/messages.php');?>
+                            
                             <div class="group">
                                 <input type="submit" class="button" formaction="../actions/action_signup.php" value="Signup">
                             </div>
