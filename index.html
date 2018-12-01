@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/test.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans+Condensed:300" rel="stylesheet">
 </head>
 
@@ -33,14 +34,14 @@
                         <form accept-charset="utf-8" form method="post" class="sign-in-form">
                             <div class="group">
                                 <label for="user" class="label">Username</label>
-                                <input name="username" maxlength="255" type="text" class="input">
+                                <input id="user" maxlength="255" type="text" class="input">
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Password</label>
-                                <input name="password" maxlength="255" type="password" class="input">
+                                <input id="pass" maxlength="255" type="password" class="input">
                             </div>
                             <div class="group">
-                               <input type="submit" class="button" formaction="../actions/action_login.php" value="Login">
+                               <input type="submit" class="button" formaction="actions/action_login.php" value="Login">
                             </div>
                             <div class="hr"></div>
                             <div class="foot-lnk">
@@ -53,22 +54,22 @@
                         <form accept-charset="utf-8" form method="post" class="sign-in-form">
                             <div class="group">
                                 <label for="user" class="label">Username</label>
-                                <input name="username" type="text" class="input">
+                                <input id="user" type="text" class="input">
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Password</label>
-                                <input name="password" type="password" class="input">
+                                <input id="pass" type="password" class="input" data-type="password">
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Repeat Password</label>
-                                <input name="password" type="password" class="input">
+                                <input id="pass" type="password" class="input" data-type="password">
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Email Address</label>
-                                <input name="password" type="text" class="input">
+                                <input id="pass" type="text" class="input">
                             </div>
                             <div class="group">
-                                <input type="submit" class="button" formaction="../actions/action_signup.php" value="Signup">
+                                <input type="submit" class="button" formaction="actions/action_signup.php" value="Signup">
                             </div>
                             <div class="foot-lnk">
                                 <label for="tab-1">Already Member?</a>

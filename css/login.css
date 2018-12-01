@@ -1,0 +1,201 @@
+:root {
+  --selected-color: ;
+  --non-selected-color: rgba(255,255,255,.3);
+  --background-color: rgba(6, 7, 8, 0.4);
+  --form-color: rgba(1, 2, 3, 0.8);
+  --font-color: #fff;
+  --theme-color: rgb(12, 83, 141);
+  --background-image: url(https://images.pexels.com/photos/2255/black-and-white-city-houses-skyline.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+}
+
+
+/* Options */
+
+input:focus {
+  outline:none;
+}
+
+a{
+  color:inherit;
+  text-decoration:none
+}
+
+*,*:before,*:after{
+  box-sizing: border-box;
+}
+
+
+
+/* Body */
+
+html, body, .login-container {
+  height: 100%;
+}
+
+body{
+  margin:0;
+  padding: 0;
+	color: var(--non-selected-color);
+  font:600 16px/18px 'Open Sans',sans-serif;
+}
+
+
+/* Background */
+.bg-container{
+  margin:0;
+  padding: 0;
+  position: fixed;
+}
+
+.bg-filter{
+  width:100%;
+	height:100%;
+  background: var(--background-color);
+  position: fixed;
+}
+
+
+.bg-image {
+  background: var(--background-image) no-repeat center center;
+  background-size: cover;
+  box-sizing: border-box;
+  display: block;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  filter: blur(30px); 
+  transform: scale(1.1);
+} 
+
+
+
+/* Website name */
+.identity{
+  display: none;
+}
+
+/* Login */
+
+/* Tentar colocar no body */
+
+/* Position */
+.login-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.login-wrap{
+  /* margin: 10em 0 0 0; */
+  width:100%;
+	max-width: 33em;
+	min-height:40em;
+  position:relative;
+  box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+  border-radius: 0.5em;
+}
+
+.login-html{
+	width:100%;
+	height:100%;
+	position:absolute;
+	padding: 3em 3em;
+  background:var(--form-color);
+  border-radius: 0.5em;
+}
+
+.login-html .sign-in-htm,
+.login-html .sign-up-htm{
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	position:absolute;
+}
+
+/* Tab */
+.login-html .sign-in,
+.login-html .sign-up,
+.login-form .group .check{
+	display:none;
+}
+
+.login-html .tab,
+.login-form .group .label,
+.login-form .group .button{
+	text-transform:uppercase;
+}
+
+.login-html .tab{
+	font-size:20px;
+	margin-right:15px;
+	padding-bottom:5px;
+	margin:0 1em 1.5em 0;
+	display:inline-block;
+	border-bottom:2px solid transparent;
+}
+
+
+.login-form{
+  /* min-height:345px; */
+	position:relative;
+  visibility: hidden;
+}
+
+.login-html .sign-in:checked ~ .login-form .sign-in-htm{visibility: visible;}
+.login-html .sign-in:checked ~ .login-form .sign-up-htm{visibility: hidden;}
+
+.login-html .sign-up:checked ~ .login-form .sign-up-htm{visibility: visible;}
+.login-html .sign-up:checked ~ .login-form .sign-in-htm{visibility: hidden;}
+
+.login-html .sign-in:checked + .tab,
+.login-html .sign-up:checked + .tab{
+	color:var(--font-color);
+	border-color:var(--theme-color);
+}
+
+
+/* Label and input*/
+.login-form .group .label{
+  margin-top:2em;
+  margin-bottom:0.5em;
+}
+
+.login-form .group input[type="submit"]{
+  margin: 0 auto;
+  width: 40%;
+  margin-top:6em;
+}
+
+.login-form .group .label,
+.login-form .group .input,
+.login-form .group .button{
+	width:100%;
+	color:var(--font-color);
+  display:block;
+}
+.login-form .group .input,
+.login-form .group .button{
+	border:none;
+	padding: 1em 1em;
+	border-radius:25px; 
+	background:rgba(255,255,255,.1);
+}
+.login-form .group .label{
+	color:#aaa;
+	font-size:12px;
+}
+
+.login-form .group .input{
+	font-size:12px;
+}
+
+.login-form .group .button{
+	background:var(--theme-color);
+}
+
+.foot-lnk{
+  margin:1em 0 1em 0;
+	text-align:center;
+}
