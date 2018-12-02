@@ -199,17 +199,17 @@ body{
 .login-form .group .input,
 .login-form .group .button{
 	border:none;
-	padding: 1em 1em;
+	padding: 0.6em 1.0em;
 	border-radius:25px; 
 	background:rgba(255,255,255,.1);
 }
 .login-form .group .label{
 	color:#aaa;
-	font-size:12px;
+	font-size:14px;
 }
 
 .login-form .group .input{
-	font-size:12px;
+	font-size:14px;
 }
 
 .login-form .group .button{

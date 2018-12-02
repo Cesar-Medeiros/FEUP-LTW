@@ -52,10 +52,3 @@ CREATE TABLE ChannelMessages (
     story_id    INTEGER NOT NULL REFERENCES Story(story_id),
     PRIMARY KEY (channel_id, story_id)
 );
-
-CREATE TRIGGER insert_user
-AFTER INSERT ON USER
-BEGIN
-    UPDATE USER SET user_id = (SELECT max(user_id) from USER) + 1
-    WHERE username = NEW.username;
-END;

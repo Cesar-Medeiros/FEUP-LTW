@@ -34,11 +34,11 @@
                         <form accept-charset="utf-8" form method="post" class="sign-in-form">
                             <div class="group">
                                 <label for="user" class="label">Username</label>
-                                <input name="username" maxlength="255" type="text" class="input" require>
+                                <input name="username" maxlength="255" type="text" class="input" required>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Password</label>
-                                <input name="password" maxlength="255" type="password" class="input" require>
+                                <input name="password" maxlength="255" type="password" class="input" required>
                             </div>
                             <?php include_once('../templates/messages.php');?>
                             <div class="group">
@@ -54,19 +54,19 @@
                         <form accept-charset="utf-8" form method="post" class="sign-in-form">
                             <div class="group">
                                 <label for="user" class="label">Username</label>
-                                <input name="username" type="text" class="input" require>
+                                <input name="username" type="text" class="input" required>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Password</label>
-                                <input name="password" type="password" class="input" require>
+                                <input name="password" type="password" class="input" required>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Repeat Password</label>
-                                <input name="password-conf" type="password" class="input" require>
+                                <input name="password-conf" type="password" class="input" required>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Email Address</label>
-                                <input name="email" type="text" class="input" require>
+                                <input name="email" type="text" class="input" required>
                             </div>
 
                             <?php include_once('../templates/messages.php');?>
