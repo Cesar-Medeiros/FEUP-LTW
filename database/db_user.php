@@ -11,7 +11,7 @@
     function addUser($username, $password){
         $db = Database::db();
         $stmt = $db->prepare('INSERT INTO User VALUES(?, ?, ?)');
-        $stmt->execute(array(-1, $username, $password));
+        $stmt->execute(array(null, $username, $password));
     }
 
     function userExist($username){
