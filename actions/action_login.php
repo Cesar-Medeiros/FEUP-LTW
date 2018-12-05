@@ -6,6 +6,7 @@
 
   if (checkUserPassword($username, $password)) {
     $_SESSION['username'] = $username;
+    $_SESSION['user_id'] =  getUser($username)['user_id'];
     header('Location: ../pages/index.php');
   } else {
     $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Login failed!');

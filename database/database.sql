@@ -1,7 +1,8 @@
 CREATE TABLE User (
     user_id     INTEGER PRIMARY KEY,
     username    TEXT NOT NULL UNIQUE,
-    password    TEXT NOT NULL
+    password    TEXT NOT NULL,
+    email       TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE Story (

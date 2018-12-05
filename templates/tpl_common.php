@@ -1,4 +1,4 @@
-<?php function draw_header($username) { 
+<?php function draw_head() { 
 /**
  * Draws the header for all pages. Receives an username
  * if the user is logged in in order to draw the logout
@@ -16,8 +16,15 @@
       <script src="../js/main.js" defer></script>
     </head>
 
-    <body>
+<?php } ?>
 
+<?php function draw_header($username) { 
+/**
+ * Draws the header for all pages. Receives an username
+ * if the user is logged in in order to draw the logout
+ * link.
+ */ 
+  draw_head();?>
       <header>
         <h1><a href="login.php"><i class="fas fa-bed"></i> Fare Niente</a></h1>
         <?php if ($username != NULL) { ?>
