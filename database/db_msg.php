@@ -64,6 +64,17 @@
     return $stmt->fetchAll(); 
   }
 
+  function getStoryWithInfo($message_id){
+    $db = Database::db();
+    $stmt = $db->prepare('
+      SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.username, Channel.title as channel
+      FROM Message, User, ChannelMessages, Channel
+      ON Message.publisher = User.user_id AND Message.message_id = ChannelMessages.story_id AND ChannelMessages.channel_id = Channel.channel_id
+      WHERE parent_message_id is null AND message_id = ?');
+    $stmt->execute(array($message_id));
+    return $stmt->fetch(); 
+  }
+
 
   function getMessage($message_id){
     $db = Database::db();
@@ -71,6 +82,8 @@
     $stmt->execute(array($message_id));
     return $stmt->fetch(); 
   }
+
+
 
   /**
    * Inserts a new post

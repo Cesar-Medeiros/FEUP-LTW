@@ -25,6 +25,7 @@
     $button = $new_vote_val;
   }  
 
+  $res = $res = new \stdClass();
   $res->score = getMessage($message_id)['score'];
   $res->button = $button;
 

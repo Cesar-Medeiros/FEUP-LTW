@@ -27,7 +27,7 @@
         <a class="gn-icon logout" href="../actions/action_logout.php"><i class="fas fa-power-off"></i></a>
       </li>
 
-      <li class="navbar-center-wrap"><a class="gn-icon logo">Website Name</a></li>
+      <li class="navbar-center-wrap"><a class="gn-icon logo" href="../pages/homepage.php">Website Name</a></li>
 
       <li class="navbar-right-wrap">
         <select id="sort_by" onchange='alert("Call ajax")'>

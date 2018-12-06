@@ -2,25 +2,29 @@
 <section id="stories">
 
   <?php 
-    foreach($stories as $story){?>
+    foreach($stories as $story){
+        draw_post($story);
+      }
+  ?>
+</section>
+<?php } ?>
 
+<?php function draw_post($story) {?>
   <div class="post">
     <?php 
         draw_story($story);
         draw_story_info($story);
         ?>
   </div>
-  <?php
-      }
+  <?php }
   ?>
-</section>
-<?php } ?>
+
 
 <?php function draw_story($story) { ?>
 <article class="story">
 
   <header>
-    <a class="title" href=""><?=$story['title']?></a>
+    <a class="title" href="../pages/post.php?id=<?=$story['message_id']?>"><?=$story['title']?></a>
   </header>
 
 
@@ -29,9 +33,8 @@
   <img class="image" src="https://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/47/cf/cf/47cfcf79-9e1d-b21f-8e10-2658b7650c15/mzl.oiljceng.png/246x0w.jpg" alt="image">
 </div>
  
-  <div class="readmore-wrap">
-    <a href="" class="readmore">Read more</a>
-  </div>
+  <a href="../pages/post.php?id=<?=$story['message_id']?>" class="readmore">Read more</a>
+
 </article>
 <?php } ?>
 
@@ -100,6 +103,6 @@
         }
     }
   }
-  
+
   return $val ? $val  . ' ago' : 'just now';
 }?>
