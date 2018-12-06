@@ -64,6 +64,40 @@
 <?php
 }?>
 
+
+<?php function draw_comments($comments) { ?>
+<article class="comments">
+
+  <header>
+    <p>Comments</p>
+  </header>
+
+  <?php foreach($comments as $comment){
+    draw_comment($comment);
+  }
+  ?>
+  
+  <div class="comment">
+    <textarea name="text" placeholder="Write comment..." class="text" required></textarea>
+    <a class="button" href="">Send</a>
+  </div>
+
+</article>
+<?php } ?>
+
+
+<?php function draw_comment($comment){?>
+    <div class="user_info">
+      <img class="user_img" src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Account-512.png" style="height:20px;width:20px;">
+      <a class="user_name" href="">Username</a>
+    </div>
+
+    <textarea readonly class="message"><?=$comment['text']?></textarea>
+<?php } ?>
+
+
+
+
 <?php function formatedTime($datetime) {
   $ago = new DateTime();
   $ago->setTimestamp($datetime);

@@ -6,7 +6,7 @@ CREATE TABLE User (
 
 CREATE TABLE Message (
     message_id  INTEGER PRIMARY KEY,
-    title       TEXT NOT NULL,
+    title       TEXT,
     text        TEXT NOT NULL,
     date        INTEGER NOT NULL,
     score       INTEGER NOT NULL,
@@ -84,6 +84,45 @@ INSERT INTO Message VALUES
 1,
 null
 );
+
+
+
+-- Comments
+
+
+INSERT INTO Message VALUES 
+(null, 
+null,
+'Comment1: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
+1543759773,
+0,
+0,
+1,
+1
+);
+
+INSERT INTO Message VALUES 
+(null, 
+null,
+'Comment2: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
+1543759773,
+0,
+0,
+1,
+1
+);
+
+INSERT INTO Message VALUES 
+(null, 
+null,
+'SubComment: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
+1543759773,
+0,
+0,
+1,
+4
+);
+
 
 
 -- Channels

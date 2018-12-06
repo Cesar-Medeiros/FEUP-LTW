@@ -12,10 +12,12 @@ $categories = getTopChannels();
 
 $message_id = $_GET['id'];
 $message = getStoryWithInfo($message_id);
+$comments = getComments($message_id);
 
 draw_header($_SESSION['username']);
 draw_aside($categories);
 draw_post($message);
+draw_comments($comments);
 draw_footer();
 
 ?>

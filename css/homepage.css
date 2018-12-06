@@ -5,7 +5,7 @@
      --sidebar-background: rgb(57, 58, 58);
      --shadow-color: rgba(0, 0, 0, 0.4);
      --post-background: #F9F9F9;
-     --body-backgorund:rgb(242, 242, 242);
+     --body-backgorund:rgb(245,245,245);
      --navbar-height: 4em;
 
      --font-color-light: #fff;
@@ -294,17 +294,17 @@ h1{
 }
 
 
+ .story.shrink{
+    max-height: 20em;
+    overflow: hidden;
+ }
+
  .story{
     background: var(--post-background);
     box-shadow: 0 4px 10px 1px var(--shadow-color);
     padding: 2.5em;
     border-radius:8px;
     grid-column: 2;
-
-
-    max-height: 20em;
-    overflow: hidden;
-
     position: relative;
 }
 
@@ -317,7 +317,7 @@ h1{
     margin: 0;
 }
 
-.story .text:before{
+.story.shrink .text:before{
     content:'';
     width:100%;
     /* height:100%; */
@@ -340,9 +340,12 @@ h1{
     margin-left: 2em;
 }
 
-
-
 .story .readmore{
+    display:none;
+}
+
+.story.shrink .readmore{
+    display: block;
     position: absolute;
     bottom: 1em;
     left: 50%;
