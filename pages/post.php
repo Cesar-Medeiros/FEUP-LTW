@@ -16,7 +16,7 @@ $comments = getComments($message_id);
 
 draw_header($_SESSION['username']);
 draw_aside($categories);
-draw_post($message);
+draw_post_full($message);
 draw_comments($comments);
 draw_footer();
 

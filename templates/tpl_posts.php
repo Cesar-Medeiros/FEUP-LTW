@@ -10,7 +10,7 @@
 <?php } ?>
 
 <?php function draw_post($story) {?>
-  <div class="post">
+  <div class="post shrink">
     <?php 
         draw_story($story);
         draw_story_info($story);
@@ -19,6 +19,15 @@
   <?php }
   ?>
 
+  <?php function draw_post_full($story) {?>
+  <div class="post">
+    <?php 
+        draw_story($story);
+        draw_story_info($story);
+        ?>
+  </div>
+  <?php }
+  ?>
 
 <?php function draw_story($story) { ?>
 <article class="story">
@@ -66,9 +75,11 @@
 
 
 <?php function draw_comments($comments) { ?>
+
+  <div class="comments_wrap">
 <article class="comments">
 
-  <header>
+  <header class="comment_title">
     <p>Comments</p>
   </header>
 
@@ -83,16 +94,20 @@
   </div>
 
 </article>
+
+</div>
 <?php } ?>
 
 
 <?php function draw_comment($comment){?>
+  <div class="comment">
     <div class="user_info">
       <img class="user_img" src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Account-512.png" style="height:20px;width:20px;">
       <a class="user_name" href="">Username</a>
     </div>
 
     <textarea readonly class="message"><?=$comment['text']?></textarea>
+  </div>
 <?php } ?>
 
 

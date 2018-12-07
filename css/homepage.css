@@ -294,7 +294,7 @@ h1{
 }
 
 
- .story.shrink{
+ .post.shrink .story{
     max-height: 20em;
     overflow: hidden;
  }
@@ -317,7 +317,7 @@ h1{
     margin: 0;
 }
 
-.story.shrink .text:before{
+.post.shrink .story .text:before{
     content:'';
     width:100%;
     /* height:100%; */
@@ -344,7 +344,7 @@ h1{
     display:none;
 }
 
-.story.shrink .readmore{
+.post.shrink .story .readmore{
     display: block;
     position: absolute;
     bottom: 1em;
@@ -452,8 +452,58 @@ h1{
 
 
 
+/* -------------------------------- 
+
+Comments
+
+-------------------------------- */
 
 
+.comments_wrap{
+    margin: 0 auto;
+    position: relative;
+    top: 3em;
+    display: grid;
+    grid-template-columns: 2fr 8fr 5fr;    
+}
+
+
+.comments_wrap .comments{
+    background: var(--post-background);
+    box-shadow: 0 4px 10px 1px var(--shadow-color);
+    padding: 2.5em;
+    border-radius:8px;
+    grid-column: 2;
+    position: relative;
+    grid-column: 2;
+}
+
+.comments_wrap .comments .text,
+.comments_wrap .comments .message
+{
+    border:none;
+    outline: none;
+	padding: 0.6em 1.0em;
+    border-radius:8px;
+    box-shadow: 0 4px 10px 0px var(--shadow-color);
+    display: block;
+	width:100%;
+    background: var(--post-background);
+    margin-top: 0.6em;
+    margin-bottom: 1em;
+    resize: none;
+    border: none;
+    color:var(--font-color-dark);
+}
+
+.comments_wrap .comments .message{
+    height: 5em;
+}
+
+
+.comments_wrap .comments .text{
+    height: 10em;
+}
 
 /* -------------------------------- 
 
