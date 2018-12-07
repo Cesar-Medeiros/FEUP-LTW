@@ -7,7 +7,6 @@
   
   try {
     addUser($username, $password, $email);
-    $_SESSION['username'] = $username;
     $_SESSION['user_id'] = getUser($username)['user_id'];
     header('Location: ../pages/homepage.php');
   } catch (PDOException $e) {

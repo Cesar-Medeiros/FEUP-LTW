@@ -1,10 +1,11 @@
 <?php
 include_once '../includes/session.php';
 include_once '../database/db_msg.php';
+include_once '../database/db_user.php';
 include_once '../templates/tpl_common.php';
 include_once '../templates/tpl_posts.php';
 
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['user_id'])) {
     die(header('Location: login.php'));
 }
 
@@ -14,10 +15,11 @@ $message_id = $_GET['id'];
 $message = getStoryWithInfo($message_id);
 $comments = getComments($message_id);
 
-draw_header($_SESSION['username']);
+$username = getUserById($_SESSION['user_id'])['username'];
+
+draw_header($username);
 draw_aside($categories);
 draw_post_full($message);
 draw_comments($comments);
 draw_footer();
-
 ?>

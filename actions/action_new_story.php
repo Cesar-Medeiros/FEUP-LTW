@@ -4,7 +4,7 @@
 
 
   // Verify if user is logged in
-  if (!isset($_SESSION['username']))
+  if (!isset($_SESSION['user_id']))
     die(header('Location: ../pages/login.php'));
 
   $channel = $_POST['channel'];

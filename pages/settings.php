@@ -1,10 +1,10 @@
 <?php 
   include_once('../includes/session.php');
+  include_once('../database/db_user.php');
   include_once('../templates/tpl_common.php');
   include_once('../templates/tpl_input.php');
-  include_once('../database/db_user.php');
 
-  if (!isset($_SESSION['username']))
+  if (!isset($_SESSION['user_id']))
     die(header('Location: login.php'));
 
   $user = getUserById($_SESSION['user_id']);

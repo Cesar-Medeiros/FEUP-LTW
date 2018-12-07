@@ -4,7 +4,7 @@
   include_once('../database/db_msg.php');
 
   // Verify if user is logged in
-  if (!isset($_SESSION['username']))
+  if (!isset($_SESSION['user_id']))
     die(header('Location: ../pages/login.php'));
 
   $message_id = $_GET['message_id'];

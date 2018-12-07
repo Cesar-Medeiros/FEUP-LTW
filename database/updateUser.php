@@ -9,5 +9,4 @@
 
   $result = updateUser($user_id, $newUsername, $newPassword, $newEmail);
   echo json_encode($result);
- 
 ?>
