@@ -1,195 +1,235 @@
-let editUsernameArea = document.getElementById("username").querySelector('label');
-let editUsernameField = editUsernameArea.querySelector("span");
 
-editUsernameArea.addEventListener("click", editUsername);
-editUsernameField.addEventListener("input", verifyInput);
+let handle = [];
+handle['editable'] = {
+  getContent: getEditableContent,
+  handleClick: handleClickOnEditable,
+  handleCancel: handleCancelOnEditable,
+  handleSave: handleSaveOnEditable,
+  handleInput: updateToolsOfEditable,
+  cancelInput: cancelEditable,
+  openInput: openEditable
+};
 
-function verifyInput() {
-  let listItem = this.parentNode.parentNode;
-  if (this.innerHTML != this.dataset.backup)
-    addSaveAndCancelButtons(listItem);
-  else removeSaveAndCancelButtons(listItem);
-}
-//editUsernameArea.addEventListener("blur", hey);
+handle['password'] = {
+  getContent: getPasswordContent,
+  handleClick: handleClickOnPassword,
+  handleCancel: handleCancelOnPassword,
+  handleSave: handleSaveOnPassword,
+  cancelInput: cancelPassword,
+  openInput: openPassword
+};
 
-/*
-let editPasswordArea = document.getElementById("password").querySelector("label");
-editPasswordArea.addEventListener("click", editPassword);
-let editEmailArea = document.getElementById("email").querySelector("label");
-editEmailArea.addEventListener("click", editEmail);
-let areas = {
-  "username" : editUsernameArea,
-  "password" : editPasswordArea,
-  "email" : editEmailArea
-}
-let editing = "none";
+let contents = [];
 
-*/
-//Handlers for mouse click
-function editUsername() {
-  console.log("here");
-  editUsernameField.focus();
-  /*document.activeElement = this;
-  console.log(document.activeElement);
-  editing = "username";
-  this.removeEventListener("click", editUsername);
-  let usernameLabel = editUsernameArea.querySelector("label");
-  let username = usernameLabel.innerHTML;
-  editUsernameArea.removeChild(usernameLabel);
+let inputs = document.querySelectorAll('#input');
 
-  let newForm = document.createElement('form');
-  let input = '<input name="username" maxlength="255" type="text" class="input" value=' + username + ' required />';
-  let saveButton = '<input type="submit" class="button" formaction="#" value="Save"></input>'
-  let cancelButton = '<input  type="submit" class="button" formaction="#" value="Cancel"></input>'
-  newForm.innerHTML =  input + saveButton + cancelButton;
-
-  editUsernameArea.appendChild(newForm);
-
-  let save = newForm.querySelector('input:nth-child(2)');
-  save.addEventListener("click", saveUsername);
-  */
-}
-/*
-function editPassword() {
-  editing = "password";
-  this.removeEventListener("click", editPassword);
-
-  let newForm = document.createElement('form');
-  let currentPass = '<label> Current Password <input name="username" maxlength="255" type="text" class="input" value="" required /> </label>';
-  let newPass = '<label> New Password <input name="username" maxlength="255" type="text" class="input" value="" required /> </label>';
-  let newPassConfirm = '<label> Confirm Password <input name="username" maxlength="255" type="text" class="input" value="" required /> </label>';
-  let saveButton = '<input type="submit" class="button" formaction="#" value="Save"></input>'
-  let cancelButton = '<input  type="submit" class="button" formaction="#" value="Cancel"></input>'
-  newForm.innerHTML = currentPass + newPass + newPassConfirm + saveButton + cancelButton;
-
-  editPasswordArea.appendChild(newForm);
-
-  let save = newForm.querySelector('input:nth-child(2)');
-  save.addEventListener("click", savePassword);
-}
-
-function editEmail() {
-  editing = "email";
-  this.removeEventListener("click", editEmail);
-  let emailLabel = editEmailArea.querySelector("label");
-  let email = emailLabel.innerHTML;
-  editEmailArea.removeChild(emailLabel);
-
-  let newForm = document.createElement('form');
-  let input = '<input name="username" maxlength="255" type="text" class="input" value=' + email + ' required />';
-  let saveButton = '<input type="submit" class="button" formaction="#" value="Save"></input>'
-  let cancelButton = '<input  type="submit" class="button" formaction="#" value="Cancel"></input>'
-  newForm.innerHTML =  input + saveButton + cancelButton;
-
-  editEmailArea.appendChild(newForm);
-
-  let save = newForm.querySelector('input:nth-child(2)');
-  save.addEventListener("click", saveEmail);
-}
-
-// Save new settings on database functions
-
-function saveUsername(event) {
-  event.preventDefault();
-  let request = new XMLHttpRequest();
-  request.addEventListener("load", updateUsername);
-  request.open("get", "../database/updateUsername.php?username=" + this.parentNode.querySelector('input').value, true);
-  request.send();
-}
-
-function savePassword(event) {
-  event.preventDefault();
-  let request = new XMLHttpRequest();
-  request.addEventListener("load", updatePassword);
-  request.open("get", "../database/updatePassword.php?password=" + this.parentNode.querySelector('input').value, true);
-  request.send();
-}
-
-function saveEmail(event) {
-  event.preventDefault();
-  let request = new XMLHttpRequest();
-  request.addEventListener("load", updateEmail);
-  request.open("get", "../database/updateEmail.php?email=" + this.parentNode.querySelector('input').value, true);
-  request.send();
-}
-
-// Handlers for ajax response received
-
-function updateUsername() {
-  let newUsername = JSON.parse(this.responseText);
-  let form = editUsernameArea.querySelector('form');
-  editUsernameArea.removeChild(form);
-  let newLabel = document.createElement('label');
-  newLabel.innerHTML = newUsername;
-  editUsernameArea.appendChild(newLabel);
-  editUsernameArea.addEventListener("click", editUsername);
-}
-
-function updatePassword() {
-  let newPassword = JSON.parse(this.responseText);
-  let form = editPasswordArea.querySelector('form');
-  editPasswordArea.removeChild(form);
-  let newLabel = document.createElement('label');
-  newLabel.innerHTML = newPassword;
-  editPasswordArea.appendChild(newLabel);
-  editPasswordArea.addEventListener("click", editPassword);
-}
-
-function updateEmail() {
-  let newEmail = JSON.parse(this.responseText);
-  let form = editEmailArea.querySelector('form');
-  editEmailArea.removeChild(form);
-  let newLabel = document.createElement('label');
-  newLabel.innerHTML = newEmail;
-  editEmailArea.appendChild(newLabel);
-  editEmailArea.addEventListener("click", editEmail);
-}
-*/
-function saveEdit(){
-  let type = this.parentNode.parentNode.id;
-
-}
-
-function cancelEdit() {
-  let span = this.parentNode.parentNode.querySelector('span');
-  span.innerHTML = span.dataset.backup;
-  let listItem = this.parentNode.parentNode;
-  removeSaveAndCancelButtons(listItem);
-}
-
-function generateSaveButton() {
-  //let save = '<input type="submit" class="button" value="Save"></input>';
-  //let cancel = '<input  type="submit" class="button" value="Cancel"></input>';
-  let save = document.createElement('input');
-  save.type = "submit";
-  save.class = "button";
-  save.value = "Save";
-
-  return save;
-}
-
-function generateCancelButton(){
-  let cancel = document.createElement('input');
-  cancel.type = "submit";
-  cancel.class = "button";
-  cancel.value = "Cancel";
-  return cancel;
-}
-
-function addSaveAndCancelButtons(item) {
-  let buttons = item.querySelector('form');
-  if (buttons == undefined) {
-    let save = generateSaveButton();
-    item.appendChild(save);
-    let cancel = generateCancelButton();
-    item.appendChild(cancel);
+for (let i = 0; i < inputs.length; i++) {
+  addListeners(inputs[i]);
+  let type = inputs[i].dataset.type;
+  contents[inputs[i].dataset.id] = {
+    type: type,
+    content: handle[type].getContent(inputs[i]),
+    input: inputs[i]
   }
 }
 
-function removeSaveAndCancelButtons(item) {
-  let buttons = item.querySelector('form');
-  if (buttons != undefined)
-    item.removeChild(buttons);
-  item.focus();
+let selectedInput = null;
+
+/* EDITABLE */
+
+/* _________ Get Content __________ */
+
+function getEditableContent(input) {
+  let span = input.querySelector('label span');
+  return span.innerHTML;
+}
+
+function getPasswordContent(input) {
+  return input.dataset.previous;
+}
+
+/* _________ Add Listeners __________ */
+
+function addListeners(input) {
+  let type = input.dataset.type;
+
+  /* Click */
+  let label = input.querySelector('label');
+  label.addEventListener("click", handle[type].handleClick);
+
+  /* Input */
+  if (type == "editable") {
+    let span = input.querySelector('span');
+    span.addEventListener("input", handle[type].handleInput);
+  }
+
+  /* Cancel */
+  let cancel = input.querySelector('#cancel');
+  cancel.addEventListener("click", handle[type].handleCancel);
+
+  /* Save */
+  let save = input.querySelector('#save');
+  save.addEventListener("click", handle[type].handleSave);
+}
+
+/* _________ Handle Click __________ */
+
+function handleClickOnEditable() {
+  let input = this.parentNode;
+  openEditable(input);
+}
+
+function handleClickOnPassword() {
+  let input = this.parentNode;
+  openPassword(input);
+}
+
+/* _________ Open Environment __________ */
+
+function openEditable(input) {
+  if (selectedInput == null) {
+    input.querySelector('label span').focus();
+  }
+  else if (selectedInput != input.dataset.id)
+    throwPopup(input);
+}
+
+function openPassword(input) {
+  let id = input.dataset.id;
+  if (selectedInput == null) {
+    showEditingTools(input);
+    selectedInput = id;
+  }
+  else if (selectedInput != input.dataset.id)
+    throwPopup(input);
+}
+
+
+/* _________ Handle Input __________ */
+
+function updateToolsOfEditable() {
+  let listItem = this.parentNode.parentNode;
+  if (this.innerHTML != this.dataset.backup)
+    showEditingTools(listItem);
+  else hideEditingTools(listItem);
+  selectedInput = listItem.dataset.id;
+
+}
+
+/* _________ Handle Cancel __________ */
+
+
+function handleCancelOnEditable() {
+  let input = this.parentNode.parentNode;
+  cancelEditable(input);
+}
+
+function cancelEditable(input) {
+  let span = input.querySelector('label span');
+  span.innerHTML = span.dataset.backup;
+  hideEditingTools(input);
+  selectedInput = null;
+}
+
+function handleCancelOnPassword() {
+  let input = this.parentNode.parentNode;
+  cancelPassword(input);
+}
+
+function cancelPassword(input) {
+  hideEditingTools(input);
+  selectedInput = null;
+}
+/* _________ Handle Save __________ */
+
+function handleSaveOnEditable() {
+  event.preventDefault();
+  let input = this.parentNode.parentNode;
+  let span = input.querySelector('span');
+  let id = input.dataset.id;
+  contents[id].content = span.innerHTML;
+  if (updateInfo())
+    span.dataset.backup = span.innerHTML;
+  else contents[id].content = span.dataset.backup;
+
+  hideEditingTools(input);
+  selectedInput = null;
+}
+
+function handleSaveOnPassword() {
+  
+  let input = this.parentNode.parentNode;
+  console.log(input);
+  let oldP = input.querySelector('#old input').value;
+  let newP = input.querySelector('#new input').value;
+  let confirmNewP = input.querySelector('#new-conf input').value;
+  let id = input.dataset.id;
+  console.log(console.log, contents['password'].content);
+  if (oldP != contents['password'].content)
+    alert("OLDP Could not update user info!");
+
+  else if (newP != confirmNewP)
+    alert("Passwords do not match!");
+  else {
+    //the update can already be made since there are no invalid passwords
+    contents[id].content = newP;
+    updateInfo();
+    hideEditingTools(input);
+    selectedInput = null;
+  }
+
+  
+}
+
+/* _________ Update info __________ */
+
+
+function updateInfo() {
+  let request = new XMLHttpRequest();
+  request.addEventListener("load", handleUpdateAnswer);
+  let args = "";
+  for (let key in contents) {
+    args += key + "=" + contents[key].content + "&";
+  }
+  request.open("get", "../database/updateUser.php?" + args, true);
+  request.send();
+}
+
+function handleUpdateAnswer() {
+  let result = JSON.parse(this.responseText);
+  if (!result)
+    alert('Could not update user info!');
+  else alert("User info succefully changed!");
+}
+
+
+/* _________ Show Tools __________ */
+
+function throwPopup(newInput) {
+  let oldInput = contents[selectedInput].input;
+  let oldType = oldInput.dataset.type;
+  let newType = newInput.dataset.type;
+  if (confirm('Are you sure you want to discard the changes?')) {
+    handle[oldType].cancelInput(oldInput);
+    handle[newType].openInput(newInput);
+  }
+}
+
+/* _________ Generic __________ */
+
+
+function showEditingTools(input) {
+  input.querySelector("div").hidden = false;
+  let id = input.dataset.id;
+  selectedInput = id;
+}
+
+function hideEditingTools(input) {
+  input.querySelector("div").hidden = true;
+  selectedInput = null;
+}
+
+function areToolsHidden(input) {
+  return input.querySelector('#editionTools').hidden;
 }
 

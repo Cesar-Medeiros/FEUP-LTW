@@ -27,26 +27,17 @@
         $stmt->execute(array($username));
         return $stmt->fetch();
     } 
-    
-    function updateUsername($user_id, $newUsername){
+    function getUserById($user_id){
         $db = Database::db();
-        $stmt = $db->prepare('UPDATE User SET username = ? WHERE user_id = ?');
-        $stmt->execute(array($newUsername, $user_id));
-        return $stmt->fetch() ? true : false; 
+        $stmt = $db->prepare('SELECT * from User WHERE user_id = ?');
+        $stmt->execute(array($user_id));
+        return $stmt->fetch();
     }
 
-    function updateEmail($user_id, $newEmail){
+    function updateUser($user_id, $newUsername, $newPassword, $newEmail){
         $db = Database::db();
-        $stmt = $db->prepare('UPDATE User SET email = ? WHERE user_id = ?');
-        $stmt->execute(array($newEmail, $user_id));
-        return $stmt->fetch() ? true : false; 
-    }
-
-    function updatePassword($user_id, $newPassword){
-        $db = Database::db();
-        $stmt = $db->prepare('UPDATE User SET password = ? WHERE user_id = ?');
-        $stmt->execute(array($newPassword, $user_id));
-        return $stmt->fetch() ? true : false; 
+        $stmt = $db->prepare('UPDATE User SET username = ?, email = ?, password = ? WHERE user_id = ?');
+        return $stmt->execute(array($newUsername, $newEmail, $newPassword, $user_id));
     }
 
     function checkUserPassword($username, $password){

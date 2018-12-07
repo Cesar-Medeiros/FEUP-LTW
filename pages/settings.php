@@ -1,9 +1,13 @@
 <?php 
   include_once('../includes/session.php');
   include_once('../templates/tpl_common.php');
+  include_once('../templates/tpl_input.php');
+  include_once('../database/db_user.php');
 
   if (!isset($_SESSION['username']))
     die(header('Location: login.php'));
+
+  $user = getUserById($_SESSION['user_id']);
   ?>
 
   <!DOCTYPE html>
@@ -19,17 +23,9 @@
   </header>
   <body>
       <ul>
-        <li id = "username"> <label> Username: <span contentEditable="true" data-backup=<?="{$_SESSION['username']}"?>><?=$_SESSION['username']?> </span> </label>
-        </li>
-        <li id = "password">
-        <label> Password
-        </label>
-        </li>
-        <li id = "email">
-        <label> Email:
-        <label><?=$_SESSION['username']?></label>
-        </label>
-        </li>
+        <?php draw_editable_input("username", "Username:", $user['username'])?>
+        <?php draw_password_input("password", "Password:", $user['password'])?>
+        <?php draw_editable_input("email", "Email:", $user['email'])?>
       </ul>
   </body>
   <?php
