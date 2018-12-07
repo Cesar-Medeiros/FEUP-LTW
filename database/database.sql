@@ -1,7 +1,8 @@
 CREATE TABLE User (
     user_id     INTEGER PRIMARY KEY,
     username    TEXT NOT NULL UNIQUE,
-    password    TEXT NOT NULL
+    password    TEXT NOT NULL,
+    email       TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE Message (
@@ -50,9 +51,9 @@ CREATE TABLE ChannelMessages (
 -- Insert info
 
 -- Users
-INSERT INTO User VALUES (null, 'User1', 'Password');
-INSERT INTO User VALUES (null, 'User2', 'Password');
-INSERT INTO User VALUES (null, 'User3', 'Password');
+INSERT INTO User VALUES (null, 'User1', 'Password', 'user1@email.com');
+INSERT INTO User VALUES (null, 'User2', 'Password', 'user2@email.com');
+INSERT INTO User VALUES (null, 'User3', 'Password', 'user3@email.com');
 
 -- Messages
 INSERT INTO Message VALUES 

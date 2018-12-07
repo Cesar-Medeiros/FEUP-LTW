@@ -19,7 +19,7 @@
             <i class="fas fa-user-circle fa-2x" value="user"></i>
             <label for="user"><?=$_SESSION['username']?></label>
 
-            <a class="header-icons" href="#settings"><i class="fas fa-cog"></i></a>
+            <a class="header-icons" href="../pages/settings.php"><i class="fas fa-cog"></i></a>
             <a class="header-icons" href="../actions/action_logout.php"><i class="fas fa-power-off"></i></a>
         </span>
 
