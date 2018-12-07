@@ -8,8 +8,8 @@
   try {
     addUser($username, $password, $email);
     $_SESSION['username'] = $username;
-    $_SESSION['user_id'] =  getUser($username)['user_id'];
-    header('Location: ../pages/index.php');
+    $_SESSION['user_id'] = getUser($username)['user_id'];
+    header('Location: ../pages/homepage.php');
   } catch (PDOException $e) {
     $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Failed to signup!');
     header('Location: ../pages/login.php');

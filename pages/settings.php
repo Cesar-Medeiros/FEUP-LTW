@@ -15,7 +15,7 @@
   <head>
     <title>Fare Niente</title>
     <meta charset="utf-8">
-    <script src="../scripts/editSettings.js" defer></script>
+    <script src="../js/editSettings.js" defer></script>
   </head>
 
   <header>

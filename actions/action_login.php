@@ -6,8 +6,8 @@
 
   if (checkUserPassword($username, $password)) {
     $_SESSION['username'] = $username;
-    $_SESSION['user_id'] =  getUser($username)['user_id'];
-    header('Location: ../pages/index.php');
+    $_SESSION['user_id'] = getUser($username)['user_id'];
+    header('Location: ../pages/homepage.php');
   } else {
     $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Login failed!');
     header('Location: ../pages/login.php');
