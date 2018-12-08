@@ -80,7 +80,7 @@
 <article class="comments">
 
   <header class="comment_title">
-    <p>Comments</p>
+    Comments
   </header>
 
   <?php foreach($comments as $comment){
@@ -90,7 +90,7 @@
   
   <div class="comment">
     <textarea name="text" placeholder="Write comment..." class="text" required></textarea>
-    <a class="button" href="">Send</a>
+    <a class="send_button" href="">Send</a>
   </div>
 
 </article>
@@ -105,7 +105,6 @@
       <img class="user_img" src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Account-512.png" style="height:20px;width:20px;">
       <a class="user_name" href="">Username</a>
     </div>
-
     <textarea readonly class="message"><?=$comment['text']?></textarea>
   </div>
 <?php } ?>
