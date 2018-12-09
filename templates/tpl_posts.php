@@ -77,24 +77,30 @@
 
 
 <?php function draw_comments($comments, $message_id) { ?>
+  <div class="comments_wrap">>
+  <?php draw_all_comments($comments, $message_id) ?>
+  </div>
+  <?php }
+?>
 
-  <div class="comments_wrap" data-id=<?=$message_id?>>
-  <article class="comments">
 
-  <header class="comment_title">
-    Comments
-  </header>
+<?php function draw_all_comments($comments, $message_id) { ?>
+  <article class="comments" data-id=<?=$message_id?>>
 
-  <?php foreach($comments as $comment){
-    draw_comment($comment);
-  }
-  ?>
-  
-  <?= draw_new_comment_area();?>
+<header class="comment_title">
+  Comments
+</header>
+
+<?php foreach($comments as $comment){
+  draw_comment($comment);
+  $commentsOfcomment = getComments($comment['message_id']);
+  draw_comments($commentsOfcomment, $comment['message_id']);
+}
+?>
+
+<?= draw_new_comment_area($message_id);?>
 
 </article>
-
-</div>
 <?php } ?>
 
 
@@ -108,8 +114,8 @@
   </div>
 <?php } ?>
 
-<?php function draw_new_comment_area() {?>
-  <div class="new_comment">
+<?php function draw_new_comment_area($message_id) {?>
+  <div class="new-comment" data-id = <?=$message_id?>>
     <textarea name="text" placeholder="Write comment..." class="text" required></textarea>
     <a class="send_button" href="">Send</a>
   </div>
