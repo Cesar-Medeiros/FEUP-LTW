@@ -110,7 +110,7 @@
   function addComment($message_id, $user_id, $text) {
     $date = time();
     $db = Database::db();
-    $stmt = $db->prepare('INSERT INTO Message VALUES(NULL, ?, ?, ?, ?, ?, ?)');
+    $stmt = $db->prepare('INSERT INTO Message VALUES(NULL, NULL, ?, ?, ?, ?, ?, ?)');
     $stmt->execute(array($text, $date, 0, 0, $user_id, $message_id));
   }
 
@@ -120,8 +120,13 @@
    */
   function addVote($user_id, $message_id, $vote_value) {
       $db = Database::db();
-      $stmt = $db->prepare('INSERT INTO Vote VALUES (?, ?, ?) ON CONFLICT(user_id, message_id) DO UPDATE SET vote = ?');
-      $stmt->execute(array($user_id, $message_id, $vote_value, $vote_value));
+      /*ON CONFLICT(user_id, message_id) ROLLBACK  UPDATE SET vote = ?*/
+      $stmt = $db->prepare('INSERT INTO Vote VALUES (?, ?, ?)');
+      $ret = $stmt->execute(array($user_id, $message_id, $vote_value));
+      if (!$ret){
+        $stmt = $db->prepare('UPDATE Vote SET vote = ? WHERE user_id = ? AND message_id == ? ');
+        $stmt->execute(array($user_id, $message_id, $vote_value));
+      }
     }
 
   /**

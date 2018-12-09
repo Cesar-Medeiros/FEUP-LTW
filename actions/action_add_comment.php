@@ -7,11 +7,10 @@
   if (!isset($_SESSION['user_id']))
     die(header('Location: ../pages/login.php'));
 
-  $message_id = $_POST['message_id'];
-  $text = $_POST['text'];
+  $message_id = $_GET['message_id'];
+  $text = $_GET['text'];
 
   addComment($message_id, $_SESSION['user_id'], $text);
-
 
   $res = new \stdClass();
   $res->content = $text;

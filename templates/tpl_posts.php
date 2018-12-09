@@ -1,3 +1,5 @@
+<?php include_once('../database/db_user.php'); ?>
+
 <?php function draw_stories($stories) {?>
 <section id="stories">
 
@@ -74,10 +76,10 @@
 }?>
 
 
-<?php function draw_comments($comments) { ?>
+<?php function draw_comments($comments, $message_id) { ?>
 
-  <div class="comments_wrap">
-<article class="comments">
+  <div class="comments_wrap" data-id=<?=$message_id?>>
+  <article class="comments">
 
   <header class="comment_title">
     Comments
@@ -88,10 +90,7 @@
   }
   ?>
   
-  <div class="comment">
-    <textarea name="text" placeholder="Write comment..." class="text" required></textarea>
-    <a class="send_button" href="">Send</a>
-  </div>
+  <?= draw_new_comment_area();?>
 
 </article>
 
@@ -103,9 +102,16 @@
   <div class="comment">
     <div class="user_info">
       <img class="user_img" src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Account-512.png" style="height:20px;width:20px;">
-      <a class="user_name" href="">Username</a>
+      <a class="user_name" href=""> <?= getUserById($comment['publisher'])['username'] ?> </a>
     </div>
     <textarea readonly class="message"><?=$comment['text']?></textarea>
+  </div>
+<?php } ?>
+
+<?php function draw_new_comment_area() {?>
+  <div class="new_comment">
+    <textarea name="text" placeholder="Write comment..." class="text" required></textarea>
+    <a class="send_button" href="">Send</a>
   </div>
 <?php } ?>
 
