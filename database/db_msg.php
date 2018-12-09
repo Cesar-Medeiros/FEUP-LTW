@@ -102,7 +102,6 @@
     $stmt->execute(array($channel_id, $story_id));
   }
 
-
   //Fazer trigger para aumentar o numero de comentários da message anterior
   /**
    * Inserts a new comment to a Message.
@@ -110,7 +109,7 @@
   function addComment($message_id, $user_id, $text) {
     $date = time();
     $db = Database::db();
-    $stmt = $db->prepare('INSERT INTO Message VALUES(NULL, ?, ?, ?, ?, ?, ?)');
+    $stmt = $db->prepare('INSERT INTO Message VALUES(NULL, NULL, ?, ?, ?, ?, ?, ?)');
     $stmt->execute(array($text, $date, 0, 0, $user_id, $message_id));
   }
 

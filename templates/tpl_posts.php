@@ -74,42 +74,27 @@
 }?>
 
 
-<?php function draw_comments($comments) { ?>
+<?php function draw_comments($message_id) { ?>
 
-  <div class="comments_wrap">
-<article class="comments">
+<div class="comments_wrap">
 
-  <header class="comment_title">
-    Comments
-  </header>
+  <article class="comments">
 
-  <?php foreach($comments as $comment){
-    draw_comment($comment);
-  }
-  ?>
-  
-  <div class="comment">
-    <textarea name="text" placeholder="Write comment..." class="text" required></textarea>
-    <a class="send_button" href="">Send</a>
-  </div>
+    <header class="comment_title">
+      Comments
+    </header>
 
-</article>
+    <div id="list_comments" data-message_id="<?=$message_id?>">
+    </div>
+    
+    <div class="comment">
+      <textarea name="send" placeholder="Write comment..." id="send_text" required></textarea>
+      <a id="send_button" href="">Send</a>
+    </div>
 
+  </article>
 </div>
 <?php } ?>
-
-
-<?php function draw_comment($comment){?>
-  <div class="comment">
-    <div class="user_info">
-      <img class="user_img" src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Account-512.png" style="height:20px;width:20px;">
-      <a class="user_name" href="">Username</a>
-    </div>
-    <textarea readonly class="message"><?=$comment['text']?></textarea>
-  </div>
-<?php } ?>
-
-
 
 
 <?php function formatedTime($datetime) {
