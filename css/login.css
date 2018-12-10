@@ -126,7 +126,7 @@ body{
   border-radius: 0.5em;
 }
 
-.login-html .sign-in-htm,
+.login-html .log-in-htm,
 .login-html .sign-up-htm{
 	top:0;
 	left:0;
@@ -164,11 +164,11 @@ body{
   visibility: hidden;
 }
 
-.login-html .sign-in:checked ~ .login-form .sign-in-htm{visibility: visible;}
+.login-html .sign-in:checked ~ .login-form .log-in-htm{visibility: visible;}
 .login-html .sign-in:checked ~ .login-form .sign-up-htm{visibility: hidden;}
 
 .login-html .sign-up:checked ~ .login-form .sign-up-htm{visibility: visible;}
-.login-html .sign-up:checked ~ .login-form .sign-in-htm{visibility: hidden;}
+.login-html .sign-up:checked ~ .login-form .log-in-htm{visibility: hidden;}
 
 .login-html .sign-in:checked + .tab,
 .login-html .sign-up:checked + .tab{

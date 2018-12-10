@@ -85,6 +85,7 @@
 
 
 
+
   /**
    * Inserts a new post
    */
@@ -111,6 +112,7 @@
     $db = Database::db();
     $stmt = $db->prepare('INSERT INTO Message VALUES(NULL, NULL, ?, ?, ?, ?, ?, ?)');
     $stmt->execute(array($text, $date, 0, 0, $user_id, $message_id));
+    return intval($db->lastInsertId());
   }
 
 
@@ -119,8 +121,13 @@
    */
   function addVote($user_id, $message_id, $vote_value) {
       $db = Database::db();
-      $stmt = $db->prepare('INSERT INTO Vote VALUES (?, ?, ?) ON CONFLICT(user_id, message_id) DO UPDATE SET vote = ?');
-      $stmt->execute(array($user_id, $message_id, $vote_value, $vote_value));
+      /*ON CONFLICT(user_id, message_id) ROLLBACK  UPDATE SET vote = ?*/
+      $stmt = $db->prepare('INSERT INTO Vote VALUES (?, ?, ?)');
+      $ret = $stmt->execute(array($user_id, $message_id, $vote_value));
+      if (!$ret){
+        $stmt = $db->prepare('UPDATE Vote SET vote = ? WHERE user_id = ? AND message_id == ? ');
+        $stmt->execute(array($user_id, $message_id, $vote_value));
+      }
     }
 
   /**

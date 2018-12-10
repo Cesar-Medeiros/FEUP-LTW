@@ -16,6 +16,7 @@
   <link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans+Condensed:300" rel="stylesheet">
   <script src="../js/vote.js" defer></script>
   <script src="../js/comment.js" defer></script>
+  <script src="../js/utilities.js" defer></script>
 </head>
 
 <?php } ?>

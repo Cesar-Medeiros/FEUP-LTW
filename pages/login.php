@@ -1,4 +1,4 @@
-<?php  include_once('../includes/session.php'); ?>
+<?php include_once('../includes/session.php'); ?>
 
 <!DOCTYPE html>
 <html>
@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
         crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans+Condensed:300" rel="stylesheet">
+    <script src="../js/auth.js" defer></script>
 </head>
 
 <body>
@@ -32,8 +33,8 @@
 
                 <div class="login-form">
 
-                    <div class="sign-in-htm">
-                        <form accept-charset="utf-8" form method="post" class="sign-in-form">
+                    <div class="log-in-htm">
+                        <form accept-charset="utf-8" form method="post" id="log-in-form">
                             <div class="group">
                                 <label for="user" class="label">Username</label>
                                 <input name="username" maxlength="255" type="text" class="input" required>
@@ -44,7 +45,7 @@
                             </div>
                             <?php include_once('../templates/messages.php');?>
                             <div class="group">
-                                <input type="submit" class="button" formaction="../actions/action_login.php" value="Login">
+                                <input type="submit" id="signin_button" class="button" value="Login">
                             </div>
                             <div class="foot-lnk">
                                 <a href="#forgot">Forgot Password?</a>
@@ -53,7 +54,7 @@
                     </div>
 
                     <div class="sign-up-htm">
-                        <form accept-charset="utf-8" form method="post" class="sign-in-form">
+                        <form accept-charset="utf-8" form method="post" id="sign-up-form">
                             <div class="group">
                                 <label for="user" class="label">Username</label>
                                 <input name="username" type="text" class="input" required>
@@ -74,7 +75,7 @@
                             <?php include_once('../templates/messages.php');?>
 
                             <div class="group">
-                                <input type="submit" class="button" formaction="../actions/action_signup.php" value="Signup">
+                                <input type="submit" id="login_button" class="button" value="Signup">
                             </div>
                             <div class="foot-lnk">
                                 <label for="tab-1">Already Member?</a>

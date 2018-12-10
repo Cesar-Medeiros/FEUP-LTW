@@ -11,8 +11,6 @@
      --font-color-light: #fff;
      --font-color-dark: rgb(57, 58, 58);
  }
-
-
  
  @font-face {
      font-weight: normal;
@@ -468,7 +466,7 @@ Comments
 }
 
 
-.comments_wrap .comments{
+.comments_wrap .comments_page{
     background: var(--post-background);
     box-shadow: 0 4px 10px 1px var(--shadow-color);
     padding: 2.5em;
@@ -478,8 +476,8 @@ Comments
     grid-column: 2;
 }
 
-.comments_wrap .comments .text,
-.comments_wrap .comments .message
+.comments_wrap .comments_page .text,
+.comments_wrap .comments_page .message
 {
     border:none;
     outline: none;
@@ -496,13 +494,18 @@ Comments
     color:var(--font-color-dark);
 }
 
-.comments_wrap .comments .message{
+.comments_wrap .comments_page .message{
     height: 5em;
 }
 
 
-.comments_wrap .comments .text{
+.comments_wrap .comments_page .text{
     height: 10em;
+}
+
+.subcomments {
+    position: relative;
+    left: 2em;
 }
 
 /* -------------------------------- 

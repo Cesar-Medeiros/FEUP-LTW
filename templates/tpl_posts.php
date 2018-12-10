@@ -1,3 +1,5 @@
+<?php include_once('../database/db_user.php'); ?>
+
 <?php function draw_stories($stories) {?>
 <section id="stories">
 
@@ -36,11 +38,10 @@
     <a class="title" href="../pages/post.php?id=<?=$story['message_id']?>"><?=$story['title']?></a>
   </header>
 
-
   <div class="content-wrap">
-  <p class="text"><?=$story['text']?></p>
-  <img class="image" src="https://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/47/cf/cf/47cfcf79-9e1d-b21f-8e10-2658b7650c15/mzl.oiljceng.png/246x0w.jpg" alt="image">
-</div>
+    <p class="text"><?=$story['text']?></p>
+    <img class="image" src="https://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/47/cf/cf/47cfcf79-9e1d-b21f-8e10-2658b7650c15/mzl.oiljceng.png/246x0w.jpg" alt="image">
+  </div>
  
   <a href="../pages/post.php?id=<?=$story['message_id']?>" class="readmore">Read more</a>
 
@@ -58,7 +59,7 @@
   <div class="vote">
     <a class="vote_up" data-id="<?=$story_info['message_id']?>" href=""><i class="fas fa-angle-up"></i></a>
     <a class="vote_down" data-id="<?=$story_info['message_id']?>" href=""><i class="fas fa-angle-down"></i></a>
-</div>
+  </div>
 
   <div class="username">
     <?=$story_info['username'];?> </div>
@@ -74,27 +75,35 @@
 }?>
 
 
-<?php function draw_comments($message_id) { ?>
+<?php function draw_comments($comments, $message_id) { ?>
+  <div class="comments_wrap">
 
-<div class="comments_wrap">
+    <article class="comments_page"> <!-- comments -->
 
-  <article class="comments">
+      <header class="comments_header"> <!-- comment_title -->
+        Comments
+      </header>
+      
+      <section class="comment-wrap" data-id=<?=$message_id?>>
 
-    <header class="comment_title">
-      Comments
-    </header>
+      </section>
 
-    <div id="list_comments" data-message_id="<?=$message_id?>">
-    </div>
-    
-    <div class="comment">
-      <textarea name="send" placeholder="Write comment..." id="send_text" required></textarea>
-      <a id="send_button" href="">Send</a>
-    </div>
+      <?php draw_new_comment_area($message_id) ?>
+    </article>
+  </div>
+  <?php }
+?>
 
-  </article>
-</div>
+
+
+<?php function draw_new_comment_area($message_id) {?>
+  <div class="new-comment" data-id = <?=$message_id?>>
+    <textarea id="send_text" name="text" placeholder="Write comment..." class="text" required></textarea>
+    <a id="send_button" href="">Send</a>
+  </div>
 <?php } ?>
+
+
 
 
 <?php function formatedTime($datetime) {

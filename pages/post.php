@@ -20,6 +20,6 @@ $username = getUserById($_SESSION['user_id'])['username'];
 draw_header($username);
 draw_aside($categories);
 draw_post_full($message);
-draw_comments($message_id);
+draw_comments($comments, $message_id);
 draw_footer();
 ?>

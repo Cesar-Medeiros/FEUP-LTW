@@ -45,9 +45,6 @@ CREATE TABLE ChannelMessages (
 
 
 
-
-
-
 -- Insert info
 
 -- Users
