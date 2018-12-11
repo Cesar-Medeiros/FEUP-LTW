@@ -12,7 +12,7 @@
     if($_SERVER['REQUEST_METHOD'] == "GET"){
         switch($type){
             case 'message' : 
-                $data = getComments($value);
+                $data = getCommentsWithInfo($value);
                 break;
 
             default: http_response_code(400); die();
@@ -28,7 +28,7 @@
             case 'all': {
                 if(isset($data['message_id']) && isset($data['text'])){
                     $comment_id = addComment($data['message_id'], $_SESSION['user_id'], $data['text']);  
-                    $data = getMessage($comment_id); 
+                    $data = getCommentWithInfo($comment_id); 
                     http_response_code(200);
                 }
                 else{

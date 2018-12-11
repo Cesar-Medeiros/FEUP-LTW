@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 $categories = getTopChannels();
 
 $message_id = $_GET['id'];
-$message = getStoryWithInfo($message_id);
+$message = getMessageWithInfo($message_id);
 $comments = getComments($message_id);
 
 $username = getUserById($_SESSION['user_id'])['username'];

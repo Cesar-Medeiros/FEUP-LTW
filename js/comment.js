@@ -9,6 +9,7 @@ function display_comments(html_element, message_id) {
         let comment_wrap = createComment(comment);
         createCommentTextarea(comment_wrap);
         html_element.appendChild(comment_wrap);
+        doScrolling(comment_wrap, 1000);
       });
     }
   }
@@ -27,7 +28,9 @@ function send_comment(html_element, message_id, text) {
       let comment_wrap = createComment(comment);
       Comment.instance(comment.message_id).changeState();
       createCommentTextarea(comment_wrap);
+
       html_element.appendChild(comment_wrap);
+      doScrolling(comment_wrap, 1000);
     }
   }
   request.open("POST", "../api/comments.php", true);
@@ -37,11 +40,15 @@ function send_comment(html_element, message_id, text) {
   }));
 }
 
+// Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.username, Channel.title as channel
+
 function createComment(comment) {
-  let comment_wrap = comment_html(comment.message_id, comment.publisher, comment.text, comment.date, comment.comments);
+  console.log(comment);
+  let comment_wrap = comment_html(comment.message_id, comment.username, comment.text, comment.date, comment.comments);
   let subcomments = comment_wrap.querySelector('.subcomments');
   let comments_button = comment_wrap.querySelector('.replies');
 
+  if(comments_button != undefined){
   comments_button.addEventListener('click', function (event) {
     event.preventDefault();
     let state = Comment.instance(comment.message_id).changeState().getState();
@@ -56,6 +63,7 @@ function createComment(comment) {
     }
     doScrolling(subcomments, 1000);
   });
+  }
   return comment_wrap;
 }
 
@@ -89,15 +97,13 @@ function comment_html(message_id, username, text, date, num_comments) {
   elem.dataset.id = message_id;
   elem.innerHTML = `
       <div class="comment">
-        <div class="user_info">
-          <img class="user_img" src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Account-512.png" style="height:20px;width:20px;">
-          <a class="user_name" href="">${username}</a>
-        </div>
-        <textarea readonly class="message">${text}</textarea>
-        <a href="" class="replies">${num_comments} comments</a>
-        <a href="" class="reply">Reply</a>
-        <span> ${time} </span>
-      </div>
+        <a class="user_name" href="">${username}</a>
+        <img class="user_img" src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Account-512.png" style="height:20px;width:20px;">  
+        <div class="message">${text}</div>
+        <div class="comment_time"> ${time} </div>
+        ${num_comments == 0 ? `` : `<a href="" class="replies">${num_comments}</a>`}
+        <a href="" class="reply">REPLY</a>
+      </div>  
 
       <div class="subcomments">
       </div>
@@ -120,7 +126,6 @@ function new_comment_html(message_id) {
 
 
 function init() {
-
   //Display all message comments
   let html_element = document.querySelector(`.comment-wrap`);
   let message_id = html_element.dataset.id;
