@@ -180,22 +180,27 @@
     $stmt->execute(array($message_id));
   }
 
-  function getNextStoriesSince($min_id){
+  //ordered by time
+
+  //ordered by votes
+  function getNextStoriesByTime($max_id){
     $db = Database::db();
     $stmt = $db->prepare('SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel
     FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id), USER
-    WHERE Message.publisher = User.user_id AND Message.message_id > ? LIMIT 5');
-    $stmt->execute(array($min_id));
+    WHERE Message.publisher = User.user_id AND Message.message_id < ? 
+    ORDER BY Message.message_id DESC LIMIT 5');
+    $stmt->execute(array($max_id));
     return $stmt->fetchAll();
   }
 
-  function getNextStoriesOfChannelSince($min_id, $channel_id){
+  function getNextStoriesOfChannelByTime($max_id, $channel_id){
     $db = Database::db();
     $stmt = $db->prepare('SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel
     FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id), USER
-    WHERE Channel.channel_id = ? AND Message.publisher = User.user_id AND Message.message_id > ? 
+    WHERE Channel.channel_id = ? AND Message.publisher = User.user_id AND Message.message_id < ? 
+    ORDER BY Message.message_id DESC 
     LIMIT 5');
-    $stmt->execute(array($channel_id, $min_id));
+    $stmt->execute(array($channel_id, $max_id));
     return $stmt->fetchAll();
   }
 
