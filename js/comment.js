@@ -128,6 +128,7 @@ function new_comment_html(message_id) {
 function init() {
   //Display all message comments
   let html_element = document.querySelector(`.comment-wrap`);
+  if (html_element != null){
   let message_id = html_element.dataset.id;
   display_comments(html_element, message_id);
 
@@ -139,6 +140,7 @@ function init() {
     send_comment(html_element, message_id, text.value);
     text.value = '';
   });
+}
 }
 
 

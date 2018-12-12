@@ -381,10 +381,10 @@ h1{
 
 .story_info .channel,
 .story_info .vote,
-.story_info .username,
 .story_info .score,
 .story_info .comments,
-.story_info .date{
+.story_info .date,
+.story_info .author_info {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -393,7 +393,7 @@ h1{
 
 .story_info .channel    {grid-area: channel;}
 .story_info .vote       {grid-area: vote;}
-.story_info .username   {grid-area: username;}
+.story_info .author_info   {grid-area: username;}
 .story_info .score      {grid-area: score;}
 .story_info .comments   {grid-area: comments;}
 .story_info .date       {grid-area: date;}
@@ -414,7 +414,7 @@ h1{
 
 }
 
-.story_info .username   {
+.story_info .author_info   {
 
 }
 

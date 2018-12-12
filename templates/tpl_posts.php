@@ -55,14 +55,15 @@
 
   <div class="channel">
     <?=$story_info['channel'];?> </div>
-
   <div class="vote">
     <a class="vote_up" data-id="<?=$story_info['message_id']?>" href=""><i class="fas fa-angle-up"></i></a>
     <a class="vote_down" data-id="<?=$story_info['message_id']?>" href=""><i class="fas fa-angle-down"></i></a>
-  </div>
+</div>
 
-  <div class="username">
-    <?=$story_info['username'];?> </div>
+  <a class="author_info" href=<?="../pages/profile.php?user_id=".$story_info['user_id']?>>
+    <img class="user_img" src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Account-512.png" style="height:20px;width:20px;">
+    <label class="user_name"> <?=$story_info['username']?>
+  </a>
   <div class="score">
     <?=$story_info['score'];?></div>
   <div class="comments">

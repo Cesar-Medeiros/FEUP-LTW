@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
     die(header('Location: login.php'));
 }
 
-$stories = getAllStoriesWithInfo();
+$stories = getNextStoriesSince(-1);
 
 $categories = getTopChannels();
 

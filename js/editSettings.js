@@ -159,12 +159,10 @@ function handleSaveOnEditable() {
 function handleSaveOnPassword() {
   
   let input = this.parentNode.parentNode;
-  console.log(input);
   let oldP = input.querySelector('#old input').value;
   let newP = input.querySelector('#new input').value;
   let confirmNewP = input.querySelector('#new-conf input').value;
   let id = input.dataset.id;
-  console.log(console.log, contents['password'].content);
   if (oldP != contents['password'].content)
     alert("OLDP Could not update user info!");
 
