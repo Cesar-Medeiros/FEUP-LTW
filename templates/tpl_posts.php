@@ -43,7 +43,7 @@
     <img class="image" src="https://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/47/cf/cf/47cfcf79-9e1d-b21f-8e10-2658b7650c15/mzl.oiljceng.png/246x0w.jpg" alt="image">
   </div>
  
-  <a href="../pages/post.php?id=<?=$story['message_id']?>" class="readmore">Read more</a>
+  <a href=<?="../pages/post.php?id={$story['message_id']}"?> class="readmore">Read more</a>
 
 </article>
 <?php } ?>
@@ -60,7 +60,7 @@
     <a class="vote_down" data-id="<?=$story_info['message_id']?>" href=""><i class="fas fa-angle-down"></i></a>
 </div>
 
-  <a class="author_info" href=<?="../pages/profile.php?user_id=".$story_info['user_id']?>>
+  <a class="author_info" href=<?="../pages/profile.php?user_id={$story_info['user_id']}"?>>
     <img class="user_img" src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Account-512.png" style="height:20px;width:20px;">
     <label class="user_name"> <?=$story_info['username']?>
   </a>

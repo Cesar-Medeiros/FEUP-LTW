@@ -73,22 +73,18 @@
 
   function getAllStoriesOfUserWithInfo($user_id) {
     $db = Database::db();
-    $stmt = $db->prepare('
-      SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel
-      FROM Message, User, ChannelMessages, Channel
-      ON Message.publisher = User.user_id AND Message.message_id = ChannelMessages.message_id AND ChannelMessages.channel_id = Channel.channel_id
-      WHERE parent_message_id is null and publisher is ?');
-      $stmt->execute(array($user_id));
+    $stmt = $db->prepare('SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel
+    FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id), User
+    WHERE Message.publisher = User.user_id AND parent_message_id is null and publisher is ?');
+    $stmt->execute(array($user_id));
     return $stmt->fetchAll(); 
   }
 
-  function getStoryWithInfo($message_id){
+  function getMessageWithInfo($message_id){
     $db = Database::db();
-    $stmt = $db->prepare('
-      SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.username, Channel.title as channel
-      FROM Message, User, ChannelMessages, Channel
-      ON Message.publisher = User.user_id AND Message.message_id = ChannelMessages.message_id AND ChannelMessages.channel_id = Channel.channel_id
-      WHERE parent_message_id is null AND message_id = ?');
+    $stmt = $db->prepare('SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel
+    FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id), User
+    WHERE Message.publisher = User.user_id AND parent_message_id is null AND message_id = ?');
     $stmt->execute(array($message_id));
     return $stmt->fetch(); 
   }
