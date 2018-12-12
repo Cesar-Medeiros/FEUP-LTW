@@ -44,9 +44,9 @@
   function getCommentsWithInfo($message_id) {
     $db = Database::db();
     $stmt = $db->prepare('
-      SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.username, Channel.title as channel
-      FROM Message, User, ChannelMessages, Channel
-      ON Message.publisher = User.user_id AND ChannelMessages.channel_id = Channel.channel_id
+      SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.username
+      FROM Message, User
+      ON Message.publisher = User.user_id
       WHERE parent_message_id = ?');
     $stmt->execute(array($message_id));
     return $stmt->fetchAll(); 
@@ -56,9 +56,9 @@
   function getCommentWithInfo($message_id){
     $db = Database::db();
     $stmt = $db->prepare('
-      SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.username, Channel.title as channel
-      FROM Message, User, ChannelMessages, Channel
-      ON Message.publisher = User.user_id AND ChannelMessages.channel_id = Channel.channel_id
+      SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.username
+      FROM Message, User
+      ON Message.publisher = User.user_id
       WHERE message_id = ?');
     $stmt->execute(array($message_id));
     return $stmt->fetch(); 

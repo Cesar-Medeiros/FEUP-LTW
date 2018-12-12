@@ -480,7 +480,7 @@ Comments
     grid-column: 2;
 } 
 
-.comment-wrap .comment{
+.comment-wrap .subcomments{
     margin-bottom: 3em;
 }
 
@@ -492,11 +492,7 @@ Comments
 .comment .user_name{
     font-weight: bold;
     font-size: 0.8em;
-    color: #5f6f81;
-}
-
-.comment .user_img{
-    float:left;
+    color: #404b58;
 }
 
 .comments_wrap .comments_page .text,
@@ -522,8 +518,6 @@ Comments
 .comments_wrap .comments_page .message{
     font-size: 0.9em;
     margin: 0.5em 0;
-    float: right;
-
 } 
 
 .comments_wrap .comments_page .text{
@@ -540,12 +534,33 @@ Comments
     color: #5f6f81;
 }
 
+.comments_wrap .comments_page .vote{
+    /* font-size: 0.8em; */
+    color: #5f6f81;
+}
+
+.comments_wrap .comments_page .replies{
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #404b58;
+}
+
 .subcomments {
     position: relative;
     margin-left: 2em;
 }
 
+.comments_wrap{
+    margin-bottom: 5em;
+}
 
+
+#send_button{
+    border:none;
+	padding: 0.6em 1.0em;
+	border-radius:25px; 
+    background:var(--body-backgorund);
+}
 
 /* -------------------------------- 
 

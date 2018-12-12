@@ -85,10 +85,9 @@
       </header>
       
       <section class="comment-wrap" data-id=<?=$message_id?>>
-
+        <section class="new_comment_area">
+        </section>
       </section>
-
-      <?php draw_new_comment_area($message_id) ?>
     </article>
   </div>
   <?php }
@@ -98,7 +97,7 @@
 
 <?php function draw_new_comment_area($message_id) {?>
   <div class="new-comment" data-id = <?=$message_id?>>
-    <textarea id="send_text" name="text" placeholder="Write comment..." class="text" required></textarea>
+    <textarea id="send_text" class="text" name="text" placeholder="Write comment..." oninput='this.style.height = "";this.style.height = this.scrollHeight + 10 + "px"'></textarea>
     <a id="send_button" href="">Send</a>
   </div>
 <?php } ?>
