@@ -4,10 +4,8 @@ function display_comments(html_element, message_id) {
   request.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       let responseJSON = JSON.parse(this.responseText);
-
       responseJSON.forEach(comment => {
         let comment_wrap = createComment(comment);
-        createCommentTextarea(comment_wrap);
         html_element.appendChild(comment_wrap);
       });
     }
@@ -16,19 +14,22 @@ function display_comments(html_element, message_id) {
   request.send();
 }
 
-function send_comment(html_element, message_id, text) {
+function send_comment(comment_wrap, message_id, text) {
   request = new XMLHttpRequest();
+
+  let subcomments = comment_wrap.querySelector('.subcomments');
 
   request.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       let responseJSON = JSON.parse(this.responseText);
-
       let comment = responseJSON;
-      let comment_wrap = createComment(comment);
-      Comment.instance(comment.message_id).changeState();
-      createCommentTextarea(comment_wrap);
 
-      html_element.appendChild(comment_wrap);
+      let new_comment_wrap = createComment(comment);
+      let replies_button = comment_wrap.querySelector('.replies');
+      Comment.instance(message_id).setOpenState();
+
+      subcomments.innerHTML = '';
+      display_comments(subcomments, message_id);
     }
   }
   request.open("POST", "../api/comments.php", true);
@@ -38,18 +39,16 @@ function send_comment(html_element, message_id, text) {
   }));
 }
 
-// Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.username, Channel.title as channel
-
 function createComment(comment) {
-  console.log(comment);
   let comment_wrap = comment_html(comment.message_id, comment.username, comment.text, comment.date, comment.comments);
   let subcomments = comment_wrap.querySelector('.subcomments');
-  let comments_button = comment_wrap.querySelector('.replies');
+  let replies_button = comment_wrap.querySelector('.replies');
   let arrow_up = comment_wrap.querySelector('.arrow_up');
   let arrow_down = comment_wrap.querySelector('.arrow_down');
+  let reply_button = comment_wrap.querySelector('.reply');
 
-  if (comments_button != undefined) {
-    comments_button.addEventListener('click', function (event) {
+  if (replies_button != undefined) {
+    replies_button.addEventListener('click', function (event) {
       event.preventDefault();
       let state = Comment.instance(comment.message_id).changeState().getState();
       switch (state) {
@@ -67,28 +66,69 @@ function createComment(comment) {
       }
     });
   }
+
+  reply_button.addEventListener('click', function (event) {
+    event.preventDefault();
+    createCommentTextarea(comment_wrap);
+  });
+
   return comment_wrap;
 }
 
 function createCommentTextarea(comment_wrap) {
   let message_id = comment_wrap.dataset.id;
-  let subcomments = comment_wrap.querySelector('.subcomments');
   let new_comment_area_wrap = comment_wrap.querySelector('.new_comment_area');
 
-  comment_wrap.querySelector('.reply').addEventListener('click', function (event) {
-    event.preventDefault();
-    let new_comment_area = new_comment_html(message_id);
-    let send_button = new_comment_area.querySelector('#send_button');
+  let new_comment_area = new_comment_html(message_id);
 
-    send_button.addEventListener('click', function (event) {
-      event.preventDefault();
-      let text = document.getElementById('send_text');
-      send_comment(subcomments, message_id, text.value);
-      new_comment_area.innerHTML = '';
-    });
-    new_comment_area_wrap.appendChild(new_comment_area);
+  let send_button = new_comment_area.querySelector('#send_button');
+  send_button.addEventListener('click', function (event) {
+    event.preventDefault();
+    let text = new_comment_area.querySelector('.send_text');
+    send_comment(comment_wrap, message_id, text.value);
+
+    if(comment_wrap.classList.contains('comment-main')){
+      text.value = '';
+    }
+    else{
+      new_comment_area_wrap.innerHTML = '';
+    }
   });
+  new_comment_area_wrap.appendChild(new_comment_area);
 }
+
+
+
+
+function init() {
+  //Display all message comments
+  let html_element = document.querySelector('.comment-wrap');
+  let subcomments = html_element.querySelector('.subcomments');
+  let message_id = html_element.dataset.id;
+  createCommentTextarea(html_element);
+  display_comments(subcomments, message_id);
+}
+
+
+init();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -111,7 +151,10 @@ function comment_html(message_id, username, text, date, num_comments) {
         </span>
         <a href="" class="reply">REPLY</a>
         </br>
-        ${num_comments == 0 ? `<a href="" class="replies">View ${num_comments} replies <i class="fas fa-angle-up arrow_up" style="display:none"></i><i class="fas fa-angle-down arrow_down"></i></a>`: ""}
+        ${num_comments == 0 
+          ? ""
+          : `<a href="" class="replies">View ${num_comments} replies <i class="fas fa-angle-up arrow_up" style="display:none"></i><i class="fas fa-angle-down arrow_down"></i></a>`
+        }
       </div>  
       <div class="new_comment_area">
       </div>
@@ -122,40 +165,12 @@ function comment_html(message_id, username, text, date, num_comments) {
 }
 
 function new_comment_html(message_id) {
-  let elem = document.createElement('section');
+  let elem = document.createElement('div');
   elem.className = 'new-comment';
   elem.dataset.id = message_id;
   elem.innerHTML = `
-    <div class="new-comment">
-      <textarea placeholder="Write a comment..." id="send_text" class="message text" name="text" oninput='this.style.height = "";this.style.height = this.scrollHeight + 10 + "px"'></textarea>
+      <textarea placeholder="Write a comment..." class="message text send_text" name="text" oninput='this.style.height = "";this.style.height = this.scrollHeight + 10 + "px"'></textarea>
       <a id="send_button" href="">Send</a>
-    </div>
     `;
   return elem;
 }
-
-
-function init() {
-  //Display all message comments
-  let html_element = document.querySelector('.comment-wrap');
-
-  let html_new_comment_area = document.querySelector('.new_comment_area');
-
-  let message_id = html_element.dataset.id;
-
-  html_new_comment_area.appendChild(new_comment_html(message_id));
-
-  display_comments(html_element, message_id);
-
-  // Install send button handlers
-  let sendButton = document.getElementById('send_button');
-  sendButton.addEventListener('click', function (event) {
-    event.preventDefault();
-    let text = document.getElementById('send_text');
-    send_comment(html_element, message_id, text.value);
-    text.value = '';
-  });
-}
-
-
-init();

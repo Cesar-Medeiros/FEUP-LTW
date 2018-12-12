@@ -300,7 +300,6 @@ h1{
 
  .story{
     background: var(--post-background);
-    /* box-shadow: 0 4px 10px 1px var(--shadow-color); */
     border: 3px solid var(--border-color);
     padding: 2.5em;
     border-radius:8px;
@@ -381,10 +380,10 @@ h1{
 
 .story_info .channel,
 .story_info .vote,
-.story_info .username,
 .story_info .score,
 .story_info .comments,
-.story_info .date{
+.story_info .date,
+.story_info .author_info {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -393,7 +392,7 @@ h1{
 
 .story_info .channel    {grid-area: channel;}
 .story_info .vote       {grid-area: vote;}
-.story_info .username   {grid-area: username;}
+.story_info .author_info   {grid-area: username;}
 .story_info .score      {grid-area: score;}
 .story_info .comments   {grid-area: comments;}
 .story_info .date       {grid-area: date;}
@@ -414,7 +413,7 @@ h1{
 
 }
 
-.story_info .username   {
+.story_info .author_info   {
 
 }
 
@@ -480,10 +479,6 @@ Comments
     grid-column: 2;
 } 
 
-.comment-wrap .subcomments{
-    margin-bottom: 3em;
-}
-
 .comments_wrap .comments_page .comments_header {
     margin-bottom: 2em;
     font-size: 1.5em;
@@ -545,21 +540,39 @@ Comments
     color: #404b58;
 }
 
-.subcomments {
+.subcomments,
+.new_comment_area
+ {
     position: relative;
     margin-left: 2em;
+    margin-bottom: 1em;
+}
+
+.comment-main > .subcomments,
+.comment-main > .new_comment_area
+{
+    margin:0;
+    margin-bottom: 4em;
 }
 
 .comments_wrap{
     margin-bottom: 5em;
 }
 
+.new-comment .text{
+    padding: 0.2em;
+}
 
 #send_button{
-    border:none;
-	padding: 0.6em 1.0em;
-	border-radius:25px; 
-    background:var(--body-backgorund);
+    position: relative;
+    bottom:2.5em;
+    right: 1.5em;
+    float: right;
+    font-size: 0.8em;
+    color:#404b58;
+    font-weight: bold;
+    text-transform:uppercase;
+    border-bottom: 2px solid var(--border-color);
 }
 
 /* -------------------------------- 

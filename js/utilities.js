@@ -59,6 +59,10 @@ class Comment {
         return this.state;
     }
 
+    setOpenState(){
+        this.state = 'OPEN';
+    }
+
 }
 Comment.comments = [];
 

@@ -31,6 +31,14 @@
     return $stmt->fetchAll(); 
   }
 
+  function getChannelMessagesWithInfo($channel_id) {
+    $db = Database::db();
+    $stmt = $db->prepare('SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel
+    FROM ChannelMessages JOIN Message USING(message_id), USER, CHANNEL WHERE Channel.channel_id = ? and Message.publisher = User.user_id AND Channel.channel_id = ChannelMessages.channel_id');
+    $stmt->execute(array($channel_id));
+    return $stmt->fetchAll(); 
+  }
+
 /**
    * Returns the list of message of one category
    */
@@ -77,22 +85,28 @@
 
   function getAllStoriesWithInfo() {
     $db = Database::db();
-    $stmt = $db->prepare('
-      SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.username, Channel.title as channel
+    $stmt = $db->prepare('SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel
       FROM Message, User, ChannelMessages, Channel
-      ON Message.publisher = User.user_id AND Message.message_id = ChannelMessages.story_id AND ChannelMessages.channel_id = Channel.channel_id
+      ON Message.publisher = User.user_id AND Message.message_id = ChannelMessages.message_id AND ChannelMessages.channel_id = Channel.channel_id
       WHERE parent_message_id is null');
     $stmt->execute();
     return $stmt->fetchAll(); 
   }
 
+  function getAllStoriesOfUserWithInfo($user_id) {
+    $db = Database::db();
+    $stmt = $db->prepare('SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel
+    FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id), User
+    WHERE Message.publisher = User.user_id AND parent_message_id is null and publisher is ?');
+    $stmt->execute(array($user_id));
+    return $stmt->fetchAll(); 
+  }
+
   function getMessageWithInfo($message_id){
     $db = Database::db();
-    $stmt = $db->prepare('
-      SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.username, Channel.title as channel
-      FROM Message, User, ChannelMessages, Channel
-      ON Message.publisher = User.user_id AND Message.message_id = ChannelMessages.story_id AND ChannelMessages.channel_id = Channel.channel_id
-      WHERE message_id = ?');
+    $stmt = $db->prepare('SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel
+    FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id), User
+    WHERE Message.publisher = User.user_id AND parent_message_id is null AND message_id = ?');
     $stmt->execute(array($message_id));
     return $stmt->fetch(); 
   }
@@ -107,7 +121,6 @@
 
 
 
-
   /**
    * Inserts a new post
    */
@@ -119,11 +132,12 @@
     return intval($db->lastInsertId());
   }
 
-  function addChannelMessages($channel_id, $story_id) {
+  function addChannelMessages($channel_id, $message_id) {
     $db = Database::db();
     $stmt = $db->prepare('INSERT INTO ChannelMessages VALUES(?, ?)');
-    $stmt->execute(array($channel_id, $story_id));
+    $stmt->execute(array($channel_id, $message_id));
   }
+
 
   //Fazer trigger para aumentar o numero de comentários da message anterior
   /**
@@ -134,7 +148,6 @@
     $db = Database::db();
     $stmt = $db->prepare('INSERT INTO Message VALUES(NULL, NULL, ?, ?, ?, ?, ?, ?)');
     $stmt->execute(array($text, $date, 0, 0, $user_id, $message_id));
-    return intval($db->lastInsertId());
   }
 
 
@@ -166,5 +179,25 @@
     $stmt = $db->prepare('DELETE FROM Message WHERE message_id = ?');
     $stmt->execute(array($message_id));
   }
+
+  function getNextStoriesSince($min_id){
+    $db = Database::db();
+    $stmt = $db->prepare('SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel
+    FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id), USER
+    WHERE Message.publisher = User.user_id AND Message.message_id > ? LIMIT 5');
+    $stmt->execute(array($min_id));
+    return $stmt->fetchAll();
+  }
+
+  function getNextStoriesOfChannelSince($min_id, $channel_id){
+    $db = Database::db();
+    $stmt = $db->prepare('SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel
+    FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id), USER
+    WHERE Channel.channel_id = ? AND Message.publisher = User.user_id AND Message.message_id > ? 
+    LIMIT 5');
+    $stmt->execute(array($channel_id, $min_id));
+    return $stmt->fetchAll();
+  }
+
 
 ?>

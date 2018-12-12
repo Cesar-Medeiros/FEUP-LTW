@@ -8,20 +8,12 @@
     die(header('Location: login.php'));
 
   $user = getUserById($_SESSION['user_id']);
-  ?>
+  
 
-  <!DOCTYPE html>
-  <html>
-  <head>
-    <title>Fare Niente</title>
-    <meta charset="utf-8">
-    <script src="../js/editSettings.js" defer></script>
-  </head>
+  draw_header(getUserById($_SESSION['user_id'])['username']); ?>
 
-  <header>
-    <h1> Account Settings </h1>
-  </header>
   <body>
+  <h1 class="account_settings"> Account Settings </h1>
       <ul>
         <?php draw_editable_input("username", "Username:", $user['username'])?>
         <?php draw_password_input("password", "Password:", $user['password'])?>

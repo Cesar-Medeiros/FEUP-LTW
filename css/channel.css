@@ -1,0 +1,56 @@
+ :root {
+     --icon-color: #F9F9F9;
+     --icon-hover-color: rgba(255,255,255,.3);
+     --navbar-background: rgb(57, 58, 58);
+     --sidebar-background: rgb(57, 58, 58);
+     --shadow-color: rgba(0, 0, 0, 0.4);
+     --post-background: #F9F9F9;
+     --body-backgorund:rgb(245,245,245);
+     --navbar-height: 4em;
+
+     --font-color-light: #fff;
+     --font-color-dark: rgb(57, 58, 58);
+     --subscribe: rgb(99, 98, 98);
+ }
+
+.channel_info{
+    background: var(--post-background);
+    box-shadow: 0 4px 10px 1px var(--shadow-color);
+    border-radius:8px;
+    grid-column: 3;
+    margin-top:4em;
+
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 1fr 1fr;
+    grid-template-areas: "title subscribe subscribers posts"
+                         "creator subscribe subscribers posts";
+}
+
+.channel_info .title,
+.channel_info .creator,
+.channel_info .subscribers,
+.channel_info .posts,
+.channel_info .button_subscribe {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+}
+
+.channel_info .button_subscribe {
+    color:var(--body-backgorund);
+    background:var(--subscribe);
+    margin:1.5em;
+    border:none;
+    outline: none;
+	padding: 0.6em 1.0em;
+    border-radius:8px;
+    box-shadow: 0 4px 10px 0px var(--shadow-color);
+    font-weight: bold;
+}
+
+.channel_info .title    {grid-area: title;}
+.channel_info .creator       {grid-area: creator;}
+.channel_info .subscribers   {grid-area: subscribers;}
+.channel_info .posts      {grid-area: posts;}
+.channel_info .button_subscribe {grid-area: subscribe;}

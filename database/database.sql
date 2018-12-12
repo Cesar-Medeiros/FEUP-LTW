@@ -27,7 +27,9 @@ CREATE TABLE Vote (
 CREATE TABLE Channel (
     channel_id  INTEGER PRIMARY KEY,
     title       TEXT NOT NULL,
-    creator_id  INTEGER REFERENCES User(user_id)     
+    creator_id  INTEGER REFERENCES User(user_id),
+    num_subscribers INTEGER NOT NULL DEFAULT 0,
+    num_posts INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE TABLE ChannelSubscribers (
@@ -39,9 +41,74 @@ CREATE TABLE ChannelSubscribers (
 
 CREATE TABLE ChannelMessages (
     channel_id  INTEGER NOT NULL,
-    story_id    INTEGER NOT NULL REFERENCES Message(message_id),
-    PRIMARY KEY (channel_id, story_id)
+    message_id    INTEGER NOT NULL REFERENCES Message(message_id),
+    PRIMARY KEY (channel_id, message_id)
 );
+
+
+CREATE TRIGGER update_score_insert
+BEFORE INSERT ON Vote
+-- WHEN (NOT EXISTS (SELECT * FROM Vote WHERE message_id = new.message_id AND user_id = new.user_id))
+BEGIN
+    UPDATE Message
+    SET score = score + new.vote
+    WHERE message_id = new.message_id;
+END;
+
+
+CREATE TRIGGER update_score_update
+BEFORE UPDATE ON Vote
+BEGIN
+    UPDATE Message
+    SET score = score - old.vote + new.vote
+    WHERE message_id = new.message_id;
+END;
+
+
+CREATE TRIGGER update_score_delete
+BEFORE DELETE ON Vote
+BEGIN
+    UPDATE Message
+    SET score = score - old.vote
+    WHERE message_id = old.message_id;
+END;
+
+
+
+CREATE TRIGGER one_more_subcriber
+BEFORE INSERT ON ChannelSubscribers
+BEGIN
+    UPDATE Channel
+    SET num_subscribers = num_subscribers + 1
+    WHERE channel_id = new.channel_id;
+END;
+
+CREATE TRIGGER one_less_subcriber
+BEFORE DELETE ON ChannelSubscribers
+BEGIN
+    UPDATE Channel
+    SET num_subscribers = num_subscribers - 1
+    WHERE channel_id = new.channel_id;
+END;
+
+
+CREATE TRIGGER update_comment_number
+AFTER INSERT ON Message
+WHEN new.parent_message_id is NOT NULL
+BEGIN
+    UPDATE Message
+    SET comments = comments + 1
+    WHERE message_id = new.parent_message_id;
+END;
+
+
+
+
+
+
+
+
+
 
 
 
@@ -83,7 +150,127 @@ INSERT INTO Message VALUES
 null
 );
 
+INSERT INTO Message VALUES 
+(null, 
+'3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
+1543759773,
+0,
+0,
+1,
+null
+);
 
+
+INSERT INTO Message VALUES 
+(null, 
+'4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
+1543759773,
+0,
+0,
+1,
+null
+);
+
+INSERT INTO Message VALUES 
+(null, 
+'5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
+1543759773,
+0,
+0,
+1,
+null
+);
+
+INSERT INTO Message VALUES 
+(null, 
+'6. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
+1543759773,
+0,
+0,
+1,
+null
+);
+INSERT INTO Message VALUES 
+(null, 
+'7. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
+1543759773,
+0,
+0,
+1,
+null
+);
+
+INSERT INTO Message VALUES 
+(null, 
+'8. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
+1543759773,
+0,
+0,
+1,
+null
+);
+
+
+INSERT INTO Message VALUES 
+(null, 
+'9. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
+1543759773,
+0,
+0,
+1,
+null
+);
+
+INSERT INTO Message VALUES 
+(null, 
+'10. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
+1543759773,
+0,
+0,
+1,
+null
+);
+
+INSERT INTO Message VALUES 
+(null, 
+'11. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
+1543759773,
+0,
+0,
+1,
+null
+);
+
+INSERT INTO Message VALUES 
+(null, 
+'12. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
+1543759773,
+0,
+0,
+1,
+null
+);
+
+INSERT INTO Message VALUES 
+(null, 
+'13. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
+1543759773,
+0,
+0,
+1,
+null
+);
 
 -- Comments
 
@@ -118,51 +305,34 @@ null,
 0,
 0,
 1,
-4
+15
 );
 
 
 
 -- Channels
 
-INSERT INTO Channel VALUES (null, 'Channel1', 1);
-INSERT INTO Channel VALUES (null, 'Channel2', 1);
-INSERT INTO Channel VALUES (null, 'Channel3', 1);
-INSERT INTO Channel VALUES (null, 'Channel4', 1);
-INSERT INTO Channel VALUES (null, 'Channel5', 1);
-INSERT INTO Channel VALUES (null, 'Channel6', 1);
-INSERT INTO Channel VALUES (null, 'Channel7', 1);
+INSERT INTO Channel VALUES (null, 'Channel1', 1, 0, 0);
+INSERT INTO Channel VALUES (null, 'Channel2', 1,0 ,0);
+INSERT INTO Channel VALUES (null, 'Channel3', 1,0 ,0);
+INSERT INTO Channel VALUES (null, 'Channel4', 1,0 ,0);
+INSERT INTO Channel VALUES (null, 'Channel5', 1,0 ,0);
+INSERT INTO Channel VALUES (null, 'Channel6', 1,0 ,0);
+INSERT INTO Channel VALUES (null, 'Channel7', 1,0 ,0);
 
 
 -- Channel Messages
 
 INSERT INTO ChannelMessages VALUES(1, 1);
 INSERT INTO ChannelMessages VALUES(3, 2);
-
-
-CREATE TRIGGER update_score_insert
-BEFORE INSERT ON Vote
-WHEN (NOT EXISTS (SELECT * FROM Vote WHERE message_id = new.message_id AND user_id = new.user_id))
-BEGIN
-    UPDATE Message
-    SET score = score + new.vote
-    WHERE message_id = new.message_id;
-END;
-
-
-CREATE TRIGGER update_score_update
-BEFORE UPDATE ON Vote
-BEGIN
-    UPDATE Message
-    SET score = score - old.vote + new.vote
-    WHERE message_id = new.message_id;
-END;
-
-
-CREATE TRIGGER update_score_delete
-BEFORE DELETE ON Vote
-BEGIN
-    UPDATE Message
-    SET score = score - old.vote
-    WHERE message_id = old.message_id;
-END;
+INSERT INTO ChannelMessages VALUES(3, 3);
+INSERT INTO ChannelMessages VALUES(3, 4);
+INSERT INTO ChannelMessages VALUES(3, 5);
+INSERT INTO ChannelMessages VALUES(3, 6);
+INSERT INTO ChannelMessages VALUES(3, 7);
+INSERT INTO ChannelMessages VALUES(3, 8);
+INSERT INTO ChannelMessages VALUES(3, 9);
+INSERT INTO ChannelMessages VALUES(3, 10);
+INSERT INTO ChannelMessages VALUES(3, 11);
+INSERT INTO ChannelMessages VALUES(3, 12);
+INSERT INTO ChannelMessages VALUES(3, 13);
