@@ -300,7 +300,6 @@ h1{
 
  .story{
     background: var(--post-background);
-    /* box-shadow: 0 4px 10px 1px var(--shadow-color); */
     border: 3px solid var(--border-color);
     padding: 2.5em;
     border-radius:8px;

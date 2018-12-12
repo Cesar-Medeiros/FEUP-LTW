@@ -35,14 +35,14 @@ draw_footer();
 
 <?php function draw_profile_info($user) { ?>
     <div class="profile">
-    <h1> <?=$user['username']?> </h2>
+    <h1 class="name"> <?=$user['username']?> </h1>
     <img class="image" src="https://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/47/cf/cf/47cfcf79-9e1d-b21f-8e10-2658b7650c15/mzl.oiljceng.png/246x0w.jpg" alt="image">
     </div>
 <?php } ?>
 
 <?php function draw_editable_profile_info($user) { ?>
-    <div class="profile">
-    <h1> <?=$user['username']?> </h2>
+    <div class="profile-editable">
+    <h1 class="name"> <?=$user['username']?> </h2>
     <img class="image" src="https://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/47/cf/cf/47cfcf79-9e1d-b21f-8e10-2658b7650c15/mzl.oiljceng.png/246x0w.jpg" alt="image">
     <a class="account-settings" href="../pages/settings.php">Account Settings</a>
     </div>
