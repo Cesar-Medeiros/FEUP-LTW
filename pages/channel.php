@@ -16,7 +16,7 @@ if (!isset($_SESSION['user_id'])) {
 $channel_id = $_GET['id'];
 $channel_info = getChannelInfo($channel_id);
 
-$stories = getNextStoriesOfChannelSince(-1, $channel_id);
+$stories = getNextStoriesOfChannelByTime(PHP_INT_MAX, $channel_id);
 
 $categories = getTopChannels();
 

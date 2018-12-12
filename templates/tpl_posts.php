@@ -112,6 +112,7 @@
   $ago->setTimestamp($datetime);
   $now = new DateTime;
   $diff = $now->diff($ago);
+  $val = null;
 
   $diff->w = floor($diff->d / 7);
   $diff->d -= $diff->w * 7;
@@ -147,5 +148,5 @@
     }
   }
 
-  return $val ? $val  . ' ago' : 'just now';
+  return ($val ? "{$val} ago " : "just now");
 }?>

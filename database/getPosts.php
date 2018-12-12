@@ -8,9 +8,9 @@
 
   $return = -1;
   if ($channel_id == 'all'){
-    $return = getNextStoriesSince($min_id);
+    $return = getNextStoriesByTime($min_id);
   }
-  else $return = getNextStoriesOfChannelSince($min_id, $channel_id);
+  else $return = getNextStoriesOfChannelByTime($min_id, $channel_id);
   
   echo json_encode($return);
 ?>
