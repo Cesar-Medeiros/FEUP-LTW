@@ -96,7 +96,9 @@
       Comments
     </header>
 
-    <section class="comment-wrap comment-main" data-id=<?=$message_id?>>
+    <section class="comment-wrap" data-id=<?=$message_id?>>
+      <div class="comment">
+      </div>
       <section class="new_comment_area">
       </section>
       <div class="subcomments">

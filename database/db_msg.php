@@ -148,6 +148,7 @@
     $db = Database::db();
     $stmt = $db->prepare('INSERT INTO Message VALUES(NULL, NULL, ?, ?, ?, ?, ?, ?)');
     $stmt->execute(array($text, $date, 0, 0, $user_id, $message_id));
+    return intval($db->lastInsertId());
   }
 
 

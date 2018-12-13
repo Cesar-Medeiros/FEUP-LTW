@@ -1,9 +1,8 @@
 function update_vote(message_id, value) {
-  xmlhttp = new XMLHttpRequest();
+  let URL = "../actions/action_vote.php?message_id=" + message_id + "&value=" + value;
 
-  xmlhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      var responseJSON = JSON.parse(this.responseText);
+  ajax(URL, "GET")
+    .then(function (responseJSON) {
       let info = document.querySelector('.story_info[data-id=\'' + message_id + '\']');
       info.querySelector('.score').innerHTML = responseJSON.score;
 
@@ -21,11 +20,8 @@ function update_vote(message_id, value) {
 
       info.querySelector('.vote_down').style.color = color_down;
       info.querySelector('.vote_up').style.color = color_up;
-
-    }
-  }
-  xmlhttp.open("GET", "../actions/action_vote.php?message_id=" + message_id + "&value=" + value, true);
-  xmlhttp.send();
+    })
+    .catch();
 }
 
 function ready() {
@@ -49,3 +45,8 @@ function ready() {
   });
 }
 ready();
+
+function addVoteHandler(vote_element){
+
+
+}
