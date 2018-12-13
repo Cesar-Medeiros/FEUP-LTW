@@ -20,7 +20,9 @@
   <script src="../js/vote.js" defer></script>
   <script src="../js/comment.js" defer></script>
   <script src="../js/utilities.js" defer></script>
+  <script src="../js/editSettings.js" defer></script>
   <script src="../js/infiniteScroll.js" defer></script>
+  <script src="../js/loadPosts.js" defer></script>
 </head>
 
 <?php } ?>
@@ -42,9 +44,9 @@ draw_head();?>
     </li>
     <li class="navbar-center-wrap"><a class="gn-icon logo" href="../pages/homepage.php">Website Name</a></li>
     <li class="navbar-right-wrap">
-      <select id="sort_by" onchange='alert("Call ajax")'>
-        <option value="vote">Most voted up</option>
+      <select id="sort_by" onchange="loadPosts(this.value)">
         <option value="time">More recent</option>
+        <option value="vote">Most voted up</option>
         <option value="comments">More comments</option>
       </select>
       <span class="search-bar-item">

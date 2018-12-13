@@ -1,19 +1,16 @@
-var stories = document.querySelectorAll('#stories aside');
-var min_id = -1;
-if (stories.length > 0) {
-    var min_id = stories[stories.length -1].dataset.id;
-}
-var loading = false;
-
-function loadMore() {
+function loadPosts(order_by) {
+    console.log(order_by);
+    var stories = document.querySelector('#stories');
+    while (stories.firstChild) {
+        stories.removeChild(stories.firstChild);
+    }
     xmlhttp = new XMLHttpRequest();
   
     xmlhttp.addEventListener("load", function () {
+        console.log(this.responseText)
         if (this.responseText == ""){
             return;
         } 
-
-        let allStories = document.querySelector('#stories');
         let stories_arr = JSON.parse(this.responseText);
         for(let i=0; i< stories_arr.length; i++){
             let post_shrink = document.createElement('div');
@@ -77,28 +74,10 @@ function loadMore() {
             story_info.appendChild(date);
             
             post_shrink.appendChild(story_info);
-
-            allStories.appendChild(post_shrink);
+            console.log(stories);
+            stories.appendChild(post_shrink);
         }
-
-        let stories = document.querySelectorAll('#stories aside');
-        min_id = stories[stories.length -1].dataset.id;
-        loading = false;
     });
-    xmlhttp.open("GET", "../database/getPosts.php?max_id=" + min_id + "&channel_id=" + 'all' + "&order_by="+"time" + "&max=" + "max", true);
+    xmlhttp.open("GET", "../database/getPosts.php?max_id=" + Number.MAX_SAFE_INTEGER + "&channel_id=" + 'all' + "&order_by="+order_by + "&max=" + Number.MAX_SAFE_INTEGER, true);
     xmlhttp.send();
 }
-
-document.addEventListener("scroll", function () {
-    let scrollHeight = Math.max(
-        document.body.scrollHeight, document.documentElement.scrollHeight,
-        document.body.offsetHeight, document.documentElement.offsetHeight,
-        document.body.clientHeight, document.documentElement.clientHeight
-      );
-    let scrollOffset = 900;
-    
-  if ((window.pageYOffset + scrollOffset) > scrollHeight && !loading){
-      loading = true;
-      loadMore();
-  }
-});

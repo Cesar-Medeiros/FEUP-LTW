@@ -204,5 +204,27 @@
     return $stmt->fetchAll();
   }
 
+  function getNextStoriesByVotes($max_votes, $max_id){
+    $db = Database::db();
+    $stmt = $db->prepare('SELECT * FROM (SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel, count(*) n_votes
+    FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id) LEFT JOIN Vote ON Vote.message_id = Message.message_id, USER
+    WHERE Message.publisher = User.user_id
+    GROUP BY Message.message_id)
+    WHERE (n_votes < ? OR (n_votes = ? AND message_id < ?))
+    ORDER BY n_votes DESC, message_id DESC, message_id DESC LIMIT 5;');
+    $stmt->execute(array($max_votes, $max_votes, $max_id));
+    return $stmt->fetchAll();
+  }
 
+  function getNextStoriesOfChannelByVotes($max_votes, $max_id, $channel_id){
+    $db = Database::db();
+    $stmt = $db->prepare('SELECT * FROM (SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel, count(*) n_votes
+    FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id) LEFT JOIN Vote ON Vote.message_id = Message.message_id, USER 
+    WHERE Message.publisher = User.user_id AND Channel.channel_id = ?
+    GROUP BY Message.message_id)
+    WHERE (n_votes < ? OR (n_votes = ? AND Message.message_id < ?))
+    ORDER BY n_votes DESC, message_id DESC, Message.message_id DESC LIMIT 5;');
+    $stmt->execute(array($channel_id, $max_votes, $max_votes, $max_id));
+    return $stmt->fetchAll();
+  }
 ?>

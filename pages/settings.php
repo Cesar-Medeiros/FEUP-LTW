@@ -1,6 +1,7 @@
 <?php 
   include_once('../includes/session.php');
   include_once('../database/db_user.php');
+  include_once('../database/db_msg.php');
   include_once('../templates/tpl_common.php');
   include_once('../templates/tpl_input.php');
 
@@ -8,10 +9,10 @@
     die(header('Location: login.php'));
 
   $user = getUserById($_SESSION['user_id']);
-  
+  $categories = getTopChannels();
 
-  draw_header(getUserById($_SESSION['user_id'])['username']); ?>
-
+  draw_header(getUserById($_SESSION['user_id'])['username']);
+  draw_aside($categories);?>
   <body>
   <h1 class="account_settings"> Account Settings </h1>
       <ul>
