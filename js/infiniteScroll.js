@@ -1,10 +1,31 @@
 var stories = document.querySelectorAll('#stories aside');
-var min_id = -1;
+var min_id = Number.MAX_SAFE_INTEGER;
 if (stories.length > 0) {
     var min_id = stories[stories.length - 1].dataset.id;
 }
-
 var loading = false;
+
+init();
+
+function init(){
+    loadMore();
+
+    document.addEventListener("scroll", function () {
+
+        let scrollHeight = Math.max(
+            document.body.scrollHeight, document.documentElement.scrollHeight,
+            document.body.offsetHeight, document.documentElement.offsetHeight,
+            document.body.clientHeight, document.documentElement.clientHeight
+        );
+        let scrollOffset = 1000;
+    
+        if ((window.pageYOffset + scrollOffset) > scrollHeight && !loading) {
+            loading = true;
+            loadMore();
+        }
+    });
+}
+
 
 function loadMore() {
     let URL = "../database/getPosts.php?min_id=" + min_id + "&channel_id=" + "all";
@@ -20,26 +41,14 @@ function loadMore() {
             }
             let stories = document.querySelectorAll('#stories aside');
             min_id = stories[stories.length - 1].dataset.id;
-            loading = false;responseJSON
+            loading = false;
+            timeAgo();
 
         })
         .catch(function () {});
+
+    
 }
-
-document.addEventListener("scroll", function () {
-
-    let scrollHeight = Math.max(
-        document.body.scrollHeight, document.documentElement.scrollHeight,
-        document.body.offsetHeight, document.documentElement.offsetHeight,
-        document.body.clientHeight, document.documentElement.clientHeight
-    );
-    let scrollOffset = 1000;
-
-    if ((window.pageYOffset + scrollOffset) > scrollHeight && !loading) {
-        loading = true;
-        loadMore();
-    }
-});
 
 
 function story_html(story) {
@@ -76,7 +85,7 @@ function story_info_html(story) {
               </a>
               <div class="score">${story['score']}</div>
               <div class="comments">${story['comments']}</div>
-              <div class="date">${story['date']}</div>
+              <div class="date timeago" datetime="${story['date']}">${story['date']}</div>
             </div>
         </aside>
         `;

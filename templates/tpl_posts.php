@@ -2,12 +2,6 @@
 
 <?php function draw_stories($stories) {?>
 <section id="stories">
-
-  <?php 
-    foreach($stories as $story){
-        draw_post($story);
-      }
-  ?>
 </section>
 <?php } ?>
 
