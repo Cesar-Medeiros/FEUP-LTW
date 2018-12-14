@@ -548,11 +548,15 @@ Comments
     margin-bottom: 1em;
 }
 
-.comment-main > .subcomments,
-.comment-main > .new_comment_area
+.comments_page > .comment-wrap > .subcomments ,
+.comments_page > .comment-wrap > .new_comment_area
 {
     margin:0;
     margin-bottom: 4em;
+}
+
+.comments_page > .comment-wrap > .comment {
+    display: none;
 }
 
 .comments_wrap{

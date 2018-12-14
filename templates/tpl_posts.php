@@ -2,12 +2,6 @@
 
 <?php function draw_stories($stories) {?>
 <section id="stories">
-
-  <?php 
-    foreach($stories as $story){
-        draw_post($story);
-      }
-  ?>
 </section>
 <?php } ?>
 
@@ -96,7 +90,9 @@
       Comments
     </header>
 
-    <section class="comment-wrap comment-main" data-id=<?=$message_id?>>
+    <section class="comment-wrap" data-id=<?=$message_id?>>
+      <div class="comment">
+      </div>
       <section class="new_comment_area">
       </section>
       <div class="subcomments">

@@ -1,42 +1,48 @@
 function display_comments(html_element, message_id) {
-  request = new XMLHttpRequest();
+  var URL = "../api/comments.php/message/" + message_id;
+  ajax(URL, "GET")
+    .then(function (responseJSON) {
 
-  request.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      let responseJSON = JSON.parse(this.responseText);
       responseJSON.forEach(comment => {
         let comment_wrap = createComment(comment);
         html_element.appendChild(comment_wrap);
       });
-    }
-  }
-  request.open("GET", "../api/comments.php/message/" + message_id, true);
-  request.send();
+
+    })
+    .catch(function () {});
+}
+
+function update_comment(comment_wrap, message_id) {
+  let URL = "../api/comments.php/" + message_id;
+  ajax(URL, "GET")
+    .then(function (parent_comment_data) {
+
+      let parent_comment_dom = createComment(parent_comment_data);
+      comment_wrap.parentNode.insertBefore(parent_comment_dom, comment_wrap);
+      comment_wrap.parentNode.removeChild(comment_wrap);
+      let subcomments = parent_comment_dom.querySelector('.subcomments');
+      display_comments(subcomments, message_id);
+
+    })
+    .catch(function () {});
 }
 
 function send_comment(comment_wrap, message_id, text) {
-  request = new XMLHttpRequest();
+  let URL = "../api/comments.php";
 
-  let subcomments = comment_wrap.querySelector('.subcomments');
-
-  request.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      let responseJSON = JSON.parse(this.responseText);
-      let comment = responseJSON;
-
-      let new_comment_wrap = createComment(comment);
-      let replies_button = comment_wrap.querySelector('.replies');
-      Comment.instance(message_id).setOpenState();
-
-      subcomments.innerHTML = '';
-      display_comments(subcomments, message_id);
-    }
-  }
-  request.open("POST", "../api/comments.php", true);
-  request.send(JSON.stringify({
+  let sendObj = JSON.stringify({
     "message_id": message_id,
     "text": text
-  }));
+  });
+
+  ajax(URL, "POST", sendObj)
+    .then(function () {
+
+      update_comment(comment_wrap, message_id);
+      Comment.instance(message_id).setOpenState();
+
+    })
+    .catch(function () {});
 }
 
 function createComment(comment) {
@@ -87,10 +93,9 @@ function createCommentTextarea(comment_wrap) {
     let text = new_comment_area.querySelector('.send_text');
     send_comment(comment_wrap, message_id, text.value);
 
-    if(comment_wrap.classList.contains('comment-main')){
+    if (comment_wrap.classList.contains('comment-main')) {
       text.value = '';
-    }
-    else{
+    } else {
       new_comment_area_wrap.innerHTML = '';
     }
   });
@@ -151,10 +156,12 @@ function comment_html(message_id, username, text, date, num_comments) {
         </span>
         <a href="" class="reply">REPLY</a>
         </br>
+        <a href="" class="replies">
         ${num_comments == 0 
           ? ""
-          : `<a href="" class="replies">View ${num_comments} replies <i class="fas fa-angle-up arrow_up" style="display:none"></i><i class="fas fa-angle-down arrow_down"></i></a>`
+          : `View ${num_comments} replies <i class="fas fa-angle-up arrow_up" style="display:none"></i><i class="fas fa-angle-down arrow_down"></i>`
         }
+        </a>
       </div>  
       <div class="new_comment_area">
       </div>
@@ -163,6 +170,7 @@ function comment_html(message_id, username, text, date, num_comments) {
     `;
   return elem;
 }
+
 
 function new_comment_html(message_id) {
   let elem = document.createElement('div');

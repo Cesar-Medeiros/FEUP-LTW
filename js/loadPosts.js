@@ -1,5 +1,4 @@
 function loadPosts(order_by) {
-    console.log(order_by);
     var stories = document.querySelector('#stories');
     while (stories.firstChild) {
         stories.removeChild(stories.firstChild);
@@ -7,7 +6,6 @@ function loadPosts(order_by) {
     xmlhttp = new XMLHttpRequest();
   
     xmlhttp.addEventListener("load", function () {
-        console.log(this.responseText)
         if (this.responseText == ""){
             return;
         } 
@@ -74,7 +72,6 @@ function loadPosts(order_by) {
             story_info.appendChild(date);
             
             post_shrink.appendChild(story_info);
-            console.log(stories);
             stories.appendChild(post_shrink);
         }
     });

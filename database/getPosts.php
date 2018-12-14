@@ -17,6 +17,9 @@
       case "vote":
       $return = getNextStoriesByVotes($max, $max_id);
       break;
+      case "comments":
+      $return = getNextStoriesByComments($max, $max_id);
+      break;
     }
   }
   else{
@@ -26,6 +29,9 @@
       break;
       case "vote":
       $return = getNextStoriesOfChannelByVotes($max, $max_id, $channel_id);
+      break;
+      case "comments":
+      $return = getNextStoriesOfChannelByComments($max, $max_id, $channel_id);
       break;
     }
   }

@@ -11,6 +11,11 @@
 
     if($_SERVER['REQUEST_METHOD'] == "GET"){
         switch($type){
+
+            case 'id':
+                $data = getCommentWithInfo($value);
+                break;
+
             case 'message' : 
                 $data = getCommentsWithInfo($value);
                 break;
@@ -22,14 +27,13 @@
         http_response_code(200);
     }
     else if($_SERVER['REQUEST_METHOD'] == "POST"){
-        $data = json_decode(file_get_contents('php://input'), true);
+        $dataR = json_decode(file_get_contents('php://input'), true);
 
         switch($type){
             case 'all': {
-                if(isset($data['message_id']) && isset($data['text'])){
-                    $comment_id = addComment($data['message_id'], $_SESSION['user_id'], $data['text']);  
-                    $data = getCommentWithInfo($comment_id); 
-                    http_response_code(200);
+                if(isset($dataR['message_id']) && isset($dataR['text'])){
+                    $comment_id = addComment($dataR['message_id'], $_SESSION['user_id'], $dataR['text']);
+                    $data = getCommentWithInfo($comment_id);
                 }
                 else{
                     http_response_code(400);
