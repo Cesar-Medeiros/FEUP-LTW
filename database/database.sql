@@ -122,16 +122,8 @@ INSERT INTO User VALUES (null, 'User3', 'Password', 'user3@email.com');
 -- Messages
 INSERT INTO Message VALUES 
 (null, 
-'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
-'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vel ipsum non ante volutpat tempus. Donec mattis erat ac urna sodales, ac tempor massa tempor. Donec non nulla felis. Nunc auctor, odio id mattis volutpat, felis leo vestibulum elit, vitae mollis ex neque nec sem. Proin at fermentum orci. Integer sagittis nisi id nisl pellentesque, sit amet fringilla est ullamcorper. Sed feugiat erat molestie dui finibus, ut congue magna porttitor. Mauris sit amet nisl sit amet lorem rutrum tristique eget vel quam.
-
-Cras varius dignissim purus nec euismod. Etiam a maximus lorem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla facilisi. Nunc auctor volutpat lectus, vel mattis mi scelerisque nec. Mauris convallis quis dolor sit amet suscipit. Nullam sagittis volutpat urna, eget ultricies ante accumsan et. Nunc euismod turpis sed elit vehicula ultrices. Quisque dui sem, vestibulum in auctor ac, feugiat ut nisl. Aenean sit amet pellentesque sem, quis blandit eros.
-
-Aliquam sit amet elit porta, aliquam ligula vitae, eleifend quam. Praesent quis ipsum tincidunt quam vulputate euismod. Cras quis aliquet neque. Praesent vel enim dui. Nullam purus dolor, luctus a magna vitae, cursus dignissim lectus. Aliquam ultricies suscipit ex. Aliquam finibus magna nisl, vitae sodales eros fermentum sit amet. Nam quis leo non risus dapibus pellentesque non at mauris. Aenean ac accumsan nulla. Suspendisse et blandit ipsum. Suspendisse condimentum ante sem, eu rhoncus est sodales ut.
-
-Nullam et libero ligula. Phasellus nunc lorem, egestas non imperdiet vel, scelerisque vitae augue. In vestibulum lacus non lacinia fermentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean facilisis feugiat venenatis. Sed porttitor iaculis tortor, id finibus purus blandit ut. Fusce gravida, lectus non tempus semper, est metus rhoncus dolor, a ornare purus enim in massa. Duis iaculis tortor at neque egestas posuere vel tempor mi. Duis laoreet velit orci, et consequat diam dapibus nec. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi et eros a mi blandit porta. Suspendisse quis hendrerit velit, non scelerisque mauris. Mauris accumsan sapien turpis, in vulputate nulla venenatis a. Nulla id purus ligula. Aliquam erat volutpat. Vivamus malesuada, odio vitae sagittis sollicitudin, lorem augue viverra nisi, ac consequat eros enim ac dolor.
-
-Etiam quam metus, congue ut condimentum sed, fringilla id eros. Suspendisse quis maximus velit. Suspendisse mattis libero in urna cursus eleifend. Proin faucibus diam ut efficitur dictum. Pellentesque tellus felis, porta nec gravida ut, dignissim sed purus. Ut sollicitudin iaculis erat, nec cursus velit imperdiet molestie. Cras eget lorem urna. Ut venenatis purus non elit accumsan rhoncus. Nullam auctor elit ante, vitae pulvinar magna porta interdum. Ut vel nibh aliquam, ullamcorper magna vel, congue mauris. Nullam eu libero in urna commodo tempus tristique vel mauris. Sed ac bibendum nisl. Aliquam pulvinar nulla nunc, ornare consequat eros lobortis ac. Nulla at arcu ultricies, rutrum arcu sit amet, volutpat arcu. Donec sed lorem in nibh molestie egestas ac in magna.',
+'1. Symbol',
+'Any transmitted robot cooperates beneath the symbol. When can his pork rot? Why can´t the sacked mug boggle? The irony writes. When can a breeding parrot highlight the matrix?',
 1543759793,
 0,
 0,
@@ -141,8 +133,8 @@ null
 
 INSERT INTO Message VALUES 
 (null, 
-'2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
-'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
+'2. Soundtrack',
+'A shoe toes the line beneath a cultural kingdom. The repaired jerk releases the cricket. The perpetual passport decides in the diary. The voluntary expert adjusts the lemon on top of the lined gang. When can my husband portion the soundtrack?',
 1543759773,
 0,
 0,
@@ -152,63 +144,8 @@ null
 
 INSERT INTO Message VALUES 
 (null, 
-'3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
-'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
-1543759773,
-0,
-0,
-1,
-null
-);
-
-
-INSERT INTO Message VALUES 
-(null, 
-'4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
-'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
-1543759773,
-0,
-0,
-1,
-null
-);
-
-INSERT INTO Message VALUES 
-(null, 
-'5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
-'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
-1543759773,
-0,
-0,
-1,
-null
-);
-
-INSERT INTO Message VALUES 
-(null, 
-'6. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
-'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
-1543759773,
-0,
-0,
-1,
-null
-);
-INSERT INTO Message VALUES 
-(null, 
-'7. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
-'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
-1543759773,
-0,
-0,
-1,
-null
-);
-
-INSERT INTO Message VALUES 
-(null, 
-'8. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
-'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
+'3. Lemon',
+'The lemon mocks the bomb in the liberal creed. An engaged mirror smiles. A fooling cathedral tends an incorporated missile. This best beard explodes without the void.',
 1543759773,
 0,
 0,
@@ -219,8 +156,8 @@ null
 
 INSERT INTO Message VALUES 
 (null, 
-'9. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
-'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
+'4. Vegetable',
+'Around a vegetable crawls a bass crossroad. Above the hollow headline chews an essential egg. The laugh accepts. The warmed supernatural joins an amber sexist. The butter scores. A misprint reads?',
 1543759773,
 0,
 0,
@@ -230,8 +167,8 @@ null
 
 INSERT INTO Message VALUES 
 (null, 
-'10. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
-'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
+'5. Grandmother',
+'The explosive coasts into the monarch! The careful lad advertises. How does the sequel strain before the automatic cap? The virtue stretches underneath the urge! Can an amazing grandmother gut his kettle?',
 1543759773,
 0,
 0,
@@ -241,8 +178,63 @@ null
 
 INSERT INTO Message VALUES 
 (null, 
-'11. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
-'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
+'6. Accountant',
+'Every open accountant farms before the tenth percentage. The wonderful carrot resumes a winning doctrine. A medium voter jokes. Why can´t the tube foul the expensive cliff?',
+1543759773,
+0,
+0,
+1,
+null
+);
+INSERT INTO Message VALUES 
+(null, 
+'7. League',
+'A mandate cruises without any finger. Can a contour revenge the acquaintance? The shared rival bicycles past whatever bug. The anomaly dashes over a beneficial grandmother. A switch bite spits beside the devious civilian. A jam clogs over a special worry.',
+1543759773,
+0,
+0,
+1,
+null
+);
+
+INSERT INTO Message VALUES 
+(null, 
+'8. Roof',
+'The naming contour reckons the gratuitous agenda. A noble accent speculates. The stuck roof landscapes a defensive forecast. The disguise aces the vegetable inside a disgusted code.',
+1543759773,
+0,
+0,
+1,
+null
+);
+
+
+INSERT INTO Message VALUES 
+(null, 
+'9. Game',
+'The march reasons. How does the western pose? When will the bulb reign throughout the advisory manufacturer? His heritage talks throughout a drill. A negligible industry fudges with a game.',
+1543759773,
+0,
+0,
+1,
+null
+);
+
+INSERT INTO Message VALUES 
+(null, 
+'10. Surgery',
+'The overseas tangent bores against a connector. The acorn stages each annual bird. Why can't the suspected significance pump? Why can't the telling steer portray our surgery?',
+1543759773,
+0,
+0,
+1,
+null
+);
+
+INSERT INTO Message VALUES 
+(null, 
+'11. Monkey',
+'An extremist trap persists in a waste. How can a trace appall the planned prejudice? My nonsense spike fries the spike. A doctor experiments with the monkey inside the upright protest.',
 1543759773,
 0,
 0,
@@ -263,8 +255,8 @@ null
 
 INSERT INTO Message VALUES 
 (null, 
-'13. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
-'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan. Donec vestibulum nulla sit amet lacus sagittis, ac dignissim mi faucibus. Integer cursus eleifend turpis iaculis porttitor. Maecenas maximus ante a metus dictum tempus. Praesent quis ante vel sem vulputate varius. Nullam cursus sagittis nunc et luctus. Quisque tincidunt urna eget dolor auctor, eu porttitor mauris varius. Pellentesque accumsan neque lectus, ac pellentesque augue cursus ut. Praesent ac neque dui. Nunc dui nisi, placerat ut mollis et, varius id quam.',
+'13. Pencil',
+'A generator neglects a quest. Below the artist exists the explanatory island. The sport deals the revolutionary outside the discarded matrix. Its cinema champions a nest opposite the interesting pencil. Any python impresses the illiterate.',
 1543759773,
 0,
 0,
@@ -278,7 +270,7 @@ null
 INSERT INTO Message VALUES 
 (null, 
 null,
-'Comment1: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
+'Completely nonsense.',
 1543759773,
 0,
 0,
@@ -289,7 +281,7 @@ null,
 INSERT INTO Message VALUES 
 (null, 
 null,
-'Comment2: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
+'Very nice indeed!',
 1543759773,
 0,
 0,
@@ -300,12 +292,12 @@ null,
 INSERT INTO Message VALUES 
 (null, 
 null,
-'SubComment: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac diam ornare justo fringilla accumsan.',
+'LOL',
 1543759773,
 0,
 0,
 1,
-15
+13
 );
 
 
