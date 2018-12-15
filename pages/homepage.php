@@ -39,5 +39,6 @@ draw_footer();
     <script src="../js/utilities.js" defer></script>
     <script src="../js/vote.js" defer></script>
     <script src="../js/post.js" defer></script>
-    <script src="../js/infiniteScroll.js" defer></script>';
+    <script src="../js/infiniteScroll.js" defer></script>
+    <script src="../js/loadPosts.js" defer></script>';
 }?>

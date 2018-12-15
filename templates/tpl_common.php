@@ -32,10 +32,10 @@
     </li>
     <li class="navbar-center-wrap"><a class="gn-icon logo" href="../pages/homepage.php">Website Name</a></li>
     <li class="navbar-right-wrap">
-      <select id="sort_by" onchange='alert("Call ajax")'>
+      <select id="sort_by" onchange='loadPosts(this.value)'>
+        <option value="time">Most recent</option>
         <option value="vote">Most voted up</option>
-        <option value="time">More recent</option>
-        <option value="comments">More comments</option>
+        <option value="comments">Most commented</option>
       </select>
       <span class="search-bar-item">
         <input placeholder="Search..." type="search" class="gn-search">

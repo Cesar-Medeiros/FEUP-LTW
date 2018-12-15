@@ -29,7 +29,7 @@ function init(){
 
 
 function loadMore() {
-    let URL = "../database/getPosts.php?min_id=" + min_id + "&channel_id=" + "all";
+    let URL = "../database/getPosts.php?max_id=" + min_id + "&channel_id=" + "all" + "&max=" + Number.MAX_SAFE_INTEGER + "&order_by=" + "time";
 
     ajax(URL, "GET")
         .then(function (responseJSON) {    
