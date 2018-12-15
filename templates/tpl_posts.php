@@ -7,10 +7,9 @@
 
 
 <?php function draw_post_full($message_id) {?>
-<div class="post_wrap" data-id="<?=$message_id?>">
-</div>
-<?php }
-  ?>
+  <div class="post_wrap" data-id="<?=$message_id?>">
+  </div>
+<?php }?>
 
 <?php function draw_comments($message_id) { ?>
 <div class="comments_wrap">

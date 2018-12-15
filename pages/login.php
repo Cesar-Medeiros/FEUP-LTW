@@ -1,4 +1,8 @@
-<?php draw_head(login_head()) ?>
+
+<?php 
+    include_once '../templates/tpl_common.php';
+    draw_head(login_head())
+?>
 
 <body>
     <div class="bg-container">
@@ -88,4 +92,4 @@
     <link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans+Condensed:300" rel="stylesheet">
     <script src="../js/utilities.js" defer></script>
     <script src="../js/auth.js" defer></script>';
-}
+}?>
