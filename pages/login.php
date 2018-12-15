@@ -1,5 +1,3 @@
-<?php include_once('../includes/session.php'); ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -9,6 +7,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
         crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans+Condensed:300" rel="stylesheet">
+    <script src="../js/utilities.js" defer></script>
     <script src="../js/auth.js" defer></script>
 </head>
 
@@ -43,7 +42,9 @@
                                 <label for="pass" class="label">Password</label>
                                 <input name="password" maxlength="255" type="password" class="input" required>
                             </div>
-                            <?php include_once('../templates/messages.php');?>
+
+                            <section id="messages"></section>
+                            
                             <div class="group">
                                 <input type="submit" id="signin_button" class="button" value="Login">
                             </div>
@@ -69,10 +70,10 @@
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Email Address</label>
-                                <input name="email" type="text" class="input" required>
+                                <input name="email" type="email" class="input" required>
                             </div>
 
-                            <?php include_once('../templates/messages.php');?>
+                            <section id="messages"></section>
 
                             <div class="group">
                                 <input type="submit" id="login_button" class="button" value="Signup">
@@ -87,4 +88,5 @@
         </div>
     </div>
 </body>
+
 </html>

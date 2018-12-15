@@ -35,12 +35,18 @@
         switch($type){
             case 'all': {
                 if(isset($data['username']) && isset($data['password']) && isset($data['email'])){
-                    addUser($data['username'], $data['password'], $data['email']);
+                    try {
+                        addUser($data['username'], $data['password'], $data['email']);
+                    } catch (PDOException $e) {
+                        http_response_code(400);
+                        echo json_encode(array('error' => 'Invalid Credentials'));
+                        die();
+                    }
                     http_response_code(200);
                 }
                 else{
-                    echo json_encode(array('error' => 'Invalid Credentials'));
                     http_response_code(400);
+                    echo json_encode(array('error' => 'Fill all fields'));
                 }
                 break;
             }
@@ -52,8 +58,8 @@
                         http_response_code(200);
                     }
                     else{
-                        echo json_encode(array('error' => 'Invalid Credentials'));
                         http_response_code(400);
+                        echo json_encode(array('error' => 'Invalid Credentials'));
                     }
                 }
                 else{
@@ -65,32 +71,4 @@
             default: http_response_code(400); die();
         }
     }
-?>
-
-<?php 
-/*
-function callHook() {
-    global $url;
- 
-    $urlArray = array();
-    $urlArray = explode("/",$url);
- 
-    $controller = $urlArray[0];
-    array_shift($urlArray);
-    $action = $urlArray[0];
-    array_shift($urlArray);
-    $queryString = $urlArray;
- 
-    $controllerName = $controller;
-    $controller = ucwords($controller);
-    $model = rtrim($controller, 's');
-    $controller .= 'Controller';
-    $dispatch = new $controller($model,$controllerName,$action);
- 
-    if ((int)method_exists($controller, $action)) {
-        call_user_func_array(array($dispatch,$action),$queryString);
-    } else {
-    }
-}
-*/
 ?>

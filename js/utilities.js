@@ -34,12 +34,13 @@ function ajax(url, methodType, sendObj) {
         xhr.send(sendObj);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
+                var resp = xhr.responseText;
+                var respJson = (resp === '') ? '' :  JSON.parse(resp);
                 if (xhr.status === 200) {
-                    var resp = xhr.responseText;
-                    var respJson = JSON.parse(resp);
                     resolve(respJson);
                 } else {
-                    reject(xhr.status);
+                    var respJson = JSON.parse(resp);
+                    reject({errorCode: xhr.status, info: respJson});
                 }
             }
         }
@@ -139,21 +140,11 @@ function doScrolling(element, duration) {
 
 
 
-
-
-
-
-
-
-
-
-
-
 function timeAgo(selector) {
     var templates = {
         prefix: "",
         suffix: " ago",
-        seconds: "less than a minute",
+        seconds: "Just now",
         minute: "about a minute",
         minutes: "%d minutes",
         hour: "about an hour",

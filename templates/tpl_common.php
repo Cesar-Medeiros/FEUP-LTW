@@ -31,7 +31,7 @@
  * if the user is logged in in order to draw the logout
  * link.
  */ 
-draw_head();?>
+?>
 <header class="navbar">
   <ul id="navbar-menu">
     <li class="navbar-left-wrap">

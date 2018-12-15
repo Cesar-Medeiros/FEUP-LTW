@@ -2,14 +2,11 @@ function display_comments(html_element, message_id) {
   var URL = "../api/comments.php/message/" + message_id;
   ajax(URL, "GET")
     .then(function (responseJSON) {
-
       responseJSON.forEach(comment => {
         let comment_wrap = createComment(comment);
         html_element.appendChild(comment_wrap);
       });
-
-    })
-    .catch(function () {});
+    });
 }
 
 function update_comment(comment_wrap, message_id) {
@@ -23,30 +20,26 @@ function update_comment(comment_wrap, message_id) {
       let subcomments = parent_comment_dom.querySelector('.subcomments');
       display_comments(subcomments, message_id);
 
-    })
-    .catch(function () {});
+    });
 }
 
 function send_comment(comment_wrap, message_id, text) {
   let URL = "../api/comments.php";
-
   let sendObj = JSON.stringify({
     "message_id": message_id,
     "text": text
   });
-
   ajax(URL, "POST", sendObj)
     .then(function () {
 
       update_comment(comment_wrap, message_id);
       Comment.instance(message_id).setOpenState();
 
-    })
-    .catch(function () {});
+    });
 }
 
 function createComment(comment) {
-  let comment_wrap = comment_html(comment.message_id, comment.username, comment.text, comment.date, comment.comments);
+  let comment_wrap = comment_html(comment.message_id, comment.username, comment.text, comment.date, comment.comments, comment.score);
   let subcomments = comment_wrap.querySelector('.subcomments');
   let replies_button = comment_wrap.querySelector('.replies');
   let arrow_up = comment_wrap.querySelector('.arrow_up');
@@ -71,6 +64,9 @@ function createComment(comment) {
           break;
       }
     });
+
+    color_vote(comment_wrap, comment_wrap.dataset.id);
+    addVoteListener(comment_wrap);
   }
 
   reply_button.addEventListener('click', function (event) {
@@ -138,7 +134,7 @@ init();
 
 
 
-function comment_html(message_id, username, text, date, num_comments) {
+function comment_html(message_id, username, text, date, num_comments, score) {
   let time = timeSince(new Date(date * 1000));
   let elem = document.createElement('section');
   elem.className = 'comment-wrap';
@@ -151,6 +147,7 @@ function comment_html(message_id, username, text, date, num_comments) {
         <span class="comment_time"> ${time} </span>
         <div class="message">${text}</div>
         <span class="vote">
+          <span class="score">${score}</span>
           <a class="vote_up" href=""><i class="fas fa-angle-up"></i></a>
           <a class="vote_down" href=""><i class="fas fa-angle-down"></i></a>
         </span>

@@ -9,7 +9,7 @@
 
   $user = getUserById($_SESSION['user_id']);
   
-
+  draw_head();
   draw_header(getUserById($_SESSION['user_id'])['username']); ?>
 
   <body>

@@ -524,13 +524,18 @@ Comments
     color: #5f6f81;
 }
 
+.comments_wrap .comments_page .score{
+    font-size: 0.8em;
+    color: #5f6f81;
+}
+
 .comments_wrap .comments_page .reply{
     font-size: 0.8em;
     color: #5f6f81;
 }
 
 .comments_wrap .comments_page .vote{
-    /* font-size: 0.8em; */
+    margin-right: 1em;
     color: #5f6f81;
 }
 

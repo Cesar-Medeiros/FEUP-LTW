@@ -21,6 +21,7 @@ $categories = getTopChannels();
 
 $username = $user['username'];
 
+draw_head();
 draw_header($username);
 draw_aside($categories);
 if ($user_id == $_SESSION['user_id'])

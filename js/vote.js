@@ -1,52 +1,45 @@
-function update_vote(message_id, value) {
-  let URL = "../actions/action_vote.php?message_id=" + message_id + "&value=" + value;
+function update_vote(elem, message_id, value) {
+  let URL = '../api/messages.php/vote';
+
+  let sendObj = JSON.stringify({
+    "message_id": message_id,
+    "value": value
+  });
+
+  ajax(URL, "POST", sendObj)
+    .then(function (responseJSON) {
+      elem.querySelector('.score').innerHTML = responseJSON.score;
+      let button = parseInt(responseJSON.button);
+      elem.querySelector('.vote_up').style.color = (button == 1) ? 'green' : 'inherit';
+      elem.querySelector('.vote_down').style.color = (button == -1) ? 'red' : 'inherit';
+    });
+}
+
+
+function color_vote(elem, message_id){
+  let URL = `../api/messages.php/vote/${message_id}`;
 
   ajax(URL, "GET")
     .then(function (responseJSON) {
-      let info = document.querySelector('.story_info[data-id=\'' + message_id + '\']');
-      info.querySelector('.score').innerHTML = responseJSON.score;
-
-      let color_down = 'inherit';
-      let color_up = 'inherit';
-
-      switch (parseInt(responseJSON.button)) {
-        case -1:
-          color_down = 'red';
-          break;
-        case 1:
-          color_up = 'green';
-          break;
-      }
-
-      info.querySelector('.vote_down').style.color = color_down;
-      info.querySelector('.vote_up').style.color = color_up;
-    })
-    .catch();
+      let vote = responseJSON['vote'];
+      elem.querySelector('.vote_up').style.color = (vote == 1) ? 'green' : 'inherit';
+      elem.querySelector('.vote_down').style.color = (vote == -1) ? 'red' : 'inherit';
+    });
 }
 
-function ready() {
-  let upButtons = document.querySelectorAll('.vote_up');
 
-  upButtons.forEach(function (item) {
-    item.addEventListener('click', function (event) {
-      event.preventDefault();
-      update_vote(item.dataset.id, 1);
-    });
+function addVoteListener(element) {
+  let upButton = element.querySelector('.vote_up');
+  let downButton = element.querySelector('.vote_down');
+  let id = element.dataset.id;
+
+  upButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    update_vote(element, id, 1);
   });
 
-
-  let vote_down = document.querySelectorAll('.vote_down');
-
-  vote_down.forEach(function (item) {
-    item.addEventListener('click', function (event) {
-      event.preventDefault();
-      update_vote(item.dataset.id, -1);
-    });
+  downButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    update_vote(element, id, -1);
   });
-}
-ready();
-
-function addVoteHandler(vote_element){
-
-
 }

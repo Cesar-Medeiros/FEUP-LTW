@@ -80,7 +80,12 @@
     $db = Database::db();
     $stmt = $db->prepare('SELECT * FROM Vote WHERE user_id=? AND message_id=?');
     $stmt->execute(array($user_id, $message_id));
-    return $stmt->fetch();
+    $ret = $stmt->fetch();
+    
+    if($ret == false){
+      $ret = array('user_id' => $user_id, 'message_id' => $message_id,  'vote' => 0);
+    }
+    return $ret;
   }
 
   function getAllStoriesWithInfo() {
