@@ -6,8 +6,11 @@ function display_comments(html_element, message_id) {
         let comment_wrap = createComment(comment);
         html_element.appendChild(comment_wrap);
       });
+      timeAgo();
     });
 }
+
+
 
 function update_comment(comment_wrap, message_id) {
   let URL = "../api/comments.php/" + message_id;
@@ -23,6 +26,8 @@ function update_comment(comment_wrap, message_id) {
     });
 }
 
+
+
 function send_comment(comment_wrap, message_id, text) {
   let URL = "../api/comments.php";
   let sendObj = JSON.stringify({
@@ -32,11 +37,13 @@ function send_comment(comment_wrap, message_id, text) {
   ajax(URL, "POST", sendObj)
     .then(function () {
 
-      update_comment(comment_wrap, message_id);
       Comment.instance(message_id).setOpenState();
+      update_comment(comment_wrap, message_id);
 
     });
 }
+
+
 
 function createComment(comment) {
   let comment_wrap = comment_html(comment.message_id, comment.username, comment.text, comment.date, comment.comments, comment.score);
@@ -49,7 +56,9 @@ function createComment(comment) {
   if (replies_button != undefined) {
     replies_button.addEventListener('click', function (event) {
       event.preventDefault();
-      let state = Comment.instance(comment.message_id).changeState().getState();
+      Comment.instance(comment.message_id).changeState();
+      let state = Comment.instance(comment.message_id).getState();
+
       switch (state) {
         case 'OPEN':
           arrow_down.style.display = "none";
@@ -65,17 +74,34 @@ function createComment(comment) {
       }
     });
 
+
     color_vote(comment_wrap, comment_wrap.dataset.id);
     addVoteListener(comment_wrap);
   }
 
+  if(story_id == comment.message_id){
+    createCommentTextarea(comment_wrap);
+  }
+
   reply_button.addEventListener('click', function (event) {
     event.preventDefault();
-    createCommentTextarea(comment_wrap);
+    let state = ReplySwitch.instance(comment.message_id).changeState().getState();
+
+      switch(state){
+        case 'OPEN':
+          createCommentTextarea(comment_wrap);
+          break;
+        case 'CLOSE':
+          let new_comment_area_wrap = comment_wrap.querySelector('.new_comment_area');
+          new_comment_area_wrap.innerHTML = '';
+          break;
+      }
   });
 
   return comment_wrap;
 }
+
+
 
 function createCommentTextarea(comment_wrap) {
   let message_id = comment_wrap.dataset.id;
@@ -84,21 +110,24 @@ function createCommentTextarea(comment_wrap) {
   let new_comment_area = new_comment_html(message_id);
 
   let send_button = new_comment_area.querySelector('#send_button');
+  
   send_button.addEventListener('click', function (event) {
     event.preventDefault();
     let text = new_comment_area.querySelector('.send_text');
-    send_comment(comment_wrap, message_id, text.value);
-
-    if (comment_wrap.classList.contains('comment-main')) {
-      text.value = '';
-    } else {
-      new_comment_area_wrap.innerHTML = '';
+    
+    if(text.value.length <= 10){
+      console.log(text);
+      new_comment_area.setCustomValidity("At least 10 characters");
     }
+    
+    send_comment(comment_wrap, message_id, text.value);
+    ReplySwitch.instance(message_id).setCloseState();
   });
   new_comment_area_wrap.appendChild(new_comment_area);
 }
 
 
+var story_id;
 
 
 function init() {
@@ -106,6 +135,7 @@ function init() {
   let html_element = document.querySelector('.comment-wrap');
   let subcomments = html_element.querySelector('.subcomments');
   let message_id = html_element.dataset.id;
+  story_id = message_id;
   createCommentTextarea(html_element);
   display_comments(subcomments, message_id);
 }
@@ -122,20 +152,7 @@ init();
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 function comment_html(message_id, username, text, date, num_comments, score) {
-  let time = timeSince(new Date(date * 1000));
   let elem = document.createElement('section');
   elem.className = 'comment-wrap';
   elem.dataset.id = message_id;
@@ -144,7 +161,7 @@ function comment_html(message_id, username, text, date, num_comments, score) {
         <img class="user_img" src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Account-512.png" style="height:20px;width:20px;">  
         
         <a class="user_name" href="">${username}</a>
-        <span class="comment_time"> ${time} </span>
+        <span class="comment_time timeago" datetime="${date}"></span>
         <div class="message">${text}</div>
         <span class="vote">
           <span class="score">${score}</span>
@@ -153,12 +170,11 @@ function comment_html(message_id, username, text, date, num_comments, score) {
         </span>
         <a href="" class="reply">REPLY</a>
         </br>
-        <a href="" class="replies">
+        
         ${num_comments == 0 
           ? ""
-          : `View ${num_comments} replies <i class="fas fa-angle-up arrow_up" style="display:none"></i><i class="fas fa-angle-down arrow_down"></i>`
+          : `<a href="" class="replies">View ${num_comments} replies <i class="fas fa-angle-up arrow_up" style="display:none"></i><i class="fas fa-angle-down arrow_down"></i></a>`
         }
-        </a>
       </div>  
       <div class="new_comment_area">
       </div>
@@ -174,7 +190,7 @@ function new_comment_html(message_id) {
   elem.className = 'new-comment';
   elem.dataset.id = message_id;
   elem.innerHTML = `
-      <textarea placeholder="Write a comment..." class="message text send_text" name="text" oninput='this.style.height = "";this.style.height = this.scrollHeight + 10 + "px"'></textarea>
+  <textarea placeholder="Write a comment..." class="message text send_text" name="text" oninput='this.style.height = "";this.style.height = this.scrollHeight + 10 + "px"'></textarea>
       <a id="send_button" href="">Send</a>
     `;
   return elem;

@@ -32,7 +32,7 @@ function story_info_html(story) {
               </a>
               <div class="score">${story['score']}</div>
               <div class="comments">${story['comments']}</div>
-              <div class="date timeago" datetime="${story['date']}">${story['date']}</div>
+              <div class="date timeago" datetime="${story['date']}"></div>
             </div>
         </aside>
         `;
