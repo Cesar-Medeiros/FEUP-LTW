@@ -109,17 +109,10 @@ function createCommentTextarea(comment_wrap) {
 
   let new_comment_area = new_comment_html(message_id);
 
-  let send_button = new_comment_area.querySelector('#send_button');
   
-  send_button.addEventListener('click', function (event) {
+  new_comment_area.addEventListener('submit', function (event) {
     event.preventDefault();
     let text = new_comment_area.querySelector('.send_text');
-    
-    if(text.value.length <= 10){
-      console.log(text);
-      new_comment_area.setCustomValidity("At least 10 characters");
-    }
-    
     send_comment(comment_wrap, message_id, text.value);
     ReplySwitch.instance(message_id).setCloseState();
   });
@@ -162,7 +155,9 @@ function comment_html(message_id, username, text, date, num_comments, score) {
         
         <a class="user_name" href="">${username}</a>
         <span class="comment_time timeago" datetime="${date}"></span>
-        <div class="message">${text}</div>
+
+        <div class="message" style="white-space: pre-line; word-wrap: break-word;" >${text}</div>
+
         <span class="vote">
           <span class="score">${score}</span>
           <a class="vote_up" href=""><i class="fas fa-angle-up"></i></a>
@@ -187,11 +182,10 @@ function comment_html(message_id, username, text, date, num_comments, score) {
 
 function new_comment_html(message_id) {
   let elem = document.createElement('div');
-  elem.className = 'new-comment';
-  elem.dataset.id = message_id;
   elem.innerHTML = `
-  <textarea placeholder="Write a comment..." class="message text send_text" name="text" oninput='this.style.height = "";this.style.height = this.scrollHeight + 10 + "px"'></textarea>
-      <a id="send_button" href="">Send</a>
-    `;
-  return elem;
+  <form class="new-comment" data-id="${message_id}">
+    <textarea placeholder="Write a comment..." class="message text send_text" name="text" oninput='this.style.height = "";this.style.height = this.scrollHeight + 25 + "px"' minlength="5"></textarea>
+    <input id="send_button" type="submit" value="Send"></input>
+  </form>`;
+  return elem.firstElementChild;
 }
