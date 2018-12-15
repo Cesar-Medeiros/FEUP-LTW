@@ -1,4 +1,6 @@
 function loadPosts(order_by) {
+    console.log("LOADED");
+    /* ORDER, CHANNEL, USER */
     var stories = document.querySelector('#stories');
     while (stories.firstChild) {
         stories.removeChild(stories.firstChild);
@@ -16,7 +18,8 @@ function loadPosts(order_by) {
             let post_shrink = post_html_shrink(stories_arr[i]);
             stories.appendChild(post_shrink);
         }
+        timeAgo();
     });
-    xmlhttp.open("GET", "../database/getPosts.php?max_id=" + Number.MAX_SAFE_INTEGER + "&channel_id=" + 'all' + "&order_by="+order_by + "&max=" + Number.MAX_SAFE_INTEGER, true);
+    xmlhttp.open("GET", "../database/getPosts.php?last_id=" + Number.MAX_SAFE_INTEGER + "&channel_id=" + 'all' + "&order_by="+order_by + "&max=" + Number.MAX_SAFE_INTEGER, true);
     xmlhttp.send();
 }

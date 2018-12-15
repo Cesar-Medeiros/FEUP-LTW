@@ -1,14 +1,9 @@
-var stories = document.querySelectorAll('#stories aside');
-var min_id = Number.MAX_SAFE_INTEGER;
+var channel, user,  last_id, order_by, last_value, loading;
 
-if (stories.length > 0) {
-    var min_id = stories[stories.length - 1].dataset.id;
-}
-var loading = false;
+function init(order_by, channel, user){
+    
+    setScrollingSettings(order_by, channel, user);
 
-init();
-
-function init(){
     loadMore();
 
     document.addEventListener("scroll", function () {
@@ -29,8 +24,7 @@ function init(){
 
 
 function loadMore() {
-    let URL = "../database/getPosts.php?max_id=" + min_id + "&channel_id=" + "all" + "&max=" + Number.MAX_SAFE_INTEGER + "&order_by=" + "time";
-
+    let URL = "../database/getPosts.php?channel=" + channel + "&user=" + user + "&order_by=" + order_by +"&last_value=" + last_value + "&last_id=" + last_id;
     ajax(URL, "GET")
         .then(function (responseJSON) {    
 
@@ -40,10 +34,45 @@ function loadMore() {
                 let post_shrink = post_html_shrink(stories_arr[i]);
                 allStories.appendChild(post_shrink);
             }
-            let stories = document.querySelectorAll('#stories aside');
-            min_id = stories[stories.length - 1].dataset.id;
+            updateLastId();
             loading = false;
             timeAgo();
 
         });
+}
+
+
+function setScrollingSettings(order_by, channel, user) {
+    
+
+    let stories = document.querySelector('#stories');
+    while (stories.firstChild) {
+        stories.removeChild(stories.firstChild);
+    }
+
+    //order
+    order_by = new_order_by;
+
+    //channel
+    channel = new_channel;
+
+    //user
+    user = new_user;
+
+    //reset
+    resetSettings();
+
+}
+
+function updateLastId(){
+    let stories = document.querySelectorAll('#stories aside');
+    if (stories.length > 0) {
+        last_id = stories[stories.length - 1].dataset.id;
+    }
+
+}
+function resetSettings(){
+    last_id = Number.MAX_SAFE_INTEGER;
+    last_value = Number.MAX_SAFE_INTEGER;
+    loading = false;
 }

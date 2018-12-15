@@ -2,38 +2,37 @@
   include_once('../includes/session.php');
   include_once('db_msg.php');
   
-  $user_id = $_SESSION['user_id'];
-  $max_id = $_GET['max_id'];
-  $channel_id = $_GET['channel_id'];
+  
+  $channel = $_GET['channel'];
+  $user = $_SESSION['user'];
+
   $order_by = $_GET['order_by'];
-  $max = $_GET['max'];
+  $last_value = $_GET['last_value'];
+  $last_id = $_GET['last_id'];
+
+  $channel_cond = "1";
+  if ($channel != null){
+    $channel_cond = "Channel.channel_id = " + $channel;
+  }
+
+  $user_cond = "1";
+  if ($user != null){
+    $user_cond = "User.user_id = " + $user;
+  }
 
   $return = -1;
-  if ($channel_id === "all"){
-    switch($order_by){
-      case "time":
-      $return = getNextStoriesByTime($max_id);
-      break;
-      case "vote":
-      $return = getNextStoriesByVotes($max, $max_id);
-      break;
-      case "comments":
-      $return = getNextStoriesByComments($max, $max_id);
-      break;
+  switch($order_by){
+    case "time":
+    $return = getNextStoriesByTime($last_id, $channel_cond, $user_cond);
+    break;
+
+    case "vote":
+    $return = getNextStoriesByVotes($last_value, $last_id, $channel_cond, $user_cond);
+    break;
+
+    case "comments":
+    $return = getNextStoriesByComments($last_value, $last_id, $channel_cond, $user_cond);
+    break;
     }
-  }
-  else{
-    switch($order_by){
-      case "time":
-      $return = getNextStoriesOfChannelByTime($max_id, $channel_id);
-      break;
-      case "vote":
-      $return = getNextStoriesOfChannelByVotes($max, $max_id, $channel_id);
-      break;
-      case "comments":
-      $return = getNextStoriesOfChannelByComments($max, $max_id, $channel_id);
-      break;
-    }
-  }
   echo json_encode($return);
 ?>
