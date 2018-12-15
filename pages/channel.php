@@ -22,7 +22,7 @@ $categories = getTopChannels();
 
 $username = getUserById($_SESSION['user_id'])['username'];
 
-draw_head();
+draw_head(channel_head());
 draw_header($username);
 draw_aside($categories);
 draw_channel_info($channel_info);
@@ -39,6 +39,16 @@ draw_footer();
         <a class="subscribers" href=""> <?=$channel_info['num_subscribers']?> subscribers </a>
         <div class="posts"> <?=$channel_info['num_posts']?> posts </div>
     </div>
-    
-   
 <?php } ?>
+
+<?php function channel_head(){
+  return '
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/aside.css">
+    <link rel="stylesheet" href="../css/channel.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans+Condensed:300" rel="stylesheet">';
+}?>

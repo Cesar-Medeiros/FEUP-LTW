@@ -1,0 +1,62 @@
+/* -------------------------------- 
+
+New Story
+
+-------------------------------- */
+
+
+.new-story-form{
+    width: 70%;
+    margin: 0 auto;
+    position: relative;
+    top: 3em;
+}
+
+
+.new-story-form input[type=text],
+.new-story-form textarea,
+.new-story-form .button{
+    border:none;
+    outline: none;
+	padding: 0.6em 1.0em;
+    border-radius:8px;
+    /* box-shadow: 0 4px 10px 0px var(--shadow-color); */
+    border: 3px solid var(--border-color);
+}
+
+.new-story-form input[type=text],
+.new-story-form textarea {
+    display: block;
+	width:100%;
+    background: var(--post-background);
+    margin-top: 0.6em;
+    margin-bottom: 1em;
+    resize: none;
+    border: none;
+    color:var(--font-color-dark);
+}
+
+.new-story-form textarea{
+    height: 10em;
+}
+
+.new-story-form .button {
+    text-transform:uppercase;
+    background: var(--navbar-background);
+    cursor: pointer;
+    color:var(--font-color-light);
+    margin:0.6em;
+}
+
+.new-story-form .buttons{
+    float:right;
+}
+
+.new-story-form .button.send {
+    background-color: #02C39A;
+}
+
+
+.new-story-form .button.cancel {
+    background-color: #F25F5C
+}

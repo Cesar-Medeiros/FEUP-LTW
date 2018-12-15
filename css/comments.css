@@ -1,0 +1,131 @@
+/* -------------------------------- 
+
+Comments
+
+-------------------------------- */
+
+
+.comments_wrap{
+    margin: 0 auto;
+    position: relative;
+    top: 3em;
+    display: grid;
+    grid-template-columns: 2fr 8fr 5fr;    
+}
+
+
+.comments_wrap .comments_page{
+    background: var(--post-background);
+    /* box-shadow: 0 4px 10px 1px var(--shadow-color); */
+    border: 3px solid var(--border-color);
+    padding: 2.5em;
+    border-radius:8px;
+    grid-column: 2;
+    position: relative;
+    grid-column: 2;
+} 
+
+.comments_wrap .comments_page .comments_header {
+    margin-bottom: 2em;
+    font-size: 1.5em;
+}
+
+.comment .user_name{
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #404b58;
+}
+
+.comments_wrap .comments_page .text,
+.comments_wrap .comments_page .message
+{
+    border:none;
+    outline: none;
+	/* padding: 0.6em 1.0em; */
+    border-radius:8px;
+    /* box-shadow: 0 4px 10px 0px var(--shadow-color); */
+    /* border: 3px solid var(--border-color); */
+    display: block;
+	width:100%;
+    background: var(--post-background);
+    /* margin-top: 0.6em;
+    margin-bottom: 1em; */
+    resize: none;
+    border: none;
+    color:var(--font-color-dark);
+}
+
+
+.comments_wrap .comments_page .message{
+    font-size: 0.9em;
+    margin: 0.5em 0;
+} 
+
+.comments_wrap .comments_page .text{
+    border: 3px solid var(--border-color);
+}
+
+.comments_wrap .comments_page .comment_time{
+    font-size: 0.8em;
+    color: #5f6f81;
+}
+
+.comments_wrap .comments_page .score{
+    font-size: 0.8em;
+    color: #5f6f81;
+}
+
+.comments_wrap .comments_page .reply{
+    font-size: 0.8em;
+    color: #5f6f81;
+}
+
+.comments_wrap .comments_page .vote{
+    margin-right: 1em;
+    color: #5f6f81;
+}
+
+.comments_wrap .comments_page .replies{
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #404b58;
+}
+
+.subcomments,
+.new_comment_area
+ {
+    position: relative;
+    margin-left: 2em;
+    margin-bottom: 1em;
+}
+
+.comments_page > .comment-wrap > .subcomments ,
+.comments_page > .comment-wrap > .new_comment_area
+{
+    margin:0;
+    margin-bottom: 4em;
+}
+
+.comments_page > .comment-wrap > .comment {
+    display: none;
+}
+
+.comments_wrap{
+    margin-bottom: 5em;
+}
+
+.new-comment .text{
+    padding: 0.2em;
+}
+
+#send_button{
+    position: relative;
+    bottom:2.5em;
+    right: 1.5em;
+    float: right;
+    font-size: 0.8em;
+    color:#404b58;
+    font-weight: bold;
+    text-transform:uppercase;
+    border-bottom: 2px solid var(--border-color);
+}

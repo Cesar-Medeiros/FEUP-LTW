@@ -1,17 +1,3 @@
- :root {
-     --icon-color: #F9F9F9;
-     --icon-hover-color: rgba(255,255,255,.3);
-     --navbar-background: rgb(57, 58, 58);
-     --sidebar-background: rgb(57, 58, 58);
-     --shadow-color: rgba(0, 0, 0, 0.4);
-     --post-background: #F9F9F9;
-     --body-backgorund:rgb(245,245,245);
-     --navbar-height: 4em;
-
-     --font-color-light: #fff;
-     --font-color-dark: rgb(57, 58, 58);
- }
-
- .account_settings h1 {
+.account_settings h1 {
     font-weight:  bold;
- }
+}

@@ -39,7 +39,7 @@
                         addUser($data['username'], $data['password'], $data['email']);
                     } catch (PDOException $e) {
                         http_response_code(400);
-                        echo json_encode(array('error' => 'Invalid Credentials'));
+                        echo json_encode(array('error' => 'Failed to signup!'));
                         die();
                     }
                     http_response_code(200);
@@ -59,7 +59,7 @@
                     }
                     else{
                         http_response_code(400);
-                        echo json_encode(array('error' => 'Invalid Credentials'));
+                        echo json_encode(array('error' => 'Login failed!'));
                     }
                 }
                 else{

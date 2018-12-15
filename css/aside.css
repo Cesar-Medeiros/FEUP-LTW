@@ -1,0 +1,136 @@
+/* -------------------------------- 
+
+Side Bar 
+
+-------------------------------- */
+
+.gn-menu-main,
+.gn-menu-main ul {
+    /* z-index: 20; */
+    margin: 0;
+    padding: 0;
+    background: var(--sidebar-background);
+    color: var(--icon-color);
+    list-style: none;
+    text-transform: none;
+    font-weight: 300;
+    font-family: 'Lato', Arial, sans-serif;
+    line-height: 60px;
+}
+
+.gn-menu-wrapper {
+    position: fixed;
+    top: var(--navbar-height);
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    width: 60px;
+    background: var(--sidebar-background);
+    -webkit-transition: -webkit-transform 0.3s, width 0.3s;
+    -moz-transition: -moz-transform 0.3s, width 0.3s;
+    transition: transform 0.3s, width 0.3s;
+    box-shadow: 4px 0px 6px 0px var(--shadow-color);
+}
+
+.gn-scroller {
+    position: absolute;
+    overflow-y: scroll;
+    width: 370px;
+    height: 100%;
+}
+
+.gn-submenu li {
+    overflow: hidden;
+    height: 0;
+    -webkit-transition: height 0.3s;
+    -moz-transition: height 0.3s;
+    transition: height 0.3s;
+}
+
+.gn-submenu li a {
+    color: #c1c9d1
+}
+
+
+.gn-icon{
+    color: var(--icon-color);
+}
+
+
+
+.gn-icon::before {
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+    text-transform: none;
+    font-weight: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-family: 'ecoicons';
+    line-height: 1;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+.gn-icon-help::before {
+    content: "\e000"
+}
+
+.gn-icon-earth::before {
+    content: "\e004"
+}
+
+.gn-icon-cog::before {
+    content: "\e006"
+}
+
+.gn-icon-search::before {
+    content: "\e005"
+}
+
+.gn-icon-download::before {
+    content: "\e007"
+}
+
+.gn-icon-photoshop::before {
+    content: "\e001"
+}
+
+.gn-icon-illustrator::before {
+    content: "\e002"
+}
+
+.gn-icon-archive::before {
+    content: "\e00d"
+}
+
+.gn-icon-article::before {
+    content: "\e003"
+}
+
+.gn-icon-pictures::before {
+    content: "\e008"
+}
+
+.gn-icon-videos::before {
+    content: "\e009"
+}
+
+/* if an icon anchor has a span, hide the span */
+
+.gn-icon span {
+    width: 0;
+    height: 0;
+    display: block;
+    overflow: hidden;
+}
+
+.gn-icon-menu::before {
+    margin-left: -15px;
+    vertical-align: -2px;
+    width: 30px;
+    height: 3px;
+    background: #5f6f81;
+    box-shadow: 0 3px white, 0 -6px #5f6f81, 0 -9px white, 0 -12px #5f6f81;
+    content: '';
+}
