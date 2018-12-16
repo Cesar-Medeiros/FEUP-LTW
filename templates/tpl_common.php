@@ -22,6 +22,7 @@
  * link.
  */ 
 ?>
+<body>
 <header class="navbar">
   <ul id="navbar-menu">
     <li class="navbar-left-wrap">
@@ -32,7 +33,7 @@
     </li>
     <li class="navbar-center-wrap"><a class="gn-icon logo" href="../pages/homepage.php">Website Name</a></li>
     <li class="navbar-right-wrap">
-      <select id="sort_by" onchange='loadPosts(this.value)'>
+      <select id="sort_by" onchange='setOrderSetting(this.value)'>
         <option value="time">Most recent</option>
         <option value="vote">Most voted up</option>
         <option value="comments">Most commented</option>

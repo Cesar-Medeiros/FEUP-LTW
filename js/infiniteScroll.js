@@ -1,9 +1,19 @@
 var channel, user,  last_id, order_by, last_value, loading;
 
-function init(order_by, channel, user){
-    
-    setScrollingSettings(order_by, channel, user);
+function getSettings(){
+    let page_type = document.querySelector('#page_type');
+    if (page_type != null) {
+        channel = page_type.dataset.channel;
+        user = page_type.dataset.user;
+        order_by = "time";
+    }
+}
 
+getSettings();
+init();
+
+function init(){
+    resetSettings();
     loadMore();
 
     document.addEventListener("scroll", function () {
@@ -24,14 +34,17 @@ function init(order_by, channel, user){
 
 
 function loadMore() {
+    loading = true;
     let URL = "../database/getPosts.php?channel=" + channel + "&user=" + user + "&order_by=" + order_by +"&last_value=" + last_value + "&last_id=" + last_id;
+    console.log(channel, user, last_value, last_id);
     ajax(URL, "GET")
-        .then(function (responseJSON) {    
-
+        .then(function (responseJSON) {   
             let allStories = document.querySelector('#stories');
             let stories_arr = responseJSON;
             for (let i = 0; i < stories_arr.length; i++) {
                 let post_shrink = post_html_shrink(stories_arr[i]);
+                console.log(stories_arr[i]);
+                last_value = stories_arr[i]['val'];
                 allStories.appendChild(post_shrink);
             }
             updateLastId();
@@ -42,16 +55,7 @@ function loadMore() {
 }
 
 
-function setScrollingSettings(order_by, channel, user) {
-    
-
-    let stories = document.querySelector('#stories');
-    while (stories.firstChild) {
-        stories.removeChild(stories.firstChild);
-    }
-
-    //order
-    order_by = new_order_by;
+function setScrollingSettings(new_order_by, new_channel, new_user) {
 
     //channel
     channel = new_channel;
@@ -59,8 +63,8 @@ function setScrollingSettings(order_by, channel, user) {
     //user
     user = new_user;
 
-    //reset
-    resetSettings();
+    //order
+    setOrderSetting(new_order_by);
 
 }
 
@@ -69,7 +73,22 @@ function updateLastId(){
     if (stories.length > 0) {
         last_id = stories[stories.length - 1].dataset.id;
     }
+}
 
+function setOrderSetting(new_order_by){
+    
+    let stories = document.querySelector('#stories');
+    while (stories.firstChild) {
+        stories.removeChild(stories.firstChild);
+    }
+
+    //order
+    order_by = new_order_by;
+
+    //reset
+    resetSettings();
+
+    loadMore();
 }
 function resetSettings(){
     last_id = Number.MAX_SAFE_INTEGER;

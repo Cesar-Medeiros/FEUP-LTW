@@ -16,8 +16,6 @@ if (!isset($_SESSION['user_id'])) {
 $channel_id = $_GET['id'];
 $channel_info = getChannelInfo($channel_id);
 
-$stories = getNextStoriesOfChannelByTime(PHP_INT_MAX, $channel_id);
-
 $categories = getTopChannels();
 
 $username = getUserById($_SESSION['user_id'])['username'];
@@ -26,7 +24,7 @@ draw_head(channel_head());
 draw_header($username);
 draw_aside($categories);
 draw_channel_info($channel_info);
-draw_stories($stories);
+draw_stories();
 draw_footer();
 
 ?>
@@ -43,6 +41,7 @@ draw_footer();
 
 <?php function channel_head(){
   return '
+    <div id="page_type" data-user="none" data-channel="'.$_GET['id'].'" hidden> </div>
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/nav.css">
