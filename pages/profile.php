@@ -57,7 +57,7 @@ draw_footer();
 
 <?php function profile_head() {
   return '
-    <div id="page_type" data-user="'.$_GET['user_id'].'" data-channel="all" hidden> </div>
+    <div id="page_type" data-author="'.$_GET['user_id'].'" data-channel="all" data-subscription="false" hidden> </div>
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/nav.css">

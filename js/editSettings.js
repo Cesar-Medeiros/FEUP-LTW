@@ -123,7 +123,6 @@ function openPassword(input) {
   if (selectedInput == null) {
     selectedInput = id;
     let previous = document.querySelector('#input[data-selected = true]');
-    console.log(previous);
     if (previous != null)
       previous.dataset.selected = false;
     input.dataset.selected = true;
@@ -139,7 +138,6 @@ function openPassword(input) {
 
 function updateToolsOfEditable() {
   let listItem = this.parentNode.parentNode;
-  console.log('ufadkshj' + listItem);
   if (this.innerHTML != this.dataset.backup)
     showEditingTools(listItem);
   else hideEditingTools(listItem);

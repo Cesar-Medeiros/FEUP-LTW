@@ -8,7 +8,7 @@
 <html>
 
 <head>
-  <title>Website Name</title>
+  <title>Post-it</title>
   <meta charset="utf-8">
   <?=$options;?>
 </head>
@@ -31,7 +31,7 @@
       <a class="gn-icon settings" href="../pages/settings.php"><i class="fas fa-cog"></i></a>
       <a class="gn-icon logout" href="../actions/action_logout.php"><i class="fas fa-power-off"></i></a>
     </li>
-    <li class="navbar-center-wrap"><a class="gn-icon logo" href="../pages/homepage.php">Website Name</a></li>
+    <li class="navbar-center-wrap"><a class="gn-icon logo" href="../pages/homepage.php">Post-it</a></li>
     <li class="navbar-right-wrap">
       <select id="sort_by" onchange='setOrderSetting(this.value)'>
         <option value="time">Most recent</option>

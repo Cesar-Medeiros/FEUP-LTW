@@ -25,7 +25,7 @@ draw_footer();
 
 <?php function homepage_head(){
   return '
-    <div id="page_type" data-user="none" data-channel="all" hidden> </div> 
+    <div id="page_type" data-author="none" data-channel="all" data-subscription="true" hidden> </div> 
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/nav.css">
