@@ -33,7 +33,7 @@ for (let i = 0; i < inputs.length; i++) {
   }
 }
 
-let selectedInput = null;
+var selectedInput = null;
 
 /* EDITABLE */
 
@@ -64,11 +64,11 @@ function addListeners(input) {
   }
 
   /* Cancel */
-  let cancel = input.querySelector('#cancel');
+  let cancel = input.querySelector('.buttons #cancel');
   cancel.addEventListener("click", handle[type].handleCancel);
 
   /* Save */
-  let save = input.querySelector('#save');
+  let save = input.querySelector('.buttons #save');
   save.addEventListener("click", handle[type].handleSave);
 }
 
@@ -95,6 +95,7 @@ function openEditable(input) {
 }
 
 function openPassword(input) {
+  console.log(selectedInput);
   let id = input.dataset.id;
   if (selectedInput == null) {
     showEditingTools(input);
@@ -109,30 +110,30 @@ function openPassword(input) {
 
 function updateToolsOfEditable() {
   let listItem = this.parentNode.parentNode;
+  console.log('ufadkshj' + listItem);
   if (this.innerHTML != this.dataset.backup)
     showEditingTools(listItem);
   else hideEditingTools(listItem);
-  selectedInput = listItem.dataset.id;
-
 }
 
 /* _________ Handle Cancel __________ */
 
 
 function handleCancelOnEditable() {
-  let input = this.parentNode.parentNode;
+  let input = this.parentNode.parentNode.parentNode;
   cancelEditable(input);
 }
 
 function cancelEditable(input) {
-  let span = input.querySelector('label span');
+  let span = input.querySelector('span');
   span.innerHTML = span.dataset.backup;
+  
   hideEditingTools(input);
   selectedInput = null;
 }
 
 function handleCancelOnPassword() {
-  let input = this.parentNode.parentNode;
+  let input = this.parentNode.parentNode.parentNode;
   cancelPassword(input);
 }
 
@@ -144,7 +145,7 @@ function cancelPassword(input) {
 
 function handleSaveOnEditable() {
   event.preventDefault();
-  let input = this.parentNode.parentNode;
+  let input = this.parentNode.parentNode.parentNode;
   let span = input.querySelector('span');
   let id = input.dataset.id;
   contents[id].content = span.innerHTML;
@@ -158,7 +159,7 @@ function handleSaveOnEditable() {
 
 function handleSaveOnPassword() {
   
-  let input = this.parentNode.parentNode;
+  let input = this.parentNode.parentNode.parentNode;
   let oldP = input.querySelector('#old input').value;
   let newP = input.querySelector('#new input').value;
   let confirmNewP = input.querySelector('#new-conf input').value;
@@ -217,13 +218,13 @@ function throwPopup(newInput) {
 
 
 function showEditingTools(input) {
-  input.querySelector("div").hidden = false;
+  input.querySelector("#editionTools").hidden = false;
   let id = input.dataset.id;
   selectedInput = id;
 }
 
 function hideEditingTools(input) {
-  input.querySelector("div").hidden = true;
+  input.querySelector("#editionTools").hidden = true;
   selectedInput = null;
 }
 

@@ -1,3 +1,53 @@
-.account_settings h1 {
-    font-weight:  bold;
+.account_settings {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.account_settings .title {
+    text-align: center;
+    padding: 2em;
+}
+
+.account_settings ul {
+    list-style-type: none;
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    padding: 1em;
+}
+
+
+
+.account_settings #input[data-type=password] #editionTools {
+    list-style-type: none;
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+    padding: 1em;
+}
+
+.account_settings #input[data-type=password] #editionTools[hidden] {
+    display:none;
+}
+.buttons {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+}
+#save, #cancel {
+    align-self: center;
+    max-width: 10em;
+    max-height: 5em;
+}
+.account_settings ul li {
+    background: var( --icon-hover-color);
+    box-shadow: 0 4px 10px 1px var(--shadow-color);
+}
+
+.account_settings ul li:hover {
+    background: var(--selected);
 }

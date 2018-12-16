@@ -1,15 +1,17 @@
 <?php function draw_editable_input($id, $name, $firstValue) {?>
   <li id = 'input' data-type = "editable" data-id=<?=$id?>> 
   <label><?=$name?><span contentEditable="true" data-backup=<?=$firstValue?>><?=$firstValue?></span></label>
-  <div id = 'tools' hidden>
+  <div id = 'editionTools' hidden>
   <?php draw_edition_buttons();?>
   </div>
   </li>
 <?php } ?>
 
 <?php function draw_edition_buttons() {?>
+  <div class="buttons">
   <input id="save" type="submit" class="button" value="Save"/>
   <input id="cancel" type="submit" class="button" value="Cancel"/>
+</div>
 <?php } ?>
 
 <?php function draw_password_input($id, $name, $previous) {?>
