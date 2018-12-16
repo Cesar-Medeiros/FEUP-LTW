@@ -26,8 +26,8 @@
     <h1 class="title"> Account Settings </h1>
       <ul>
         <?php draw_editable_input("username", "Username:", $user['username'])?>
-        <?php draw_password_input("password", "Password", $user['password'])?>
         <?php draw_editable_input("email", "Email:", $user['email'])?>
+        <?php draw_password_input("password", "Password", $user['password'])?>
       </ul>
 </div>
   </body>

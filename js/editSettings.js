@@ -3,16 +3,19 @@ let handle = [];
 handle['editable'] = {
   getContent: getEditableContent,
   handleClick: handleClickOnEditable,
+  handleBlur: handleBlurOnEditable,
   handleCancel: handleCancelOnEditable,
   handleSave: handleSaveOnEditable,
   handleInput: updateToolsOfEditable,
   cancelInput: cancelEditable,
-  openInput: openEditable
+  openInput: openEditable,
+  
 };
 
 handle['password'] = {
   getContent: getPasswordContent,
   handleClick: handleClickOnPassword,
+  handleBlur: handleBlurOnPassword,
   handleCancel: handleCancelOnPassword,
   handleSave: handleSaveOnPassword,
   cancelInput: cancelPassword,
@@ -40,7 +43,7 @@ var selectedInput = null;
 /* _________ Get Content __________ */
 
 function getEditableContent(input) {
-  let span = input.querySelector('label span');
+  let span = input.querySelector('span');
   return span.innerHTML;
 }
 
@@ -54,8 +57,11 @@ function addListeners(input) {
   let type = input.dataset.type;
 
   /* Click */
-  let label = input.querySelector('label');
-  label.addEventListener("click", handle[type].handleClick);
+  let div = input.querySelector('div');
+  div.addEventListener("click", handle[type].handleClick);
+  
+  /* Blur */
+  handle[type].handleBlur(input);
 
   /* Input */
   if (type == "editable") {
@@ -84,22 +90,45 @@ function handleClickOnPassword() {
   openPassword(input);
 }
 
+/* _________ Handle Blur __________ */
+
+function handleBlurOnEditable(input) {
+  input.querySelector('span').addEventListener('blur', function() {
+  let previous = document.querySelector('#input[data-selected = true]');
+    if (previous != null)
+      previous.dataset.selected = false;
+  });
+}
+
+function handleBlurOnPassword(input) {
+  //do nothing;
+}
+
 /* _________ Open Environment __________ */
 
 function openEditable(input) {
   if (selectedInput == null) {
-    input.querySelector('label span').focus();
+    input.querySelector('span').focus();
+    let previous = document.querySelector('#input[data-selected = true]');
+    if (previous != null)
+      previous.dataset.selected = false;
+    input.dataset.selected = true;
   }
   else if (selectedInput != input.dataset.id)
     throwPopup(input);
 }
 
 function openPassword(input) {
-  console.log(selectedInput);
   let id = input.dataset.id;
   if (selectedInput == null) {
-    showEditingTools(input);
     selectedInput = id;
+    let previous = document.querySelector('#input[data-selected = true]');
+    console.log(previous);
+    if (previous != null)
+      previous.dataset.selected = false;
+    input.dataset.selected = true;
+
+    showEditingTools(input);
   }
   else if (selectedInput != input.dataset.id)
     throwPopup(input);
@@ -130,6 +159,7 @@ function cancelEditable(input) {
   
   hideEditingTools(input);
   selectedInput = null;
+  input.dataset.selected = false;
 }
 
 function handleCancelOnPassword() {
@@ -140,6 +170,7 @@ function handleCancelOnPassword() {
 function cancelPassword(input) {
   hideEditingTools(input);
   selectedInput = null;
+  input.dataset.selected = false;
 }
 /* _________ Handle Save __________ */
 
@@ -155,6 +186,7 @@ function handleSaveOnEditable() {
 
   hideEditingTools(input);
   selectedInput = null;
+  input.dataset.selected = false;
 }
 
 function handleSaveOnPassword() {
@@ -175,6 +207,7 @@ function handleSaveOnPassword() {
     updateInfo();
     hideEditingTools(input);
     selectedInput = null;
+    input.dataset.selected = false;
   }
 
   
@@ -221,11 +254,13 @@ function showEditingTools(input) {
   input.querySelector("#editionTools").hidden = false;
   let id = input.dataset.id;
   selectedInput = id;
+  input.dataset.selected = true;
 }
 
 function hideEditingTools(input) {
   input.querySelector("#editionTools").hidden = true;
   selectedInput = null;
+  input.dataset.selected = false;
 }
 
 function areToolsHidden(input) {
