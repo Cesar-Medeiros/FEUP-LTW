@@ -35,7 +35,6 @@ function init(){
 
 function loadMore() {
     loading = true;
-    console.log(channel, user, last_value, last_id);
     let URL = "../database/getPosts.php?channel=" + channel + "&user=" + user + "&order_by=" + order_by +"&last_value=" + last_value + "&last_id=" + last_id;
     
     ajax(URL, "GET")

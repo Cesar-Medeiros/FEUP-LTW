@@ -10,28 +10,31 @@
   $last_value = $_GET['last_value'];
   $last_id = $_GET['last_id'];
 
-  $channel_cond = "1";
+  $channel_like = '%';
+  
   if (!($channel === "all")){
-    $channel_cond = "Channel.channel_id = {$channel}";
+    $channel_like = $channel;
   }
-  $user_cond = "1";
+
+  $user_like = '%';
+  
   if (!($user === "none")){
-    $user_cond = "User.user_id =".$user;
+    $user_like = $user;
   }
 
 
   $return = -1;
   switch($order_by){
     case "time":
-    $return = getNextStoriesByTime($last_id, $channel_cond, $user_cond);
+    $return = getNextStoriesByTime($last_id, $channel_like, $user_like);
     break;
 
     case "vote":
-    $return = getNextStoriesByVotes($last_value, $last_id, $channel_cond, $user_cond);
+    $return = getNextStoriesByVotes($last_value, $last_id, $channel_like, $user_like);
     break;
 
     case "comments":
-    $return = getNextStoriesByComments($last_value, $last_id, $channel_cond, $user_cond);
+    $return = getNextStoriesByComments($last_value, $last_id, $channel_like, $user_like);
     break;
     }
   echo json_encode($return);

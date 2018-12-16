@@ -189,45 +189,54 @@
   //ordered by time
 
  
-  function getNextStoriesByTime($last_id, $channel_cond, $user_cond){
+  function getNextStoriesByTime($last_id, $channel, $user){
     $db = Database::db();
-    $stmt = $db->prepare("SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel, Channel.title as val
+    $stmt = $db->prepare('SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel, Channel.title as val
     FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id), USER
-    WHERE Message.publisher = User.user_id AND Message.message_id < :id AND Message.parent_message_id is null AND :channel_cond AND :user_cond
-    ORDER BY message_id DESC LIMIT 5");
-    $stmt->execute(array(':id' => $last_id, ':channel_cond' => $channel_cond, ':user_cond' => $user_cond));
+    WHERE Message.publisher = User.user_id AND Message.message_id < :id AND Message.parent_message_id is null AND Channel.channel_id LIKE :channel AND User.user_id LIKE :user
+    ORDER BY message_id DESC LIMIT 5');
+    $stmt->execute(array(':id' => $last_id, ':channel' => $channel, ':user' => $user));
+    $stmt->execute();
     return $stmt->fetchAll();
   }
 
  //ordered by votes
 
 
-  function getNextStoriesByVotes($last_value, $last_id, $channel_cond, $user_cond){
+  function getNextStoriesByVotes($last_value, $last_id, $channel, $user){
     $db = Database::db();
     $stmt = $db->prepare("SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.score as val, Message.comments, User.user_id, User.username, Channel.title as channel
     FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id), USER
-    WHERE Message.publisher = User.user_id AND Message.parent_message_id is null AND (val < :val OR (val = :val AND message_id < :id)) AND :channel_cond AND :user_cond
+    WHERE Message.publisher = User.user_id AND Message.parent_message_id is null AND (val < :val OR (val = :val AND message_id < :id)) AND Channel.channel_id LIKE :channel AND User.user_id LIKE :user
     ORDER BY val DESC, message_id DESC LIMIT 5;");
-    $stmt->execute(array(':val' => $last_value, ':id' => $last_id, ':channel_cond' => $channel_cond, ':user_cond' => $user_cond));
+    $stmt->execute(array(':val' => $last_value, ':id' => $last_id, ':channel' => $channel, ':user' => $user));
     return $stmt->fetchAll();
   }
 
  //ordered by comments
 
-  function getNextStoriesByComments($last_value, $last_id, $channel_cond, $user_cond){
+  function getNextStoriesByComments($last_value, $last_id, $channel, $user){
     $db = Database::db();
     $stmt = $db->prepare("SELECT M1.message_id, M1.title, M1.text, M1.date, M1.score, M1.comments, count(M2.message_id) as val, User.user_id, User.username, Channel.title as channel
     FROM Message M1 JOIN ChannelMessages USING(message_id) JOIN CHANNEL USING(channel_id) LEFT JOIN Message M2 ON M1.message_id = M2.parent_message_id JOIN User ON M1.publisher = User.user_id
-    WHERE M1.parent_message_id is null AND :channel_cond AND :user_cond
+    WHERE M1.parent_message_id is null AND Channel.channel_id LIKE :channel AND User.user_id LIKE :user
     GROUP BY M1.message_id
     HAVING (val < :val OR (val = :val AND M1.message_id < :id))
     ORDER BY val DESC, M1.message_id DESC LIMIT 5;");
     $stmt->bindParam(':val', $last_value, PDO::PARAM_INT);
     $stmt->bindParam(':id', $last_id, PDO::PARAM_INT);
-    $stmt->bindParam(':channel_cond', $channel_cond, PDO::PARAM_STR);
-    $stmt->bindParam(':user_cond', $user_cond, PDO::PARAM_STR);
+    $stmt->bindParam(':channel', $channel, PDO::PARAM_STR);
+    $stmt->bindParam(':user', $user, PDO::PARAM_STR);
     $stmt->execute();
     return $stmt->fetchAll();
   }
 
+  /*
+    $stmt->bindParam(':val', $last_value, PDO::PARAM_INT);
+    $stmt->bindParam(':id', $last_id, PDO::PARAM_INT);
+    $stmt->bindParam(':channel', $channel, PDO::PARAM_STR);
+    $stmt->bindParam(':user', $user, PDO::PARAM_STR);
+    $stmt->execute();
+    */
 ?>
+
