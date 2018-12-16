@@ -62,6 +62,9 @@
     <nav class="gn-menu-wrapper gn-open-part">
       <div class="gn-scroller">
         <ul id="gn-menu" class="gn-menu-main">
+        <li>
+         <a class="gn-icon gn-icon-download" href="../pages/allPosts.php">all</a>
+        </li>
           <?php 
             foreach($channels as $channel)
               draw_aside_channel($channel);

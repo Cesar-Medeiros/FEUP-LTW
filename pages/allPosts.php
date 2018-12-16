@@ -13,41 +13,32 @@ if (!isset($_SESSION['user_id'])) {
     die(header('Location: login.php'));
 }
 
-$channel_id = $_GET['id'];
-$channel_info = getChannelInfo($channel_id);
-
 $categories = getTopChannels();
+$subscribers = 0;
+$posts = 0;
 
 $username = getUserById($_SESSION['user_id'])['username'];
-
-$isUserSubbed = isUserSubscribed($_SESSION['user_id'], $channel_id);
-$subs = 'SUBSCRIBE';
-if ($isUserSubbed){
-    $subs = 'UNSUBSCRIBE';
-}
 
 draw_head(channel_head());
 draw_header($username);
 draw_aside($categories);
-draw_channel_info($channel_info, $subs);
+draw_all_channel_info($posts, $subscribers);
 draw_stories();
 draw_footer();
 
 ?>
 
-<?php function draw_channel_info($channel_info, $subs) {?>
-    <div class="channel_info">
-        <div class="title"><h1><?= $channel_info['title']?> </h1> </div>
-        <div class="creator"> by <?=$channel_info['creator']?> </div>
-        <a class="button_subscribe" data-id=<?=$_GET['id']?>><?=$subs?></a>
-        <a class="subscribers" href=""> <?=$channel_info['num_subscribers']?> subscribers </a>
-        <div class="posts"> <?=$channel_info['num_posts']?> posts </div>
+<?php function draw_all_channel_info($posts, $subscribers) {?>
+    <div class="overal_specs">
+        <div class="title"><h1>all</h1> </div>
+        <a class="subscribers" href=""> <?=$subscribers?> subscribers </a>
+        <div class="posts"> <?=$posts?> posts </div>
     </div>
 <?php } ?>
 
 <?php function channel_head(){
   return '
-    <div id="page_type" data-author="none" data-channel='.$_GET['id'].' data-subscription="false" hidden> </div>
+    <div id="page_type" data-author="none" data-channel="all" data-subscription="false" hidden> </div>
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/nav.css">
@@ -62,6 +53,5 @@ draw_footer();
     <script src="../js/utilities.js" defer></script>
     <script src="../js/vote.js" defer></script>
     <script src="../js/post.js" defer></script>
-    <script src="../js/infiniteScroll.js" defer></script>
-    <script src="../js/subscribe.js" defer></script>';
+    <script src="../js/infiniteScroll.js" defer></script>';
 }?>

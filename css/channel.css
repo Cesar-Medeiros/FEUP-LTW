@@ -43,3 +43,19 @@
 .channel_info .subscribers   {grid-area: subscribers;}
 .channel_info .posts      {grid-area: posts;}
 .channel_info .button_subscribe {grid-area: subscribe;}
+
+.overal_specs{
+    background: var(--post-background);
+    box-shadow: 0 4px 10px 1px var(--shadow-color);
+    border-radius:8px;
+    margin-top:4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+}
+.overal_specs .title,
+.overal_specs .posts,
+.overal_specs .subscribers {
+    margin: 1em 2em;
+}
