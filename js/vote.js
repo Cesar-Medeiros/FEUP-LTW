@@ -16,6 +16,7 @@ function update_vote(elem, message_id, value) {
 }
 
 
+
 function color_vote(elem, message_id){
   let URL = `../api/messages.php/vote/${message_id}`;
 
@@ -26,6 +27,7 @@ function color_vote(elem, message_id){
       elem.querySelector('.vote_down').style.color = (vote == -1) ? 'red' : 'inherit';
     });
 }
+
 
 
 function addVoteListener(element) {

@@ -35,15 +35,15 @@ function init(){
 
 function loadMore() {
     loading = true;
-    let URL = "../database/getPosts.php?channel=" + channel + "&user=" + user + "&order_by=" + order_by +"&last_value=" + last_value + "&last_id=" + last_id;
     console.log(channel, user, last_value, last_id);
+    let URL = "../database/getPosts.php?channel=" + channel + "&user=" + user + "&order_by=" + order_by +"&last_value=" + last_value + "&last_id=" + last_id;
+    
     ajax(URL, "GET")
         .then(function (responseJSON) {   
             let allStories = document.querySelector('#stories');
             let stories_arr = responseJSON;
             for (let i = 0; i < stories_arr.length; i++) {
                 let post_shrink = post_html_shrink(stories_arr[i]);
-                console.log(stories_arr[i]);
                 last_value = stories_arr[i]['val'];
                 allStories.appendChild(post_shrink);
             }
