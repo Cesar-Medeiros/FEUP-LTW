@@ -55,7 +55,6 @@
     padding: 1em;
 }
 .overal_specs .title,
-.overal_specs .posts,
-.overal_specs .subscribers {
+.overal_specs .posts {
     margin: 1em 2em;
 }

@@ -15,6 +15,7 @@ New Story
 
 .new-story-form input[type=text],
 .new-story-form textarea,
+.new-story-form select,
 .new-story-form .button{
     border:none;
     outline: none;

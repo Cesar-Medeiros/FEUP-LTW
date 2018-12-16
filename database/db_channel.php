@@ -1,6 +1,6 @@
 <?php
   include_once('../includes/database.php');
-  
+
   function getChannelInfo($channel_id){
     return getChannelSpecs($channel_id);
 
@@ -44,4 +44,13 @@
     $stmt->execute(array($user_id, $channel_id));
     return ($stmt->fetch()? true : false); 
   }
+
+    
+  function getTotalPosts(){
+    $db = Database::db();
+    $stmt = $db->prepare('SELECT count(message_id) no_points FROM Message');
+    $stmt->execute();
+    return $stmt->fetch();
+  }
+  
 ?>

@@ -11,36 +11,38 @@
   $last_value = $_GET['last_value'];
   $last_id = $_GET['last_id'];
 
-  $channel_like = "%";
-  
-  if (!($channel === "all")){
-    $channel_like = "{$channel}";
-  }
-
-  $author_like = "%";
-  
-  if (!($author === "none")){
-    $author_like = "{$author}";
-  }
 
   $return = -1;
   switch($order_by){
     case "time":
-    if($subscription === "false")
-    $return = getNextStoriesByTime($last_id, $channel_like, $author_like);
-    else $return = getNextSubscribedStoriesByTime($last_id, $channel_like, $author_like, "{$_SESSION['user_id']}");
-    break;
+    if($subscription === "true")
+    $return = getNextSubscribedStoriesByTime($last_id, "{$_SESSION['user_id']}");
+    else if ($channel != "all")
+    $return = getNextChannelStoriesByTime($last_id,$channel);
+    else if ($author != "none")
+    $return = getNextPostedStoriesByTime($last_id, $author);
+    else $return = getNextStoriesByTime($last_id);
 
+    break;
     case "vote":
-    if ($subscription === "false")
-    $return = getNextStoriesByVotes($last_value, $last_id, $channel_like, $author_like);
-    else $return = getNextSubscribedStoriesByVotes($last_value, $last_id, $channel_like, $author_like, "{$_SESSION['user_id']}");
-    break;
+    if($subscription === "true")
+    $return = getNextSubscribedStoriesByVotes($last_id, "{$_SESSION['user_id']}");
+    else if ($channel != "all")
+    $return = getNextChannelStoriesByVotes($last_id,$channel);
+    else if ($author != "none")
+    $return = getNextPostedStoriesByVotes($last_id, $author);
+    else $return = getNextStoriesByVotes($last_id);
 
+    break;
     case "comments":
-    if ($subscription === "false")
-    $return = getNextStoriesByComments($last_value, $last_id, $channel_like, $author_like);
-    else $return = getNextSubscribedStoriesByComments($last_value, $last_id, $channel_like, $author_like, "{$_SESSION['user_id']}");
+    if($subscription === "true")
+    $return = getNextSubscribedStoriesByComments($last_id, "{$_SESSION['user_id']}");
+    else if ($channel != "all")
+    $return = getNextChannelStoriesByComments($last_id,$channel);
+    else if ($author != "none")
+    $return = getNextPostedStoriesByComments($last_id, $author);
+    else $return = getNextStoriesByComments($last_id);
+
     break;
     }
   echo json_encode($return);

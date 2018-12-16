@@ -16,7 +16,7 @@
    */
   function getTopChannels(){
     $db = Database::db();
-    $stmt = $db->prepare('SELECT * FROM Channel limit 5');
+    $stmt = $db->prepare('SELECT * FROM Channel WHERE channel_id > 0 limit 5');
     $stmt->execute();
     return $stmt->fetchAll();    
   }
@@ -189,60 +189,130 @@
   //ordered by time
 
  
-  function getNextStoriesByTime($last_id, $channel, $author){
+  function getNextStoriesByTime($last_id){
     $db = Database::db();
     $stmt = $db->prepare('SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel, Channel.title as val
     FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id) JOIN USER ON Message.publisher = User.user_id
-    WHERE Message.message_id < ? AND Message.parent_message_id is null AND Channel.channel_id LIKE ? AND User.user_id LIKE ?
+    WHERE Message.message_id < ? AND Message.parent_message_id is null
     ORDER BY message_id DESC LIMIT 5');
-    $stmt->execute(array($last_id, $channel, $author));
+    $stmt->execute(array($last_id));
     return $stmt->fetchAll();
   }
 
-  function getNextSubscribedStoriesByTime($last_id, $channel, $author, $user){
+  function getNextSubscribedStoriesByTime($last_id, $user){
     $db = Database::db();
     $stmt = $db->prepare('SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel, Channel.title as val
     FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id) JOIN USER ON Message.publisher = User.user_id LEFT JOIN ChannelSubscribers USING(channel_id)
-    WHERE Message.message_id < ? AND Message.parent_message_id is null AND Channel.channel_id LIKE ? AND User.user_id LIKE ? AND ChannelSubscribers.user_id LIKE ?
+    WHERE Message.message_id < ? AND Message.parent_message_id is null AND ChannelSubscribers.user_id LIKE ?
     ORDER BY message_id DESC LIMIT 5');
-    $stmt->execute(array($last_id, $channel, $author, $user));
+    $stmt->execute(array($last_id, $user));
+    return $stmt->fetchAll();
+  }
+
+  function getNextPostedStoriesByTime($last_id, $author){
+    $db = Database::db();
+    $stmt = $db->prepare('SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel, Channel.title as val
+    FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id) JOIN USER ON Message.publisher = User.user_id
+    WHERE Message.message_id < ? AND Message.parent_message_id is null AND Message.publisher = ?
+    ORDER BY message_id DESC LIMIT 5');
+    $stmt->execute(array($last_id, $author));
+    return $stmt->fetchAll();
+  }
+
+  function getNextChannelStoriesByTime($last_id, $channel){
+    $db = Database::db();
+    $stmt = $db->prepare('SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.comments, User.user_id, User.username, Channel.title as channel, Channel.title as val
+    FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id) JOIN USER ON Message.publisher = User.user_id
+    WHERE Message.message_id < ? AND Message.parent_message_id is null AND Channel.channel_id = ?
+    ORDER BY message_id DESC LIMIT 5');
+    $stmt->execute(array($last_id, $channel));
     return $stmt->fetchAll();
   }
 
  //ordered by votes
 
 
-  function getNextStoriesByVotes($last_value, $last_id, $channel, $author){
+  function getNextStoriesByVotes($last_value, $last_id){
     $db = Database::db();
     $stmt = $db->prepare("SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.score as val, Message.comments, User.user_id, User.username, Channel.title as channel
     FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id) JOIN USER ON Message.publisher = User.user_id 
-    WHERE Message.parent_message_id is null AND (val < ? OR (val = ? AND message_id < ?)) AND Channel.channel_id LIKE ? AND User.user_id LIKE ?
+    WHERE Message.parent_message_id is null AND (val < ? OR (val = ? AND message_id < ?))
     ORDER BY val DESC, message_id DESC LIMIT 5;");
-    $stmt->execute(array($last_value, $last_value, $last_id, $channel, $author));
+    $stmt->execute(array($last_value, $last_value, $last_id));
     return $stmt->fetchAll();
   }
 
-  function getNextSubscribedStoriesByVotes($last_value, $last_id, $channel, $author, $user){
+  function getNextSubscribedStoriesByVotes($last_value, $last_id, $user){
     $db = Database::db();
     $stmt = $db->prepare("SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.score as val, Message.comments, User.user_id, User.username, Channel.title as channel
     FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id) JOIN USER ON Message.publisher = User.user_id JOIN ChannelSubscribers USING(channel_id)
-    WHERE Message.parent_message_id is null AND (val < ? OR (val = ? AND message_id < ?)) AND Channel.channel_id LIKE ? AND User.user_id LIKE ? AND ChannelSubscribers.user_id LIKE ?
+    WHERE Message.parent_message_id is null AND (val < ? OR (val = ? AND message_id < ?)) AND ChannelSubscribers.user_id LIKE ?
     ORDER BY val DESC, message_id DESC LIMIT 5;");
-    $stmt->execute(array($last_value, $last_value, $last_id, $channel, $author, $user));
+    $stmt->execute(array($last_value, $last_value, $last_id, $user));
+    return $stmt->fetchAll();
+  }
+
+  function getNextPostedStoriesByVotes($last_value, $last_id, $author){
+    $db = Database::db();
+    $stmt = $db->prepare("SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.score as val, Message.comments, User.user_id, User.username, Channel.title as channel
+    FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id) JOIN USER ON Message.publisher = User.user_id JOIN ChannelSubscribers USING(channel_id)
+    WHERE Message.parent_message_id is null AND (val < ? OR (val = ? AND message_id < ?)) AND Message.publisher LIKE ?
+    ORDER BY val DESC, message_id DESC LIMIT 5;");
+    $stmt->execute(array($last_value, $last_value, $last_id, $author));
+    return $stmt->fetchAll();
+  }
+
+  function getNextChannelStoriesByVotes($last_value, $last_id, $channel){
+    $db = Database::db();
+    $stmt = $db->prepare("SELECT Message.message_id, Message.title, Message.text, Message.date, Message.score, Message.score as val, Message.comments, User.user_id, User.username, Channel.title as channel
+    FROM Message JOIN ChannelMessages USING(message_id) JOIN Channel USING(channel_id) JOIN USER ON Message.publisher = User.user_id JOIN ChannelSubscribers USING(channel_id)
+    WHERE Message.parent_message_id is null AND (val < ? OR (val = ? AND message_id < ?)) AND Channel.channel_id LIKE ?
+    ORDER BY val DESC, message_id DESC LIMIT 5;");
+    $stmt->execute(array($last_value, $last_value, $last_id, $channel));
     return $stmt->fetchAll();
   }
 
  //ordered by comments
 
-  function getNextStoriesByComments($last_value, $last_id, $channel, $author){
+  function getNextStoriesByComments($last_value, $last_id){
     $db = Database::db();
     $stmt = $db->prepare("SELECT M1.message_id, M1.title, M1.text, M1.date, M1.score, M1.comments, count(M2.message_id) as val, User.user_id, User.username, Channel.title as channel
     FROM Message M1 JOIN ChannelMessages USING(message_id) JOIN CHANNEL USING(channel_id) LEFT JOIN Message M2 ON M1.message_id = M2.parent_message_id JOIN User ON M1.publisher = User.user_id
-    WHERE M1.parent_message_id is null AND Channel.channel_id LIKE :channel AND User.user_id LIKE :user
+    WHERE M1.parent_message_id is null
     GROUP BY M1.message_id
     HAVING (val < :val OR ((val = :val) AND (M1.message_id < :id)))
     ORDER BY val DESC, M1.message_id DESC LIMIT 5;");
-    $stmt->bindParam(':channel', $channel);
+    $stmt->bindParam(':val', $last_value, PDO::PARAM_INT);
+    $stmt->bindParam(':id', $last_id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll();
+  
+  }
+
+  function getNextSubscribedStoriesByComments($last_value, $last_id, $user){
+    $db = Database::db();
+    $stmt = $db->prepare("SELECT M1.message_id, M1.title, M1.text, M1.date, M1.score, M1.comments, count(M2.message_id) as val, User.user_id, User.username, Channel.title as channel
+    FROM Message M1 JOIN ChannelMessages USING(message_id) JOIN CHANNEL USING(channel_id) LEFT JOIN Message M2 ON M1.message_id = M2.parent_message_id JOIN User ON M1.publisher = User.user_id JOIN ChannelSubscribers USING(channel_id)
+    WHERE M1.parent_message_id is null AND ChannelSubscribers.user_id LIKE :sub
+    GROUP BY M1.message_id
+    HAVING (val < :val OR ((val = :val) AND (M1.message_id < :id)))
+    ORDER BY val DESC, M1.message_id DESC LIMIT 5;");
+    $stmt->bindParam(':val', $last_value, PDO::PARAM_INT);
+    $stmt->bindParam(':id', $last_id, PDO::PARAM_INT);
+    $stmt->bindParam(':sub', $user);
+    $stmt->execute();
+    return $stmt->fetchAll();
+  
+  }
+
+  function getNextPostedStoriesByComments($last_value, $last_id, $author){
+    $db = Database::db();
+    $stmt = $db->prepare("SELECT M1.message_id, M1.title, M1.text, M1.date, M1.score, M1.comments, count(M2.message_id) as val, User.user_id, User.username, Channel.title as channel
+    FROM Message M1 JOIN ChannelMessages USING(message_id) JOIN CHANNEL USING(channel_id) LEFT JOIN Message M2 ON M1.message_id = M2.parent_message_id JOIN User ON M1.publisher = User.user_id JOIN ChannelSubscribers USING(channel_id)
+    WHERE M1.parent_message_id is null AND User.user_id LIKE :user
+    GROUP BY M1.message_id
+    HAVING (val < :val OR ((val = :val) AND (M1.message_id < :id)))
+    ORDER BY val DESC, M1.message_id DESC LIMIT 5;");
     $stmt->bindParam(':user', $author);
     $stmt->bindParam(':val', $last_value, PDO::PARAM_INT);
     $stmt->bindParam(':id', $last_id, PDO::PARAM_INT);
@@ -251,19 +321,17 @@
   
   }
 
-  function getNextSubscribedStoriesByComments($last_value, $last_id, $channel, $author, $user){
+  function getNextChannelStoriesByComments($last_value, $last_id, $channel){
     $db = Database::db();
     $stmt = $db->prepare("SELECT M1.message_id, M1.title, M1.text, M1.date, M1.score, M1.comments, count(M2.message_id) as val, User.user_id, User.username, Channel.title as channel
     FROM Message M1 JOIN ChannelMessages USING(message_id) JOIN CHANNEL USING(channel_id) LEFT JOIN Message M2 ON M1.message_id = M2.parent_message_id JOIN User ON M1.publisher = User.user_id JOIN ChannelSubscribers USING(channel_id)
-    WHERE M1.parent_message_id is null AND Channel.channel_id LIKE :channel AND User.user_id LIKE :user AND ChannelSubscribers.user_id LIKE :sub
+    WHERE M1.parent_message_id is null AND Channel.channel_id LIKE :channel
     GROUP BY M1.message_id
     HAVING (val < :val OR ((val = :val) AND (M1.message_id < :id)))
     ORDER BY val DESC, M1.message_id DESC LIMIT 5;");
     $stmt->bindParam(':channel', $channel);
-    $stmt->bindParam(':user', $author);
     $stmt->bindParam(':val', $last_value, PDO::PARAM_INT);
     $stmt->bindParam(':id', $last_id, PDO::PARAM_INT);
-    $stmt->bindParam(':sub', $user);
     $stmt->execute();
     return $stmt->fetchAll();
   

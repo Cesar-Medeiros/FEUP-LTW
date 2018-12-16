@@ -14,24 +14,22 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $categories = getTopChannels();
-$subscribers = 0;
-$posts = 0;
+$posts = getTotalPosts();
 
 $username = getUserById($_SESSION['user_id'])['username'];
 
 draw_head(channel_head());
 draw_header($username);
 draw_aside($categories);
-draw_all_channel_info($posts, $subscribers);
+draw_all_channel_info($posts['no_points']);
 draw_stories();
 draw_footer();
 
 ?>
 
-<?php function draw_all_channel_info($posts, $subscribers) {?>
+<?php function draw_all_channel_info($posts) {?>
     <div class="overal_specs">
         <div class="title"><h1>all</h1> </div>
-        <a class="subscribers" href=""> <?=$subscribers?> subscribers </a>
         <div class="posts"> <?=$posts?> posts </div>
     </div>
 <?php } ?>

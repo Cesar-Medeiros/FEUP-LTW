@@ -312,6 +312,7 @@ null,
 
 -- Channels
 
+INSERT INTO Channel VALUES (0, ' ', 0, 0, 0);
 INSERT INTO Channel VALUES (null, 'Channel1', 1, 0, 0);
 INSERT INTO Channel VALUES (null, 'Channel2', 1,0 ,0);
 INSERT INTO Channel VALUES (null, 'Channel3', 1,0 ,0);

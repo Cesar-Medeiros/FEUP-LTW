@@ -11,18 +11,25 @@ if (!isset($_SESSION['user_id'])) {
 
 $username = getUserById($_SESSION['user_id'])['username'];
 
+$categories = getTopChannels();
+
 draw_head(new_story_head());
 draw_header($username);
-draw_aside([]);
-draw_new_story();
+draw_aside($categories);
+draw_new_story($categories);
 draw_footer();
 ?>
 
 
-<?php function draw_new_story(){?>
+<?php function draw_new_story($categories){?>
     <form accept-charset="utf-8" form method="post" class="new-story-form">
         <label for="channel" class="label">Channel</label>
-        <input name="channel" maxlength="255" type="text" class="input" value="all" required>
+        <select class="input" name="channel" onchange=''>
+            <option value=0>all</option>;
+                <?php foreach($categories as $category){?>
+                    <option value=<?="{$category['channel_id']}"?>><?=$category['title']?></option>;
+                <?php } ?>
+        </select>
 
         <label for="title" class="label">Title</label>
         <input name="title" maxlength="255" type="text" class="input" required>
@@ -32,7 +39,7 @@ draw_footer();
 
     <div class="buttons">
         <input type="submit" class="button send" formaction="../actions/action_new_story.php" value="Post">
-        <a class="button cancel" href="../pages/homepage.php">Cancel</a>
+        <a class="button cancel" href="../pages/allPosts.php">Cancel</a>
     </div>
     </form>
 <?php }?>
