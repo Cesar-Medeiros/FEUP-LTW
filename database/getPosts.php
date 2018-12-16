@@ -23,25 +23,24 @@
     $author_like = "{$author}";
   }
 
-  $subscription_like = "%";
-  
-  if ($subscription=="true"){
-    $subscription_like = "{$_SESSION['user_id']}";
-  }
-
-
   $return = -1;
   switch($order_by){
     case "time":
-    $return = getNextStoriesByTime($last_id, $channel_like, $author_like, $subscription_like);
+    if($subscription === "false")
+    $return = getNextStoriesByTime($last_id, $channel_like, $author_like);
+    else $return = getNextSubscribedStoriesByTime($last_id, $channel_like, $author_like, "{$_SESSION['user_id']}");
     break;
 
     case "vote":
-    $return = getNextStoriesByVotes($last_value, $last_id, $channel_like, $author_like, $subscription_like);
+    if ($subscription === "false")
+    $return = getNextStoriesByVotes($last_value, $last_id, $channel_like, $author_like);
+    else $return = getNextSubscribedStoriesByVotes($last_value, $last_id, $channel_like, $author_like, "{$_SESSION['user_id']}");
     break;
 
     case "comments":
-    $return = getNextStoriesByComments($last_value, $last_id, $channel_like, $author_like, $subscription_like);
+    if ($subscription === "false")
+    $return = getNextStoriesByComments($last_value, $last_id, $channel_like, $author_like);
+    else $return = getNextSubscribedStoriesByComments($last_value, $last_id, $channel_like, $author_like, "{$_SESSION['user_id']}");
     break;
     }
   echo json_encode($return);
