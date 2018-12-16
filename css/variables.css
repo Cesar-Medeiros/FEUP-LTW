@@ -41,12 +41,14 @@ a {
     color: var(--icon-color);
 }
 
-body {
-    margin-top: var(--navbar-height);
-    margin-left: 4em;
-    background: var(--body-backgorund);
-}
+@media only screen and (min-width: 400px) { 
+    body {
+        margin-top: var(--navbar-height);
+        margin-left: 4em;
+        background: var(--body-backgorund);
+    }
 
-h1 {
-    margin: 0;
+    h1 {
+        margin: 0;
+    }
 }

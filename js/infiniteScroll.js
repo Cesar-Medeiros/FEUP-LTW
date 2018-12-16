@@ -18,8 +18,8 @@ function init(){
             document.body.offsetHeight, document.documentElement.offsetHeight,
             document.body.clientHeight, document.documentElement.clientHeight
         );
-        let scrollOffset = 1000;
-    
+        let scrollOffset = window.innerHeight + window.innerHeight/3;
+
         if ((window.pageYOffset + scrollOffset) > scrollHeight && !loading) {
             loading = true;
             loadMore();

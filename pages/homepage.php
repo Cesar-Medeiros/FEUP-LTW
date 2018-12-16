@@ -39,5 +39,7 @@ draw_footer();
     <script src="../js/utilities.js" defer></script>
     <script src="../js/vote.js" defer></script>
     <script src="../js/post.js" defer></script>
-    <script src="../js/infiniteScroll.js" defer></script>';
+    <script src="../js/infiniteScroll.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    ';
 }?>
