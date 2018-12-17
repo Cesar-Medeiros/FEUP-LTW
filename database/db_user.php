@@ -12,6 +12,7 @@
         $db = Database::db();
         $stmt = $db->prepare('INSERT INTO User VALUES(?, ?, ?, ?)');
         $stmt->execute(array(null, $username, $password, $email));
+        return intval($db->lastInsertId());
     }
 
     function userExist($username){

@@ -19,18 +19,19 @@ function login(username, password) {
         });
 }
 
-function signup(username, password, email) {
+function signup(username, password, email, file) {
     var URL = "../api/users.php";
 
-    let sendObj = JSON.stringify({
-        "username": username,
-        "password": password,
-        "email": email
-    });
+    let formData = new FormData();
 
-    ajax(URL, "POST", sendObj)
+    formData.append("username", username);
+    formData.append("password", password);
+    formData.append("email", email);
+    if(file) formData.append("file", file);
+
+    ajax(URL, "POST", formData)
         .then(function () {
-            // window.location = "../pages/homepage.php";
+            window.location = "../pages/homepage.php";
         })
         .catch(function (responseJSON) {
             var type = Object.keys(responseJSON.info)[0];
@@ -61,15 +62,9 @@ login_form.addEventListener('submit', function (event) {
 
 signup_form.addEventListener('submit', function (event) {
     event.preventDefault();
-    console.log("t");
-    console.log(this.elements['password'].value);
-    console.log(this.elements['password-conf'].value);
-    console.log(this.elements['password'].value == this.elements['password-conf'].value);
     if (this.elements['password'].value == this.elements['password-conf'].value) {
-        console.log("1");
-        signup(this.elements['username'].value, this.elements['password'].value, this.elements['email'].value);
+        signup(this.elements['username'].value, this.elements['password'].value, this.elements['email'].value, this.elements['upload-file'].files[0]);
     } else {
-        console.log("2");
         this.elements['password-conf'].setCustomValidity('Password doesn\'t match');
     }
 });

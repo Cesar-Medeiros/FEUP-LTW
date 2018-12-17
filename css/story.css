@@ -17,39 +17,109 @@ Stories
     width: 100%;
 }
 
-@media only screen and (min-width: 400px) {
-    .post{
+@media only screen and (max-width: 600px) {
+    .post {
         max-width: 98%;
     }
-    .story{
-        grid-row: 1;
+
+    .story_info .channel {
+        display: none;
     }
-    .story_info{
-        grid-row: 2;
+
+    .story_info .author_info {
+        float: right;
+    }
+
+    .story_info .author_info .user_name {
+        display: none;
+    }
+
+    .story_info * {
+        display: inline;
+    }
+
+    .story_info {
+        padding: 0em 5%;
     }
 
 }
-@media only screen and (min-width: 800px) {
-    .post{
+
+@media only screen and (min-width: 600px) and (max-width: 1000px) {
+    .post {
         max-width: 95%;
+        grid-template-columns: 8fr 0.1fr 1fr;
     }
 
-    .story{
+    .story {
         grid-column: 1;
     }
-    .story_info{
+
+    .story_info {
         grid-column: 3;
-    }
-  
-}
-@media only screen and (min-width: 1000px) {
-    .post{
-        width: 70em;
     }
 
-    .story{
+    .story_info {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas: "channel"
+            "username"
+            "vote"
+            "score"
+            "comments"
+            "date";
+    }
+
+    .story_info .channel,
+    .story_info .vote,
+    .story_info .score,
+    .story_info .comments,
+    .story_info .date,
+    .story_info .author_info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1em;
+    }
+
+
+}
+
+@media only screen and (min-width: 1000px) {
+    .post {
+        width: 80%;
+        grid-template-columns: 8fr 0.5fr 1fr;
+    }
+
+    .story {
+        grid-column: 1;
+    }
+
+    .story_info {
         grid-column: 3;
     }
+
+    .story_info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "channel channel"
+            "username username"
+            "vote vote"
+            "score comments"
+            "date date";
+    }
+
+    .story_info .channel,
+    .story_info .vote,
+    .story_info .score,
+    .story_info .comments,
+    .story_info .date,
+    .story_info .author_info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1em;
+    }
+
 }
 
 .post.shrink .story {
@@ -92,9 +162,9 @@ Stories
 }
 
 .story .image {
-    max-width: 10em;
+    /* max-width: 10em;
     max-height: 10em;
-    margin-left: 2em;
+    margin-left: 2em; */
 }
 
 .story .readmore {
@@ -120,64 +190,10 @@ Stories
     background: var(--post-background);
     border: 3px solid var(--border-color);
     border-radius: 8px;
-};
-
-@media only screen and (min-width: 600px) {
-    .story_info {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-areas: "channel"
-            "username"
-            "vote"
-            "score"
-            "comments"
-            "date";
-    }
-}
-
-@media only screen and (min-width: 1000px) {
-    .story_info {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas: "channel channel"
-            "username username"
-            "vote vote"
-            "score comments"
-            "date date";
-    }
 }
 
 
-body {
-    background-color: tan;
-}
 
-/* On screens that are 992px or less, set the background color to blue */
-@media screen and (max-width: 992px) {
-    body {
-        background-color: blue;
-    }
-}
-
-/* On screens that are 600px or less, set the background color to olive */
-@media screen and (max-width: 600px) {
-    body {
-        background-color: olive;
-    }
-}
-
-
-.story_info .channel,
-.story_info .vote,
-.story_info .score,
-.story_info .comments,
-.story_info .date,
-.story_info .author_info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1em;
-}
 
 .story_info .channel {
     grid-area: channel;

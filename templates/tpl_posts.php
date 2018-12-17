@@ -1,6 +1,6 @@
 <?php include_once('../database/db_user.php'); ?>
 
-<?php function draw_stories($stories) {?>
+<?php function draw_stories() {?>
 <section id="stories">
 </section>
 <?php } ?>

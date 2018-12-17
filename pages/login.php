@@ -1,4 +1,3 @@
-
 <?php 
     include_once '../templates/tpl_common.php';
     draw_head(login_head())
@@ -12,7 +11,7 @@
 
     <header class="identity">
         <a class="logo"><i class="fab fa-reddit fa-4x"></i></a>
-        <h1> WebsiteName </h1>
+        <h1>WebsiteName</h1>
     </header>
 
 
@@ -37,7 +36,7 @@
                             </div>
 
                             <section id="messages"></section>
-                            
+
                             <div class="group">
                                 <input type="submit" id="signin_button" class="button" value="Login">
                             </div>
@@ -49,6 +48,20 @@
 
                     <div class="sign-up-htm">
                         <form accept-charset="utf-8" form method="post" id="sign-up-form">
+                            <div class="group">
+
+                                <div id="upload-container">
+                                    <div id="upload-choose-container">
+                                        <input type="file" id="upload-file" name="file" accept="image/jpeg, image/png" />
+                                        <button id="choose-upload-button"><img id="img_placeholder" src="../resources/default.png"></button>
+                                    </div>
+                                    <div id="placeholder">
+                                        <button id="cancel-button"><i class="far fa-times-circle"></i></button>
+                                    </div>
+                                    <div id="error-message"></div>
+                                </div>
+
+                            </div>
                             <div class="group">
                                 <label for="user" class="label">Username</label>
                                 <input name="username" type="text" class="input" required>
@@ -86,10 +99,12 @@
 
 <?php function login_head(){
     return '
+    <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
         crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans+Condensed:300" rel="stylesheet">
     <script src="../js/utilities.js" defer></script>
+    <script src="../js/image.js" defer></script>
     <script src="../js/auth.js" defer></script>';
 }?>
