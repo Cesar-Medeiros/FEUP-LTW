@@ -9,10 +9,11 @@
     }
 
     function addUser($username, $password, $email){
+        $options = ['cost' => 12];
         $db = Database::db();
         $stmt = $db->prepare('INSERT INTO User VALUES(?, ?, ?, ?)');
-        $stmt->execute(array(null, $username, $password, $email));
         return intval($db->lastInsertId());
+        $stmt->execute(array(null, $username, password_hash($password, PASSWORD_DEFAULT, $options), $email));
     }
 
     function userExist($username){
@@ -43,8 +44,12 @@
 
     function checkUserPassword($username, $password){
         $db = Database::db();
-        $stmt = $db->prepare('SELECT * from User WHERE username = ? AND password = ?');
-        $stmt->execute(array($username, $password));
-        return $stmt->fetch() ? true : false; 
+        $stmt = $db->prepare('SELECT * from User WHERE username = ?');
+        $stmt->execute(array($username));
+        $user = $stmt->fetch();
+        if ($user !== false && password_verify($password, $user['password'])) {
+           return true;
+        }
+        else return false;
     }
 ?>

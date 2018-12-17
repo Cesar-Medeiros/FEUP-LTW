@@ -6,7 +6,6 @@ function ajax(url, methodType, sendObj) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 var resp = xhr.responseText;
-                console.log(resp);
                 var respJson = (resp === '') ? '' :  JSON.parse(resp);
                 if (xhr.status === 200) {
                     resolve(respJson);

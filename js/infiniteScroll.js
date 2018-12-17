@@ -6,7 +6,6 @@ function getSettings(){
         channel = page_type.dataset.channel;
         author = page_type.dataset.author;
         subscription = page_type.dataset.subscription;
-        console.log(channel, author, subscription);
         order_by = "time";
     }
 }
