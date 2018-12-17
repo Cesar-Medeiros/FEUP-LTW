@@ -115,9 +115,9 @@ END;
 -- Insert info
 
 -- Users
-INSERT INTO User VALUES (null, 'User1', 'Password', 'user1@email.com');
-INSERT INTO User VALUES (null, 'User2', 'Password', 'user2@email.com');
-INSERT INTO User VALUES (null, 'User3', 'Password', 'user3@email.com');
+INSERT INTO User VALUES (null, 'User1', '$2y$12$HFR499GjbxUDOYt6.tvC1eDeGjOP2pppaGkV4928bD3FieqeDbZJe', 'user1@email.com');
+INSERT INTO User VALUES (null, 'User2', '$2y$12$HFR499GjbxUDOYt6.tvC1eDeGjOP2pppaGkV4928bD3FieqeDbZJe', 'user2@email.com');
+INSERT INTO User VALUES (null, 'User3', '$2y$12$HFR499GjbxUDOYt6.tvC1eDeGjOP2pppaGkV4928bD3FieqeDbZJe', 'user3@email.com');
 
 -- Messages
 INSERT INTO Message VALUES 
