@@ -53,7 +53,7 @@
                                 <div id="upload-container">
                                     <div id="upload-choose-container">
                                         <input type="file" id="upload-file" name="file" accept="image/jpeg, image/png" />
-                                        <button id="choose-upload-button"><img id="img_placeholder" src="../resources/default.png"></button>
+                                        <button id="choose-upload-button"><img id="img_placeholder" src="../resources/profile/default.png"></button>
                                     </div>
                                     <div id="placeholder">
                                         <button id="cancel-button"><i class="far fa-times-circle"></i></button>
