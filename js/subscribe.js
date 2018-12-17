@@ -7,10 +7,8 @@ subscribeButton.addEventListener('click', function(event){
 
 function subscribe(elem, channel) {
   let URL = '../database/subscribe.php?channel='+channel;
-  console.log(channel);
   ajax(URL, "GET")
     .then(function (responseJSON) {
-      console.log(responseJSON);
       if (elem.innerHTML == 'SUBSCRIBE')
           elem.innerHTML = 'UNSUBSCRIBE';
       else elem.innerHTML = 'SUBSCRIBE';
