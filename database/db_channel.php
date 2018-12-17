@@ -1,20 +1,20 @@
 <?php
   include_once('../includes/database.php');
-  
+
   function getChannelInfo($channel_id){
     return getChannelSpecs($channel_id);
 
   }
   function getChannelNumSubscribers($channel_id){
     $db = Database::db();
-    $stmt = $db->prepare('SELECT count(user_id) as num from ChannelSubscribers WHERE channel_id = ?');
+    $stmt = $db->prepare('SELECT num_subscribers FROM Channel WHERE Channel.channel_id = ?');
     $stmt->execute(array($channel_id));
     return $stmt->fetch();
   }
 
   function getChannelNumMessages($channel_id){
     $db = Database::db();
-    $stmt = $db->prepare('SELECT count(message_id) as num from ChannelMessages WHERE channel_id = ?');
+    $stmt = $db->prepare('SELECT num_posts FROM Channel WHERE Channel.channel_id = ?');
     $stmt->execute(array($channel_id));
     return $stmt->fetch();
   }
@@ -25,4 +25,32 @@
     $stmt->execute(array($channel_id));
     return $stmt->fetch();
   }
+
+  function updateSubscription($user_id, $channel_id){
+    $db = Database::db();
+    try {
+      $stmt = $db->prepare('INSERT INTO ChannelSubscribers VALUES(?, ?)');
+      $stmt->execute(array($channel_id, $user_id));
+    } catch (PDOException $e) {
+      $stmt = $db->prepare('DELETE FROM ChannelSubscribers WHERE user_id = ? AND channel_id = ?');
+      $stmt->execute(array($user_id, $channel_id));
+    }
+    return getChannelNumSubscribers($channel_id);
+  }
+
+  function isUserSubscribed($user_id, $channel_id){
+    $db = Database::db();
+    $stmt = $db->prepare('SELECT * FROM ChannelSubscribers WHERE user_id = ? AND channel_id = ?');
+    $stmt->execute(array($user_id, $channel_id));
+    return ($stmt->fetch()? true : false); 
+  }
+
+    
+  function getTotalPosts(){
+    $db = Database::db();
+    $stmt = $db->prepare('SELECT count(message_id) no_points FROM Message');
+    $stmt->execute();
+    return $stmt->fetch();
+  }
+  
 ?>

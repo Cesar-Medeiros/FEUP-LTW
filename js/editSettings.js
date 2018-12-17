@@ -3,16 +3,19 @@ let handle = [];
 handle['editable'] = {
   getContent: getEditableContent,
   handleClick: handleClickOnEditable,
+  handleBlur: handleBlurOnEditable,
   handleCancel: handleCancelOnEditable,
   handleSave: handleSaveOnEditable,
   handleInput: updateToolsOfEditable,
   cancelInput: cancelEditable,
-  openInput: openEditable
+  openInput: openEditable,
+  
 };
 
 handle['password'] = {
   getContent: getPasswordContent,
   handleClick: handleClickOnPassword,
+  handleBlur: handleBlurOnPassword,
   handleCancel: handleCancelOnPassword,
   handleSave: handleSaveOnPassword,
   cancelInput: cancelPassword,
@@ -33,14 +36,14 @@ for (let i = 0; i < inputs.length; i++) {
   }
 }
 
-let selectedInput = null;
+var selectedInput = null;
 
 /* EDITABLE */
 
 /* _________ Get Content __________ */
 
 function getEditableContent(input) {
-  let span = input.querySelector('label span');
+  let span = input.querySelector('span');
   return span.innerHTML;
 }
 
@@ -54,8 +57,11 @@ function addListeners(input) {
   let type = input.dataset.type;
 
   /* Click */
-  let label = input.querySelector('label');
-  label.addEventListener("click", handle[type].handleClick);
+  let div = input.querySelector('div');
+  div.addEventListener("click", handle[type].handleClick);
+  
+  /* Blur */
+  handle[type].handleBlur(input);
 
   /* Input */
   if (type == "editable") {
@@ -64,11 +70,11 @@ function addListeners(input) {
   }
 
   /* Cancel */
-  let cancel = input.querySelector('#cancel');
+  let cancel = input.querySelector('.buttons #cancel');
   cancel.addEventListener("click", handle[type].handleCancel);
 
   /* Save */
-  let save = input.querySelector('#save');
+  let save = input.querySelector('.buttons #save');
   save.addEventListener("click", handle[type].handleSave);
 }
 
@@ -84,11 +90,29 @@ function handleClickOnPassword() {
   openPassword(input);
 }
 
+/* _________ Handle Blur __________ */
+
+function handleBlurOnEditable(input) {
+  input.querySelector('span').addEventListener('blur', function() {
+  let previous = document.querySelector('#input[data-selected = true]');
+    if (previous != null)
+      previous.dataset.selected = false;
+  });
+}
+
+function handleBlurOnPassword(input) {
+  //do nothing;
+}
+
 /* _________ Open Environment __________ */
 
 function openEditable(input) {
   if (selectedInput == null) {
-    input.querySelector('label span').focus();
+    input.querySelector('span').focus();
+    let previous = document.querySelector('#input[data-selected = true]');
+    if (previous != null)
+      previous.dataset.selected = false;
+    input.dataset.selected = true;
   }
   else if (selectedInput != input.dataset.id)
     throwPopup(input);
@@ -97,8 +121,13 @@ function openEditable(input) {
 function openPassword(input) {
   let id = input.dataset.id;
   if (selectedInput == null) {
-    showEditingTools(input);
     selectedInput = id;
+    let previous = document.querySelector('#input[data-selected = true]');
+    if (previous != null)
+      previous.dataset.selected = false;
+    input.dataset.selected = true;
+
+    showEditingTools(input);
   }
   else if (selectedInput != input.dataset.id)
     throwPopup(input);
@@ -112,39 +141,40 @@ function updateToolsOfEditable() {
   if (this.innerHTML != this.dataset.backup)
     showEditingTools(listItem);
   else hideEditingTools(listItem);
-  selectedInput = listItem.dataset.id;
-
 }
 
 /* _________ Handle Cancel __________ */
 
 
 function handleCancelOnEditable() {
-  let input = this.parentNode.parentNode;
+  let input = this.parentNode.parentNode.parentNode;
   cancelEditable(input);
 }
 
 function cancelEditable(input) {
-  let span = input.querySelector('label span');
+  let span = input.querySelector('span');
   span.innerHTML = span.dataset.backup;
+  
   hideEditingTools(input);
   selectedInput = null;
+  input.dataset.selected = false;
 }
 
 function handleCancelOnPassword() {
-  let input = this.parentNode.parentNode;
+  let input = this.parentNode.parentNode.parentNode;
   cancelPassword(input);
 }
 
 function cancelPassword(input) {
   hideEditingTools(input);
   selectedInput = null;
+  input.dataset.selected = false;
 }
 /* _________ Handle Save __________ */
 
 function handleSaveOnEditable() {
   event.preventDefault();
-  let input = this.parentNode.parentNode;
+  let input = this.parentNode.parentNode.parentNode;
   let span = input.querySelector('span');
   let id = input.dataset.id;
   contents[id].content = span.innerHTML;
@@ -154,11 +184,12 @@ function handleSaveOnEditable() {
 
   hideEditingTools(input);
   selectedInput = null;
+  input.dataset.selected = false;
 }
 
 function handleSaveOnPassword() {
   
-  let input = this.parentNode.parentNode;
+  let input = this.parentNode.parentNode.parentNode;
   let oldP = input.querySelector('#old input').value;
   let newP = input.querySelector('#new input').value;
   let confirmNewP = input.querySelector('#new-conf input').value;
@@ -174,6 +205,7 @@ function handleSaveOnPassword() {
     updateInfo();
     hideEditingTools(input);
     selectedInput = null;
+    input.dataset.selected = false;
   }
 
   
@@ -217,14 +249,16 @@ function throwPopup(newInput) {
 
 
 function showEditingTools(input) {
-  input.querySelector("div").hidden = false;
+  input.querySelector("#editionTools").hidden = false;
   let id = input.dataset.id;
   selectedInput = id;
+  input.dataset.selected = true;
 }
 
 function hideEditingTools(input) {
-  input.querySelector("div").hidden = true;
+  input.querySelector("#editionTools").hidden = true;
   selectedInput = null;
+  input.dataset.selected = false;
 }
 
 function areToolsHidden(input) {

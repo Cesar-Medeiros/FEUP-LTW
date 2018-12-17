@@ -1,10 +1,12 @@
-var channel, user,  last_id, order_by, last_value, loading;
+var channel, author, subscription, last_id, order_by, last_value, loading;
 
 function getSettings(){
     let page_type = document.querySelector('#page_type');
     if (page_type != null) {
         channel = page_type.dataset.channel;
-        user = page_type.dataset.user;
+        author = page_type.dataset.author;
+        subscription = page_type.dataset.subscription;
+        console.log(channel, author, subscription);
         order_by = "time";
     }
 }
@@ -35,15 +37,13 @@ function init(){
 
 function loadMore() {
     loading = true;
-    let URL = "../database/getPosts.php?channel=" + channel + "&user=" + user + "&order_by=" + order_by +"&last_value=" + last_value + "&last_id=" + last_id;
-    console.log(order_by, last_value, last_id);
+    let URL = "../database/getPosts.php?channel=" + channel + "&author=" + author + "&subs=" + subscription + "&order_by=" + order_by +"&last_value=" + last_value + "&last_id=" + last_id;
     ajax(URL, "GET")
         .then(function (responseJSON) {   
             let allStories = document.querySelector('#stories');
             let stories_arr = responseJSON;
             for (let i = 0; i < stories_arr.length; i++) {
                 let post_shrink = post_html_shrink(stories_arr[i]);
-                console.log(stories_arr[i]);
                 last_value = stories_arr[i]['val'];
                 allStories.appendChild(post_shrink);
             }
@@ -55,13 +55,13 @@ function loadMore() {
 }
 
 
-function setScrollingSettings(new_order_by, new_channel, new_user) {
+function setScrollingSettings(new_order_by, new_channel, new_author) {
 
     //channel
     channel = new_channel;
 
-    //user
-    user = new_user;
+    //author
+    author = new_author;
 
     //order
     setOrderSetting(new_order_by);
@@ -91,7 +91,7 @@ function setOrderSetting(new_order_by){
     loadMore();
 }
 function resetSettings(){
-    last_id = Number.MAX_SAFE_INTEGER;
-    last_value = Number.MAX_SAFE_INTEGER;
+    last_id = 1000;
+    last_value = 1000;
     loading = false;
 }

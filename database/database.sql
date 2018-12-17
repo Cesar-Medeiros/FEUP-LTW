@@ -88,7 +88,7 @@ BEFORE DELETE ON ChannelSubscribers
 BEGIN
     UPDATE Channel
     SET num_subscribers = num_subscribers - 1
-    WHERE channel_id = new.channel_id;
+    WHERE channel_id = old.channel_id;
 END;
 
 
@@ -312,6 +312,7 @@ null,
 
 -- Channels
 
+INSERT INTO Channel VALUES (0, ' ', 0, 0, 0);
 INSERT INTO Channel VALUES (null, 'Channel1', 1, 0, 0);
 INSERT INTO Channel VALUES (null, 'Channel2', 1,0 ,0);
 INSERT INTO Channel VALUES (null, 'Channel3', 1,0 ,0);
@@ -336,3 +337,6 @@ INSERT INTO ChannelMessages VALUES(3, 10);
 INSERT INTO ChannelMessages VALUES(3, 11);
 INSERT INTO ChannelMessages VALUES(3, 12);
 INSERT INTO ChannelMessages VALUES(3, 13);
+
+--Channel Subscribers
+INSERT INTO ChannelSubscribers VALUES(3, 1);

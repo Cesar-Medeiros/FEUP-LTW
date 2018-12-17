@@ -1,33 +1,36 @@
-.profile-editable {
-    background: var(--post-background);
+.profile_info {
+    display: flex;
+    justify-content: center;
+}
+ 
+.profile_info .profile-editable {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background: var( --icon-hover-color);
     box-shadow: 0 4px 10px 1px var(--shadow-color);
-    position: relative;
-
-    display: grid;
-    grid-column: 2;
-    grid-row: 2;
-    grid-template-rows: 1fr, 7fr;
-    grid-template-areas: "foto name"
-                        "foto settings"
-
-
+    padding: 1em;
 }
-
-.profile .image {
-    margin: 2em;
+ 
+.profile_info .profile {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background: var( --icon-hover-color);
     box-shadow: 0 4px 10px 1px var(--shadow-color);
+    padding: 1em;
 }
 
-.profile .image,
-.profile-editable .image {
-    grid-area: foto;
-}
-
-.profile .name,
-.profile-editable .name {
-    grid-area: name;
-}
-
-.profile-editable .account-settings {
-    grid-area: settings;
+.profile_info .profile-editable .image,
+.profile_info .profile .image  {
+    order : -1;
+    max-width:7em;
+    max-height: 7em;
+    margin: 2em 2em 1em 2em;
+    align-self: center;
+    color: var(--shadow-color);
 }

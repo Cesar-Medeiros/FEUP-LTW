@@ -1,3 +1,81 @@
-.account_settings h1 {
-    font-weight:  bold;
+.account_settings {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.account_settings .title {
+    text-align: center;
+    padding: 2em;
+}
+
+.account_settings ul {
+    list-style-type: none;
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+
+.account_settings #input[data-type=password] #editionTools {
+    list-style-type: none;
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+}
+
+.account_settings #input[data-type=password] #editionTools[hidden] {
+    display:none;
+}
+
+#save, #cancel {
+    align-self: center;
+}
+.account_settings ul li {
+    background: var( --icon-hover-color);
+    box-shadow: 0 4px 10px 1px var(--shadow-color);
+    font-size:1.5em;
+}
+
+.account_settings .edit {
+    padding: 1em 5em 1em 5em;
+}
+
+.account_settings #input[data-selected=true]{
+    background: var(--selected);
+}
+.account_settings ul li:hover {
+    background: var(--selected);
+}
+
+.account_settings .buttons {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: center;
+    text-transform:uppercase;
+    cursor: pointer;
+    color:var(--font-color-light);
+    margin:0.6em;
+    
+}
+
+.account_settings .button {
+    border:none;
+    outline: none;
+    margin: 1em;
+	padding: 0.3em 0.7em;
+    border-radius:8px;
+    border: 3px solid var(--border-color);
+}
+
+.account_settings #save {
+    background-color: #02C39A;
+}
+
+.account_settings #cancel {
+    background-color: #F25F5C
 }
