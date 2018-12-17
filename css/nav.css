@@ -83,3 +83,9 @@ input.gn-search::placeholder{
    /* position: absolute;
    top: 0; */
 }
+
+.user_image{
+   height:40px; 
+   width:40px;
+   border-radius:50%;
+}

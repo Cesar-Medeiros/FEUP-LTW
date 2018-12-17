@@ -1,6 +1,7 @@
 <?php 
     include_once('../database/db_user.php');
     include_once('../includes/session.php');
+    include_once('../includes/upload.php');
     include_once('api.php');
 
     header('Content-Type: application/json');
@@ -34,9 +35,15 @@
 
         switch($type){
             case 'all': {
+                $data = $_POST;
+                $file = $_FILES['file'];
                 if(isset($data['username']) && isset($data['password']) && isset($data['email'])){
                     try {
-                        addUser($data['username'], $data['password'], $data['email']);
+                        $user_id = addUser($data['username'], $data['password'], $data['email']);
+                        $_SESSION['user_id'] = $user_id;
+                        if(isset($file)){
+                            uploadImage($file, 'profile', $user_id);
+                        }
                     } catch (PDOException $e) {
                         http_response_code(400);
                         echo json_encode(array('error' => 'Failed to signup!'));

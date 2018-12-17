@@ -4,6 +4,13 @@ Side Bar
 
 -------------------------------- */
 
+
+@media only screen and (max-width: 600px) {
+    .gn-menu-wrapper{
+        display: none;
+    }
+}
+
 .gn-menu-main,
 .gn-menu-main ul {
     /* z-index: 20; */

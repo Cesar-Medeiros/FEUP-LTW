@@ -61,3 +61,35 @@ New Story
 .new-story-form .button.cancel {
     background-color: #F25F5C
 }
+
+
+
+
+#upload-file{
+    display:none;
+}
+
+#upload-button,
+#choose-upload-button,
+#upload-choose-container,
+#cancel-button{
+    border:none;
+    background: none;
+}
+
+#cancel-button{
+    position: absolute;
+    color: white;
+    left: 160px;
+    top: 5px;
+    display: none;
+}
+
+#placeholder{
+    position: relative;
+}
+
+#image {
+    height: 200px;
+    width: 200px;
+}

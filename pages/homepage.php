@@ -2,11 +2,11 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-include_once '../includes/session.php';
-include_once '../database/db_msg.php';
-include_once '../database/db_user.php';
-include_once '../templates/tpl_common.php';
-include_once '../templates/tpl_posts.php';
+include_once('../includes/session.php');
+include_once('../database/db_msg.php');
+include_once('../database/db_user.php');
+include_once('../templates/tpl_common.php');
+include_once('../templates/tpl_posts.php');
 
 if (!isset($_SESSION['user_id'])) {
     die(header('Location: login.php'));
@@ -38,5 +38,7 @@ draw_footer();
     <script src="../js/utilities.js" defer></script>
     <script src="../js/vote.js" defer></script>
     <script src="../js/post.js" defer></script>
-    <script src="../js/infiniteScroll.js" defer> </script>';
+    <script src="../js/infiniteScroll.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    ';
 }?>

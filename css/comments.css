@@ -10,8 +10,15 @@ Comments
     position: relative;
     top: 3em;
     display: grid;
-    grid-template-columns: 2fr 8fr 5fr;    
 }
+
+@media only screen and (max-width: 600px) {.comments_wrap{width: 98%;}}
+
+@media only screen and (min-width: 600px) and (max-width: 1000px) {.comments_wrap{width: 95%;}}
+
+@media only screen and (min-width: 1000px) {.comments_wrap{width: 80%;}}
+
+
 
 
 .comments_wrap .comments_page{
@@ -20,9 +27,7 @@ Comments
     border: 3px solid var(--border-color);
     padding: 2.5em;
     border-radius:8px;
-    grid-column: 2;
     position: relative;
-    grid-column: 2;
 } 
 
 .comments_wrap .comments_page .comments_header {
@@ -113,12 +118,15 @@ Comments
 .new-comment .text{
     padding: 0.2em;
 }
+.new-comment{
+    position: relative;
+}
+
 
 #send_button{
-    position: relative;
-    bottom:2.5em;
-    right: 6em;
-    float: right;
+    position: absolute;
+    left:50%;
+    bottom: 10%;
     font-size: 0.8em;
     color:#404b58;
     font-weight: bold;

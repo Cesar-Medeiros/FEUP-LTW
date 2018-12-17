@@ -12,6 +12,7 @@
         $options = ['cost' => 12];
         $db = Database::db();
         $stmt = $db->prepare('INSERT INTO User VALUES(?, ?, ?, ?)');
+        return intval($db->lastInsertId());
         $stmt->execute(array(null, $username, password_hash($password, PASSWORD_DEFAULT, $options), $email));
     }
 

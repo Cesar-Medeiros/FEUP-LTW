@@ -26,7 +26,8 @@
 <header class="navbar">
   <ul id="navbar-menu">
     <li class="navbar-left-wrap">
-      <a class="gn-icon username" href=<?= "../pages/profile.php?user_id={$_SESSION['user_id']}"?>><i class="fas fa-user-circle fa-2x"></i>
+      <a class="gn-icon username" href=<?= "../pages/profile.php?user_id={$_SESSION['user_id']}"?>>
+        <img src="../resources/profile/medium/<?=$_SESSION['user_id']?>.jpg" onerror="this.src='../resources/profile/default.png'" class="user_image">
         <?=$username;?></a>
       <a class="gn-icon settings" href="../pages/settings.php"><i class="fas fa-cog"></i></a>
       <a class="gn-icon logout" href="../actions/action_logout.php"><i class="fas fa-power-off"></i></a>
@@ -84,39 +85,3 @@
       <?=$channel['title']?></a>
   </li>
 <?php }?>
-
-
-<?php
-/*
-<aside>
-    <nav class="gn-menu-wrapper gn-open-part">
-      <div class="gn-scroller">
-        <ul id="gn-menu" class="gn-menu-main">
-
-          <li class="gn-search-item">
-            <input placeholder="Search" type="search" class="gn-search">
-            <a class="gn-icon gn-icon-search"><span>Search</span></a>
-          </li>
-          <li>
-            <a class="gn-icon gn-icon-download">Downloads</a>
-            <ul class="gn-submenu">
-              <li><a class="gn-icon gn-icon-illustrator">Vector Illustrations</a></li>
-              <li><a class="gn-icon gn-icon-photoshop">Photoshop files</a></li>
-            </ul>
-          </li>
-          <li><a class="gn-icon gn-icon-cog">Settings</a></li>
-          <li><a class="gn-icon gn-icon-help">Help</a></li>
-          <li>
-            <a class="gn-icon gn-icon-archive">Archives</a>
-            <ul class="gn-submenu">
-              <li><a class="gn-icon gn-icon-article">Articles</a></li>
-              <li><a class="gn-icon gn-icon-pictures">Images</a></li>
-              <li><a class="gn-icon gn-icon-videos">Videos</a></li>
-            </ul>
-          </li>
-          
-        </ul>
-      </div>
-    </nav>
-  </aside>*/
-  ?>

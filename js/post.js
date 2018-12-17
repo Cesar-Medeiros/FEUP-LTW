@@ -3,17 +3,16 @@ function story_html(story) {
     div.innerHTML = `
             <article class="story">        
                 <header>
-                <a class="title" href="../pages/post.php?id=${story['message_id']}"> ${story['title']}</a>
+                    <a class="title" href="../pages/post.php?id=${story['message_id']}"> ${story['title']}</a>
                 </header>
                 <div class="content-wrap">
-                <p class="text">${story['text']}</p>
-                <img class="image" src="https://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/47/cf/cf/47cfcf79-9e1d-b21f-8e10-2658b7650c15/mzl.oiljceng.png/246x0w.jpg"
-                    alt="image">
+                    <p class="text">${story['text']}</p>
+                    <img class="image" src="../resources/images/medium/${story['message_id']}.jpeg" onerror="this.style.display='none'" alt="image"></img>
                 </div>
                 <a href="../pages/post.php?id=${story['message_id']}" class="readmore">Read more</a>
             </article>
         `;
-    return div.firstElementChild
+    return div.firstElementChild;
 }
 
 
@@ -27,7 +26,7 @@ function story_info_html(story) {
                   <a class="vote_down" data-id="${story['message_id']}" href=""><i class="fas fa-angle-down"></i></a>
               </div>
               <a class="author_info" href="../pages/profile.php?user_id=${story['user_id']}">
-                  <img class="user_img" src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Account-512.png" style="height:20px;width:20px;">
+                  <img class="user_img" src="../resources/profile/medium/${story['user_id']}.jpg" onerror="this.src='../resources/profile/default.png'"style="height:50px;width:50px;border-radius:50%;">
                   <label class="user_name">${story['username']}</label>
               </a>
               <div class="score">${story['score']}</div>
